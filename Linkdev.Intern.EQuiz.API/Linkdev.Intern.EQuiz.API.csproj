@@ -111,9 +111,9 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Linkdev.Intern.EQuiz.Service\Linkdev.Intern.EQuiz.Service.csproj">
+    <ProjectReference Include="..\Linkdev.Intern.EQuiz.Service\Linkdev.Intern.EQuiz.Business.csproj">
       <Project>{5353a379-bc5f-4422-bdc5-b70f0dbc7b35}</Project>
-      <Name>Linkdev.Intern.EQuiz.Service</Name>
+      <Name>Linkdev.Intern.EQuiz.Business</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

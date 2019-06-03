@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linkdev.Intern.EQuiz.Data",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linkdev.Intern.EQuiz.Repo", "Linkdev.Intern.EQuiz.Repo\Linkdev.Intern.EQuiz.Repo.csproj", "{0F58FEC5-028F-4F49-AF58-614276D66447}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linkdev.Intern.EQuiz.Service", "Linkdev.Intern.EQuiz.Service\Linkdev.Intern.EQuiz.Service.csproj", "{5353A379-BC5F-4422-BDC5-B70F0DBC7B35}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linkdev.Intern.EQuiz.Business", "Linkdev.Intern.EQuiz.Service\Linkdev.Intern.EQuiz.Business.csproj", "{5353A379-BC5F-4422-BDC5-B70F0DBC7B35}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linkdev.Intern.EQuiz.Mappers", "Linkdev.Intern.EQuiz.Mappers\Linkdev.Intern.EQuiz.Mappers.csproj", "{57A6ABEB-1678-448F-B41C-062669B19103}"
 EndProject
