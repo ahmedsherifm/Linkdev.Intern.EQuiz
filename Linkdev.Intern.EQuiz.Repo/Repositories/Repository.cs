@@ -44,7 +44,7 @@ namespace Linkdev.Intern.EQuiz.Repo.Repositories
             return Context.Set<TEntity>().Find(id);
         }
 
-        public bool? Remove(TEntity entity)
+        public virtual bool? Remove(TEntity entity)
         {
             if(entity != null)
             {
