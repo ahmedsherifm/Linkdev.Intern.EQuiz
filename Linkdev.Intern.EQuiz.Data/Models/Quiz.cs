@@ -28,7 +28,6 @@ namespace Linkdev.Intern.EQuiz.Data
 
         public DateTime ActivationDate { get; set; }
 
-        public DateTime? ExpirationDate { get; set; }
 
         public int? NumberOfTrials { get; set; }
 

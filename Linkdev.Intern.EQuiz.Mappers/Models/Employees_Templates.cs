@@ -1,3 +1,5 @@
+using System;
+
 namespace Linkdev.Intern.EQuiz.Mappers
 { 
     public class Employees_Templates
@@ -15,5 +17,8 @@ namespace Linkdev.Intern.EQuiz.Mappers
         public int Status { get; set; }
 
         public int? TimeTaken { get; set; }
+
+        public DateTime? ExpirationDate { get; set; }
+
     }
 }

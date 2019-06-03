@@ -22,6 +22,8 @@ namespace Linkdev.Intern.EQuiz.Data
 
         public int? TimeTaken { get; set; }
 
+        public DateTime? ExpirationDate { get; set; }
+
         public virtual Employee Employee { get; set; }
 
         public virtual Template Template { get; set; }

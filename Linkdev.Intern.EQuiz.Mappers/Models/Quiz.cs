@@ -14,7 +14,6 @@ namespace Linkdev.Intern.EQuiz.Mappers
 
         public DateTime ActivationDate { get; set; }
 
-        public DateTime? ExpirationDate { get; set; }
 
         public int? NumberOfTrials { get; set; }
 
