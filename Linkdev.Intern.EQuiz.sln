@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2016
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linkdev.Intern.EQuiz.API", "Linkdev.Intern.EQuiz.API\Linkdev.Intern.EQuiz.API.csproj", "{05FC6B62-3BC4-4BEA-BEE0-70B379E03BBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linkdev.Intern.EQuiz.Data", "Linkdev.Intern.EQuiz.Data\Linkdev.Intern.EQuiz.Data.csproj", "{11BE22E5-51E5-4830-A07E-E253CDDF5F0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linkdev.Intern.EQuiz.Repo", "Linkdev.Intern.EQuiz.Repo\Linkdev.Intern.EQuiz.Repo.csproj", "{0F58FEC5-028F-4F49-AF58-614276D66447}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linkdev.Intern.EQuiz.Service", "Linkdev.Intern.EQuiz.Service\Linkdev.Intern.EQuiz.Service.csproj", "{5353A379-BC5F-4422-BDC5-B70F0DBC7B35}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linkdev.Intern.EQuiz.Mappers", "Linkdev.Intern.EQuiz.Mappers\Linkdev.Intern.EQuiz.Mappers.csproj", "{57A6ABEB-1678-448F-B41C-062669B19103}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{05FC6B62-3BC4-4BEA-BEE0-70B379E03BBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05FC6B62-3BC4-4BEA-BEE0-70B379E03BBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05FC6B62-3BC4-4BEA-BEE0-70B379E03BBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05FC6B62-3BC4-4BEA-BEE0-70B379E03BBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11BE22E5-51E5-4830-A07E-E253CDDF5F0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11BE22E5-51E5-4830-A07E-E253CDDF5F0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11BE22E5-51E5-4830-A07E-E253CDDF5F0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11BE22E5-51E5-4830-A07E-E253CDDF5F0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F58FEC5-028F-4F49-AF58-614276D66447}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F58FEC5-028F-4F49-AF58-614276D66447}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F58FEC5-028F-4F49-AF58-614276D66447}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F58FEC5-028F-4F49-AF58-614276D66447}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5353A379-BC5F-4422-BDC5-B70F0DBC7B35}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5353A379-BC5F-4422-BDC5-B70F0DBC7B35}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5353A379-BC5F-4422-BDC5-B70F0DBC7B35}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5353A379-BC5F-4422-BDC5-B70F0DBC7B35}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57A6ABEB-1678-448F-B41C-062669B19103}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57A6ABEB-1678-448F-B41C-062669B19103}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57A6ABEB-1678-448F-B41C-062669B19103}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57A6ABEB-1678-448F-B41C-062669B19103}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {77F2587F-A517-4DC3-86EC-56942EA3FF22}
+	EndGlobalSection
+EndGlobal
