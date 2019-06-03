@@ -1,17 +1,18 @@
-﻿using Linkdev.Intern.EQuiz.Data;
+﻿using Linkdev.Intern.EQuiz.Repo.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
 
 namespace Linkdev.Intern.EQuiz.Repo.Repositories
 {
-    internal class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        public EQuizContext Context { get; private set; }
+        public DbContext Context { get; private set; }
 
-        public Repository(EQuizContext context)
+        public Repository(DbContext context)
         {
             Context = context;
         }
