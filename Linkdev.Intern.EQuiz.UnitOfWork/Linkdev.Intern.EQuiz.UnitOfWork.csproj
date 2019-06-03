@@ -7,12 +7,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{0F58FEC5-028F-4F49-AF58-614276D66447}</ProjectGuid>
+    <ProjectGuid>{4AD115B6-96DA-4547-8B46-CD4475872CF1}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Linkdev.Intern.EQuiz.Repo</RootNamespace>
-    <AssemblyName>Linkdev.Intern.EQuiz.Repo</AssemblyName>
+    <RootNamespace>Linkdev.Intern.EQuiz.UnitOfWork</RootNamespace>
+    <AssemblyName>Linkdev.Intern.EQuiz.UnitOfWork</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -43,12 +43,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -76,29 +70,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IAnswerRepository.cs" />
-    <Compile Include="Interfaces\IEmployeeRepository.cs" />
-    <Compile Include="Interfaces\IEmployeeQuestionTemplateRepository.cs" />
-    <Compile Include="Interfaces\IEmployeeTemplateRepository.cs" />
-    <Compile Include="Interfaces\IQuestionRepository.cs" />
-    <Compile Include="Interfaces\IQuestionTemplateRepository.cs" />
-    <Compile Include="Interfaces\IQuizRepository.cs" />
-    <Compile Include="Interfaces\ITemplateRepository.cs" />
-    <Compile Include="Interfaces\ITopicRepository.cs" />
+    <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Interfaces\IRepository.cs" />
-    <Compile Include="Repositories\AnswerRepository.cs" />
-    <Compile Include="Repositories\EmployeeQuestionTemplateRepository.cs" />
-    <Compile Include="Repositories\EmployeeRepository.cs" />
-    <Compile Include="Repositories\EmployeeTemplateRepository.cs" />
-    <Compile Include="Repositories\QuestionRepository.cs" />
-    <Compile Include="Repositories\QuestionTemplateRepository.cs" />
-    <Compile Include="Repositories\QuizRepository.cs" />
-    <Compile Include="Repositories\Repository.cs" />
-    <Compile Include="Repositories\TemplateRepository.cs" />
-    <Compile Include="Repositories\TopicRepository.cs" />
-    <Compile Include="UnitOfWork\IUnitOfWork.cs" />
-    <Compile Include="UnitOfWork\UnitOfWork.cs" />
+    <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -114,8 +88,11 @@
       <Project>{11be22e5-51e5-4830-a07e-e253cddf5f0c}</Project>
       <Name>Linkdev.Intern.EQuiz.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Linkdev.Intern.EQuiz.Repo\Linkdev.Intern.EQuiz.Repo.csproj">
+      <Project>{0f58fec5-028f-4f49-af58-614276d66447}</Project>
+      <Name>Linkdev.Intern.EQuiz.Repo</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -129,9 +106,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>54234</DevelopmentServerPort>
+          <DevelopmentServerPort>50580</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:54234/</IISUrl>
+          <IISUrl>http://localhost:50580/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

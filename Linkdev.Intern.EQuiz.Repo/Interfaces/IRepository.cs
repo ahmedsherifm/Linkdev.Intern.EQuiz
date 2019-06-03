@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Linkdev.Intern.EQuiz.Repo.Interfaces
 {
-    interface IRepository<TEntity> where TEntity : class
+    public interface IRepository<TEntity> where TEntity : class
     {
         IEnumerable<TEntity> GetAll();
 
@@ -21,6 +21,5 @@ namespace Linkdev.Intern.EQuiz.Repo.Interfaces
 
         TEntity SingleOrDefault(Expression<Func<TEntity, bool>> predict);
 
-        void SaveChanges();
     }
 }

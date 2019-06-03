@@ -60,9 +60,6 @@ namespace Linkdev.Intern.EQuiz.Repo.Repositories
             return Context.Set<TEntity>().SingleOrDefault(predict);
         }
 
-        public void SaveChanges()
-        {
-            Context.SaveChanges();
-        }
+        
     }
 }

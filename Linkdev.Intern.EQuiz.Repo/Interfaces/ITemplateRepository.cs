@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Linkdev.Intern.EQuiz.Repo.Interfaces
 {
-    interface ITemplateRepository
+    public interface ITemplateRepository
     {
     }
 }
