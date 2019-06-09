@@ -76,7 +76,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\ITopicService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\TopicService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -88,6 +90,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Linkdev.Intern.EQuiz.Data\Linkdev.Intern.EQuiz.Data.csproj">
+      <Project>{11be22e5-51e5-4830-a07e-e253cddf5f0c}</Project>
+      <Name>Linkdev.Intern.EQuiz.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Linkdev.Intern.EQuiz.Mappers\Linkdev.Intern.EQuiz.Mappers.csproj">
       <Project>{57a6abeb-1678-448f-b41c-062669b19103}</Project>
       <Name>Linkdev.Intern.EQuiz.Mappers</Name>
@@ -97,6 +103,7 @@
       <Name>Linkdev.Intern.EQuiz.Repo</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Linkdev.Intern.EQuiz.Repo.Interfaces
 {
-    public interface ITopicRepository
+    public interface ITopicRepository: IRepository<Topic>
     {
         IEnumerable<Topic> GetTopicsByCreationDate(int pageIndex, int pageSize = 10);
 
