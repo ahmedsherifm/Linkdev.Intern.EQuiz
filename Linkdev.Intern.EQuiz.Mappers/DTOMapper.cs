@@ -8,7 +8,7 @@ namespace Linkdev.Intern.EQuiz.Mappers
 {
     public static class DTOMapper
     {
-        static readonly IMapper Mapper;
+        public static readonly IMapper Mapper;
 
         static DTOMapper()
         {
