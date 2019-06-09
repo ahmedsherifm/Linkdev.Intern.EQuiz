@@ -9,12 +9,12 @@ namespace Linkdev.Intern.EQuiz.Repo.Interfaces
 {
     public interface ITopicRepository
     {
-        IEnumerable<Topic> GetTopicsByCreationDate();
+        IEnumerable<Topic> GetTopicsByCreationDate(int pageIndex, int pageSize = 10);
 
-        IEnumerable<Topic> GetTopicsByName(bool ascending);
+        IEnumerable<Topic> GetTopicsByName(bool ascending, int pageIndex, int pageSize = 10);
 
-        IEnumerable<Topic> FilterTopicsByName(string name);
+        IEnumerable<Topic> FilterTopicsByName(string name, int pageIndex, int pageSize = 10);
 
-        IEnumerable<Topic> GetTopicsByPage(int pageIndex, int pageSize = 10);
+        IEnumerable<Topic> GetTopics(int pageIndex, int pageSize = 10);
     }
 }
