@@ -7,7 +7,7 @@ using Linkdev.Intern.EQuiz.Repo.Interfaces;
 
 namespace Linkdev.Intern.EQuiz.Repo.UnitOfWork
 {
-    interface IUnitOfWork
+    public interface IUnitOfWork
     {
         IAnswerRepository AnswerRepository { get; set; }
 
