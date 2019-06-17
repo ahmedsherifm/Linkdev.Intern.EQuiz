@@ -29,7 +29,7 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
         // GET: api/Topic
         public IEnumerable<Topic> GetAllTopics()
         {
-            var topics = _topicService.GetAllTopics();
+            var topics = _topicService.GetAllTopics().ToList();
             return topics;
         }
 
