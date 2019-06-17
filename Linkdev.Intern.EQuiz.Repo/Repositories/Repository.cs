@@ -36,7 +36,7 @@ namespace Linkdev.Intern.EQuiz.Repo.Repositories
         public IEnumerable<TEntity> GetAll()
         {
             //return Context.Set<TEntity>();
-            return Context.Set<TEntity>().AsEnumerable();
+            return Context.Set<TEntity>().AsEnumerable().ToList();
         }
 
         public TEntity GetByID(int id)
