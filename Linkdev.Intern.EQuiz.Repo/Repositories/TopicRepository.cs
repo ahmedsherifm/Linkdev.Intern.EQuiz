@@ -113,17 +113,17 @@ namespace Linkdev.Intern.EQuiz.Repo.Repositories
             }
         }
 
+        public override bool? Remove(Topic entity)
+        {
+            if (entity != null)
+            {
+                entity.IsDeleted = true;
+                return true;
+            }
+            else
+                return false;
+        }
 
 
-        //// delete topic " with all req. conds."
-        //public TopicQuestionsState DeleteTopicStates(int id)
-        //{
-        //    if (TopicHasQuestion(id) == false)
-        //        return TopicQuestionsState.NoQuestionsAssigned;
-        //    else if (TopicHasQuestionUsed(id) == false)
-        //        return TopicQuestionsState.NoQuestionsUsed;
-        //    else
-        //        return TopicQuestionsState.QuestionsUsed;
-        //}
     }
 }
