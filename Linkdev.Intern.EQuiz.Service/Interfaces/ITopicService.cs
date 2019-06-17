@@ -22,5 +22,7 @@ namespace Linkdev.Intern.EQuiz.Service.Interfaces
 
         Topic GetTopicSingleOrDefault(Expression<Func<Topic, bool>> predict);
 
+
+
     }
 }
