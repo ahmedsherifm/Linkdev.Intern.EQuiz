@@ -37,7 +37,7 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
         // GET: api/Topic/2/10
         public IEnumerable<Topic> GetTopicsPaging(int pageIndex,int pageSize)
         {
-            var topics = _topicService.GetTopicsByCreationDate(pageIndex,pageSize);
+            var topics = _topicService.GetTopicsByCreationDate(pageIndex,pageSize).ToList();
             return topics;
         }
 
@@ -53,7 +53,7 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
         // GET: api/Topic/2/10
         public IEnumerable<Topic> GetTopicsByName(bool ascending, int pageIndex, int pageSize)
         {
-            var topics = _topicService.GetTopicsByName(ascending,pageIndex, pageSize);
+            var topics = _topicService.GetTopicsByName(ascending,pageIndex, pageSize).ToList();
             return topics;
         }
 
@@ -61,7 +61,7 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
         // GET: api/Topic/2/10
         public IEnumerable<Topic> FilterTopicsByName(string name, int pageIndex, int pageSize)
         {
-            var topics = _topicService.FilterTopicsByName(name, pageIndex, pageSize);
+            var topics = _topicService.FilterTopicsByName(name, pageIndex, pageSize).ToList();
             return topics;
         }
 
