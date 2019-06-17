@@ -10,6 +10,7 @@ namespace Linkdev.Intern.EQuiz.Service.Interfaces
 {
     public interface ITopicService
     {
+        // implementing generic repo services
         IEnumerable<Topic> GetAllTopics();
 
         Topic GetTopicByID(int id);
@@ -22,5 +23,11 @@ namespace Linkdev.Intern.EQuiz.Service.Interfaces
 
         Topic GetTopicSingleOrDefault(Expression<Func<Topic, bool>> predict);
 
+        // implemeting topic repo services
+        IEnumerable<Topic> GetTopicsByCreationDate(int pageIndex, int pageSize = 10);
+
+        IEnumerable<Topic> GetTopicsByName(bool ascending, int pageIndex, int pageSize = 10);
+
+        IEnumerable<Topic> FilterTopicsByName(string name, int pageIndex, int pageSize = 10);
     }
 }

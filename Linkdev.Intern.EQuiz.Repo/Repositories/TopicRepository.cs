@@ -65,13 +65,13 @@ namespace Linkdev.Intern.EQuiz.Repo.Repositories
             }
         }
 
-        public IEnumerable<Topic> GetTopics(int pageIndex, int pageSize = 10)
-        {
-            return EQuizContext.Topics
-                    .Skip((pageIndex - 1) * pageSize)
-                    .Take(pageSize)
-                    .AsEnumerable();
-        }
+        //public IEnumerable<Topic> GetTopics(int pageIndex, int pageSize = 10)
+        //{
+        //    return EQuizContext.Topics
+        //            .Skip((pageIndex - 1) * pageSize)
+        //            .Take(pageSize)
+        //            .AsEnumerable();
+        //}
 
 
         // get topic's questions and answers

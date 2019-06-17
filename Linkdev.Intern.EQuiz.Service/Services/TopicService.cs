@@ -33,9 +33,9 @@ namespace Linkdev.Intern.EQuiz.Service.Services
 
         public IEnumerable<Topic> FindTopic(Expression<Func<Topic, bool>> predict)
         {
-            //var topics = DTOMapper.Mapper.Map<ICollection<Topic>,ICollection< Data.Topic >;
-            //var topics = UnitOfWork.TopicRepository.Find(predict);
-            throw new NotImplementedException();
+            var dtoPredict = DTOMapper.Mapper.Map<Expression<Func<Topic, bool>>, Expression<Func<Data.Topic, bool>>>(predict);
+            var topics = UnitOfWork.TopicRepository.Find(dtoPredict);
+            return DTOMapper.Mapper.Map<IEnumerable<Data.Topic>, IEnumerable<Topic>>(topics);
         }
 
         public IEnumerable<Topic> GetAllTopics()
@@ -48,7 +48,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         {
             var topic = UnitOfWork.TopicRepository.GetByID(id);
 
-            return DTOMapper.Mapper.Map< Data.Topic, Topic>(topic);
+            return DTOMapper.Mapper.Map<Data.Topic, Topic>(topic);
         }
 
         public bool? RemoveTopic(Topic entity)
@@ -65,10 +65,27 @@ namespace Linkdev.Intern.EQuiz.Service.Services
 
         public Topic GetTopicSingleOrDefault(Expression<Func<Topic, bool>> predict)
         {
-            //var topic = UnitOfWork.TopicRepository.SingleOrDefault(predict);
+            var dtoPredict = DTOMapper.Mapper.Map<Expression<Func<Topic, bool>>, Expression<Func<Data.Topic, bool>>>(predict);
+            var topics = UnitOfWork.TopicRepository.SingleOrDefault(dtoPredict);
+            return DTOMapper.Mapper.Map<Data.Topic, Topic>(topics);
+        }
 
-            //return DTOMapper.Mapper.Map<Data.Topic, Topic>(topic);
-            throw new NotImplementedException();
+        public IEnumerable<Topic> GetTopicsByCreationDate(int pageIndex, int pageSize = 10)
+        {
+            var topics = UnitOfWork.TopicRepository.GetTopicsByCreationDate(pageIndex,pageSize);
+            return DTOMapper.Mapper.Map<IEnumerable<Data.Topic>, IEnumerable<Topic>>(topics);
+        }
+
+        public IEnumerable<Topic> GetTopicsByName(bool ascending, int pageIndex, int pageSize = 10)
+        {
+            var topics = UnitOfWork.TopicRepository.GetTopicsByName(ascending,pageIndex, pageSize);
+            return DTOMapper.Mapper.Map<IEnumerable<Data.Topic>, IEnumerable<Topic>>(topics);
+        }
+
+        public IEnumerable<Topic> FilterTopicsByName(string name, int pageIndex, int pageSize = 10)
+        {
+            var topics = UnitOfWork.TopicRepository.FilterTopicsByName(name,pageIndex, pageSize);
+            return DTOMapper.Mapper.Map<IEnumerable<Data.Topic>, IEnumerable<Topic>>(topics);
         }
     }
 }
