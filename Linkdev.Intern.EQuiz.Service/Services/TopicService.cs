@@ -18,6 +18,10 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             UnitOfWork = unitOfWork;
         }
 
+        public TopicService()
+        {
+            UnitOfWork = new UnitOfWork(new Data.EQuizContext());
+        }
 
         public bool? AddTopic(Topic entity)
         {
