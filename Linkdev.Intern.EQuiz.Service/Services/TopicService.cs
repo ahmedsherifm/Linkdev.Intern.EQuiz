@@ -1,6 +1,7 @@
 ﻿using Linkdev.Intern.EQuiz.Mappers;
 using Linkdev.Intern.EQuiz.Repo.UnitOfWork;
 using Linkdev.Intern.EQuiz.Service.Interfaces;
+using Linkdev.Intern.EQuiz.Service.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,8 +58,21 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             return DTOMapper.Mapper.Map<Data.Topic, Topic>(topic);
         }
 
-        public bool? RemoveTopic(Topic entity)
+        
+        public Output CheckTopicStatus(int id)
+        {         
+
+            if (UnitOfWork.TopicRepository.TopicHasQuestion(id) == false)
+                return Output.Success;
+            else if (UnitOfWork.TopicRepository.TopicHasQuestionUsed(id) == false)
+                return Output.Warning;
+            else
+                return Output.Failure;
+        }
+
+        public bool? RemoveTopic(int id)
         {
+            var entity = GetTopicByID(id);
             if (entity != null)
             {
                 var dtoTopic = DTOMapper.Mapper.Map<Topic, Data.Topic>(entity);
@@ -95,5 +109,25 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             var topics = UnitOfWork.TopicRepository.FilterTopicsByName(name,pageIndex, pageSize);
             return DTOMapper.Mapper.Map<IEnumerable<Data.Topic>, IEnumerable<Topic>>(topics);
         }
+
+        public bool? ChangeTopicName(int id, string name)
+        {
+            var result = UnitOfWork.TopicRepository.ChangeTopicName(id, name);
+            if ((bool)result)
+            {
+                UnitOfWork.SaveChanges();
+                return true;
+            }
+            else
+                return false;
+        }
+
+        public IEnumerable<Question> GetTopicQuestions(int id)
+        {
+            var questions = UnitOfWork.TopicRepository.GetTopicQuestions(id);
+            return DTOMapper.Mapper.Map<IEnumerable<Data.Question>, IEnumerable<Question>>(questions);
+        }
+
+       
     }
 }

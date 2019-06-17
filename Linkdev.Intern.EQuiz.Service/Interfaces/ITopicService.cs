@@ -1,4 +1,5 @@
 ﻿using Linkdev.Intern.EQuiz.Mappers;
+using Linkdev.Intern.EQuiz.Service.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +18,6 @@ namespace Linkdev.Intern.EQuiz.Service.Interfaces
 
         bool? AddTopic(Topic entity);
 
-        bool? RemoveTopic(Topic entity);
-
         IEnumerable<Topic> FindTopic(Expression<Func<Topic, bool>> predict);
 
         Topic GetTopicSingleOrDefault(Expression<Func<Topic, bool>> predict);
@@ -29,5 +28,13 @@ namespace Linkdev.Intern.EQuiz.Service.Interfaces
         IEnumerable<Topic> GetTopicsByName(bool ascending, int pageIndex, int pageSize = 10);
 
         IEnumerable<Topic> FilterTopicsByName(string name, int pageIndex, int pageSize = 10);
+        bool? RemoveTopic(int id);
+
+        Output CheckTopicStatus(int id);
+
+        IEnumerable<Question> GetTopicQuestions(int id);
+
+        bool? ChangeTopicName(int id, string name);
+
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Linkdev.Intern.EQuiz.Mappers;
 using Linkdev.Intern.EQuiz.Service.Interfaces;
 using Linkdev.Intern.EQuiz.Service.Services;
+using Linkdev.Intern.EQuiz.Service.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,9 +36,9 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
 
         [Route("{pageIndex:int}/{pageSize:int}")]
         // GET: api/Topic/2/10
-        public IEnumerable<Topic> GetTopicsPaging(int pageIndex,int pageSize)
+        public IEnumerable<Topic> GetTopicsPaging(int pageIndex, int pageSize)
         {
-            var topics = _topicService.GetTopicsByCreationDate(pageIndex,pageSize).ToList();
+            var topics = _topicService.GetTopicsByCreationDate(pageIndex, pageSize).ToList();
             return topics;
         }
 
@@ -61,30 +62,46 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
         // GET: api/Topic/2/10
         public IEnumerable<Topic> GetTopicsByName(bool ascending, int pageIndex, int pageSize)
         {
-            var topics = _topicService.GetTopicsByName(ascending,pageIndex, pageSize).ToList();
+            var topics = _topicService.GetTopicsByName(ascending, pageIndex, pageSize).ToList();
             return topics;
         }
 
-        //[HttpPost]
-        //[Route("")]
-        //// POST: api/Topic
-        //public bool? AddTopic([FromBody]Topic topic)
-        //{
-        //    var isAdded = _topicService.AddTopic(topic);
-        //    return isAdded;
-        //}
-        public void Post([FromBody]string value)
+        [HttpPost]
+        [Route("")]
+        // POST: api/Topic
+        public bool? AddTopic([FromBody]Topic topic)
         {
+            var isAdded = _topicService.AddTopic(topic);
+            return isAdded;
         }
 
-        // PUT: api/Topic/5
-        public void Put(int id, [FromBody]string value)
+        [HttpPatch]
+        [Route("ChangeName/{id:int}")]
+        public bool? ChangeTopicName(int id,[FromBody] string name)
         {
+            return _topicService.ChangeTopicName(id, name);
         }
 
-        // DELETE: api/Topic/5
-        public void Delete(int id)
+        [HttpGet]
+        [Route("Questions/{id:int}")]
+        public IEnumerable<Question> GetTopicQuestions(int id)
         {
+            return _topicService.GetTopicQuestions(id).ToList();
+        }
+
+        [HttpGet]
+        [Route("CheckTopicStatus/{id:int}")]
+        public Output CheckTopicStatus(int id)
+        {
+            return _topicService.CheckTopicStatus(id);
+        }
+
+        [HttpDelete]
+        // I didn't set a riute as there is only one http delete method
+        [Route("{id:int}")]
+        public bool? RemoveTopic(int id)
+        {
+            return _topicService.RemoveTopic(id);
         }
     }
 }
