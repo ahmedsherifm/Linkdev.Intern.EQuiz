@@ -10,16 +10,16 @@ namespace Linkdev.Intern.EQuiz.Service.Interfaces
 {
     public interface ITopicService
     {
-        IEnumerable<Topic> GetAll();
+        IEnumerable<Topic> GetAllTopics();
 
-        Topic GetByID(int id);
+        Topic GetTopicByID(int id);
 
-        bool? Add(Topic entity);
+        bool? AddTopic(Topic entity);
 
-        bool? Remove(Topic entity);
+        bool? RemoveTopic(Topic entity);
 
-        IEnumerable<Topic> Find(Expression<Func<Topic, bool>> predict);
+        IEnumerable<Topic> FindTopic(Expression<Func<Topic, bool>> predict);
 
-        Topic SingleOrDefault(Expression<Func<Topic, bool>> predict);
+        Topic GetTopicSingleOrDefault(Expression<Func<Topic, bool>> predict);
     }
 }
