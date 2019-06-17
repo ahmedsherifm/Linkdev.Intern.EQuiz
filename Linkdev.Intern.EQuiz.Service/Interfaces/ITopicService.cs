@@ -21,5 +21,6 @@ namespace Linkdev.Intern.EQuiz.Service.Interfaces
         IEnumerable<Topic> FindTopic(Expression<Func<Topic, bool>> predict);
 
         Topic GetTopicSingleOrDefault(Expression<Func<Topic, bool>> predict);
+
     }
 }
