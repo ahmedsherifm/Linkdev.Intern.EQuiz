@@ -17,8 +17,12 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
 
         public TopicsController(ITopicService topicService)
         {
+            _topicService = topicService;
+        }
+
+        public TopicsController()
+        {
             _topicService = new TopicService();
-            //_topicService = topicService;
         }
 
         [Route("")]
