@@ -41,6 +41,14 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
             return topics;
         }
 
+        [Route("{pageIndex:int}/{pageSize:int}/{name}")]
+        // GET: api/Topic/2/10
+        public IEnumerable<Topic> FilterTopicsByName(string name, int pageIndex, int pageSize)
+        {
+            var topics = _topicService.FilterTopicsByName(name, pageIndex, pageSize).ToList();
+            return topics;
+        }
+
         [Route("{id:int}")]
         // GET: api/Topic/5
         public Topic GetTopicByID(int id)
@@ -49,19 +57,11 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
             return topic;
         }
 
-        [Route("byname/{pageIndex:int}/{pageSize:int}/{ascending:bool}")]
+        [Route("ByName/{pageIndex:int}/{pageSize:int}/{ascending:bool}")]
         // GET: api/Topic/2/10
         public IEnumerable<Topic> GetTopicsByName(bool ascending, int pageIndex, int pageSize)
         {
             var topics = _topicService.GetTopicsByName(ascending,pageIndex, pageSize).ToList();
-            return topics;
-        }
-
-        [Route("{pageIndex:int}/{pageSize:int}/{name}")]
-        // GET: api/Topic/2/10
-        public IEnumerable<Topic> FilterTopicsByName(string name, int pageIndex, int pageSize)
-        {
-            var topics = _topicService.FilterTopicsByName(name, pageIndex, pageSize).ToList();
             return topics;
         }
 
