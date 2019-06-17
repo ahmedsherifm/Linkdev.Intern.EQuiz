@@ -20,7 +20,6 @@ namespace Linkdev.Intern.EQuiz.Service.Services
 
 
         public bool? AddTopic(Topic entity)
-
         {
             if (entity != null)
             {
@@ -33,21 +32,19 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         }
 
         public IEnumerable<Topic> FindTopic(Expression<Func<Topic, bool>> predict)
-
         {
-            //var topics = DTOMapper.Mapper.Map<IEnumerable<Topic>,IEnumerable<Data.Topic>
+            //var topics = DTOMapper.Mapper.Map<ICollection<Topic>,ICollection< Data.Topic >;
+            //var topics = UnitOfWork.TopicRepository.Find(predict);
             throw new NotImplementedException();
         }
 
         public IEnumerable<Topic> GetAllTopics()
-
         {
-            throw new NotImplementedException();
+            var topics = UnitOfWork.TopicRepository.GetAll();
+            return DTOMapper.Mapper.Map<IEnumerable<Data.Topic>, IEnumerable<Topic>>(topics);
         }
 
-
         public Topic GetTopicByID(int id)
-
         {
             var topic = UnitOfWork.TopicRepository.GetByID(id);
 
@@ -55,7 +52,6 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         }
 
         public bool? RemoveTopic(Topic entity)
-
         {
             if (entity != null)
             {
@@ -68,7 +64,6 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         }
 
         public Topic GetTopicSingleOrDefault(Expression<Func<Topic, bool>> predict)
-
         {
             //var topic = UnitOfWork.TopicRepository.SingleOrDefault(predict);
 
