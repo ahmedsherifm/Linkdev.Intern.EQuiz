@@ -15,8 +15,6 @@ namespace Linkdev.Intern.EQuiz.Repo.Interfaces
 
         IEnumerable<Topic> FilterTopicsByName(string name, int pageIndex, int pageSize = 10);
 
-        IEnumerable<Topic> GetTopics(int pageIndex, int pageSize = 10);
-
         IEnumerable<Question> GetTopicQuestions(int id);
 
         bool? TopicHasQuestion(int id);
