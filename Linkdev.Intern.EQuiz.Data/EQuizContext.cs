@@ -21,7 +21,19 @@ namespace Linkdev.Intern.EQuiz.Data
         public virtual DbSet<Quiz> Quizes { get; set; }
         public virtual DbSet<Template> Templates { get; set; }
         public virtual DbSet<Topic> Topics { get; set; }
-
+        //public void Test()
+        //{
+        //    using (var context = new EQuizContext())
+        //    {
+        //        var query = context.Topics.Where(t => t.IsDeleted);
+        //        query = query.Take(10).Skip(5);
+        //        query = query.Where(t => t.ID > 0);
+        //        query = query.OrderByDescending(t => t.ID);
+        //        var output = query.ToList();
+           
+                
+        //    }
+        //}
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Answer>()
