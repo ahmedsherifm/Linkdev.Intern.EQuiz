@@ -88,5 +88,52 @@ namespace Linkdev.Intern.EQuiz.Repo.Repositories
                     .OrderByDescending(q => q.CreationDate)
                     .AsEnumerable();
         }
+
+        public IEnumerable<Question> GetQuestionsByName(bool ascending, int pageIndex , int pageSize = 10)
+        {
+            if (ascending)
+            {
+                return EQuizContext.Questions
+                        .Skip((pageIndex - 1) * pageSize)
+                        .Take(pageSize)
+                        .OrderBy(t => t.Text);
+            }
+            else
+            {
+                return EQuizContext.Questions
+                        .Skip((pageIndex - 1) * pageSize)
+                        .Take(pageSize)
+                        .OrderByDescending(t => t.Text);
+            }
+        }
+
+        public IEnumerable<Question> GetQuestionsByText(string text, int pageIndex, int pageSize = 10)
+        {
+            return EQuizContext.Questions
+                    .Where(q => q.Text.ToLower().Contains(text.ToLower()))
+                    .Skip((pageIndex - 1) * pageSize)
+                    .Take(pageSize)
+                    .AsEnumerable();
+        }
+
+        public IEnumerable<Question> GetQuestionsByTopic(Topic topic, int pageIndex, int pageSize = 10)
+        {
+            return EQuizContext.Questions
+                    .Where(q => q.Topic.Name == topic.Name)
+                    .Skip((pageIndex - 1) * pageSize)
+                    .Take(pageSize)
+                    .AsEnumerable();
+        }
+
+        public IEnumerable<Question> GetQuestionsByTopicName(string topicName, int pageIndex, int pageSize = 10)
+        {
+            return EQuizContext.Questions
+                    .Where(q => q.Topic.Name == topicName)
+                    .Skip((pageIndex - 1) * pageSize)
+                    .Take(pageSize)
+                    .AsEnumerable();
+        }
+
+        override 
     }
 }
