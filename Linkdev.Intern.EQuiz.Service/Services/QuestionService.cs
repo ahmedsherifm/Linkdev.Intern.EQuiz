@@ -30,7 +30,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             return DTOMapper.Mapper.Map<Data.Question, Question>(question);
         }
 
-        public bool? ChangeCorrectAnswers(int questionId, ICollection<Answer> answers)
+        public bool ChangeCorrectAnswers(int questionId, ICollection<Answer> answers)
         {
             if (answers != null)
             {
@@ -39,13 +39,13 @@ namespace Linkdev.Intern.EQuiz.Service.Services
                 var result = UnitOfWork.QuestionRepository.ChangeCorrectAnswers(questionId, dtoAnswers);
                 UnitOfWork.SaveChanges();
 
-                return result;
+                return (bool)result;
             }
             else
                 return false;
         }
 
-        public bool? EditQuestion(Question question)
+        public bool EditQuestion(Question question)
         {
             if (question != null)
             {
@@ -55,7 +55,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
                     var result = UnitOfWork.QuestionRepository.EditQuestion(dtoQuestion);
                     UnitOfWork.SaveChanges();
 
-                    return result;
+                    return (bool)result;
                 }
                 else
                     return false;
@@ -64,14 +64,14 @@ namespace Linkdev.Intern.EQuiz.Service.Services
                 return false;
         }
 
-        public bool? IsQuestionActive(int id)
+        public bool IsQuestionActive(int id)
         {
-            return UnitOfWork.QuestionRepository.IsQuestionActive(id);
+            return (bool)UnitOfWork.QuestionRepository.IsQuestionActive(id);
         }
 
-        public bool? IsQuestionUsed(int id)
+        public bool IsQuestionUsed(int id)
         {
-            return UnitOfWork.QuestionRepository.IsQuestionUsed(id);
+            return (bool)UnitOfWork.QuestionRepository.IsQuestionUsed(id);
         }
 
         //public bool IsQuestionRemovable(int id)
@@ -79,7 +79,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         //    if(UnitOfWork.QuestionRepository.IsQuestionUsed(id) == false)
         //}
 
-        public bool? Remove(int id)
+        public bool Remove(int id)
         {
             var ques = GetQuestionByID(id);
             if (ques != null)
@@ -88,7 +88,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
                 var result = UnitOfWork.QuestionRepository.Remove(dtoQuestion);
                 UnitOfWork.SaveChanges();
 
-                return result;
+                return (bool)result;
             }
 
             return false;
