@@ -29,10 +29,10 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             if (entity != null)
             {
                 var dtoTopic = DTOMapper.Mapper.Map<Topic, Data.Topic>(entity);
-                UnitOfWork.TopicRepository.Add(dtoTopic);
+                var result = UnitOfWork.TopicRepository.Add(dtoTopic);
                 UnitOfWork.SaveChanges();
 
-                return true;
+                return result;
             }
             else
                 return false;
@@ -76,10 +76,10 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             if (entity != null)
             {
                 var dtoTopic = DTOMapper.Mapper.Map<Topic, Data.Topic>(entity);
-                UnitOfWork.TopicRepository.Remove(dtoTopic);
+                var result = UnitOfWork.TopicRepository.Remove(dtoTopic);
                 UnitOfWork.SaveChanges();
 
-                return true;
+                return result;
             }
             else
                 return false;

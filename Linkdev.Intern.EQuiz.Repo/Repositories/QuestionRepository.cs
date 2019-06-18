@@ -79,5 +79,14 @@ namespace Linkdev.Intern.EQuiz.Repo.Repositories
 
             return false;
         }
+
+        public IEnumerable<Question> GetQuestionsByCreationDate(int pageIndex, int pageSize = 10)
+        {
+            return EQuizContext.Questions
+                    .Skip((pageIndex - 1) * pageSize)
+                    .Take(pageSize)
+                    .OrderByDescending(q => q.CreationDate)
+                    .AsEnumerable();
+        }
     }
 }
