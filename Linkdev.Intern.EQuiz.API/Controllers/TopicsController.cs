@@ -27,7 +27,7 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
         }
 
         [Route("")]
-        // GET: api/Topic
+        // GET: api/topic
         public IEnumerable<Topic> GetAllTopics()
         {
             var topics = _topicService.GetAllTopics();
@@ -35,7 +35,7 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
         }
 
         [Route("{pageIndex:int}/{pageSize:int}")]
-        // GET: api/Topic/2/10
+        // GET: api/topic/2/10
         public IEnumerable<Topic> GetTopicsPaging(int pageIndex, int pageSize)
         {
             var topics = _topicService.GetTopicsByCreationDate(pageIndex, pageSize).ToList();
@@ -43,7 +43,7 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
         }
 
         [Route("{pageIndex:int}/{pageSize:int}/{name}")]
-        // GET: api/Topic/2/10
+        // GET: api/topic/2/10/topi
         public IEnumerable<Topic> FilterTopicsByName(string name, int pageIndex, int pageSize)
         {
             var topics = _topicService.FilterTopicsByName(name, pageIndex, pageSize).ToList();
@@ -51,7 +51,7 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
         }
 
         [Route("{id:int}")]
-        // GET: api/Topic/5
+        // GET: api/topic/5
         public Topic GetTopicByID(int id)
         {
             var topic = _topicService.GetTopicByID(id);
@@ -59,7 +59,7 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
         }
 
         [Route("ByName/{pageIndex:int}/{pageSize:int}/{ascending:bool}")]
-        // GET: api/Topic/2/10
+        // GET: api/topic/ByName/2/10/1
         public IEnumerable<Topic> GetTopicsByName(bool ascending, int pageIndex, int pageSize)
         {
             var topics = _topicService.GetTopicsByName(ascending, pageIndex, pageSize).ToList();
@@ -68,7 +68,7 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
 
         [HttpPost]
         [Route("")]
-        // POST: api/Topic
+        // POST: api/topic
         public bool? AddTopic([FromBody]Topic topic)
         {
             var isAdded = _topicService.AddTopic(topic);
