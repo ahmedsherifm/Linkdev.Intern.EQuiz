@@ -13,6 +13,7 @@ namespace Linkdev.Intern.EQuiz.Data
         {
             Answers = new HashSet<Answer>();
             Employees_Questions_Templates = new HashSet<Employees_Questions_Templates>();
+            Questions_Quizes = new HashSet<Questions_Quizes>();
             Questions_Templates = new HashSet<Questions_Templates>();
         }
 
@@ -40,6 +41,9 @@ namespace Linkdev.Intern.EQuiz.Data
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employees_Questions_Templates> Employees_Questions_Templates { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Questions_Quizes> Questions_Quizes { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Questions_Templates> Questions_Templates { get; set; }

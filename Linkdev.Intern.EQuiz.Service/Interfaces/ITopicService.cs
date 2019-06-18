@@ -28,6 +28,7 @@ namespace Linkdev.Intern.EQuiz.Service.Interfaces
         IEnumerable<Topic> GetTopicsByName(bool ascending, int pageIndex, int pageSize = 10);
 
         IEnumerable<Topic> FilterTopicsByName(string name, int pageIndex, int pageSize = 10);
+
         bool? RemoveTopic(int id);
 
         Output CheckTopicStatus(int id);
