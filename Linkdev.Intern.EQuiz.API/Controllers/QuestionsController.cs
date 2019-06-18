@@ -25,6 +25,7 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
         }
 
         // How to use delegates with APIs???!!!!!!!!!!!!!ظظظظظظظظظ
+        // not having enumerable quizes in questions (mapping occurs on third class)
         
         public IEnumerable<Question> Get()
         {
