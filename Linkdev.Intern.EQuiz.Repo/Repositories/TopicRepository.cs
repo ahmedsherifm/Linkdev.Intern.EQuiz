@@ -118,6 +118,8 @@ namespace Linkdev.Intern.EQuiz.Repo.Repositories
             if (entity != null)
             {
                 entity.IsDeleted = true;
+                entity.Questions.Select(q => { q.IsDeleted = true; return q; }).ToList();
+                
                 return true;
             }
             else
