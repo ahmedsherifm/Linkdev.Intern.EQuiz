@@ -1,14 +1,23 @@
-﻿using System;
+﻿using Linkdev.Intern.EQuiz.Mappers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using Linkdev.Intern.EQuiz.Data;
 
-namespace Linkdev.Intern.EQuiz.Repo.Interfaces
+namespace Linkdev.Intern.EQuiz.Service.Interfaces
 {
-    public interface IQuestionRepository : IRepository<Question>
+    public interface IQuestionService
     {
+        bool? Add(Question question);
+
+        IEnumerable<Question> GetAllQuestions();
+
+        Question GetQuestionById(int id);
+
+        IEnumerable<Question> FindQuestions(Expression<Func<Question, bool>> predicate);
+
         IEnumerable<Question> GetQuestionsByCreationDate(int pageIndex, int pageSize = 10);
 
         IEnumerable<Question> GetQuestionsByName(bool ascending, int pageIndex, int pageSize = 10);
@@ -21,6 +30,10 @@ namespace Linkdev.Intern.EQuiz.Repo.Interfaces
 
         string GetQuestionHint(int id);
 
+        IEnumerable<Answer> GetQuestionAnswers(int id);
 
+        IEnumerable<Quiz> GetQuestionQuizez(int id);
+
+        Topic GetQuestionTopic(int id);
     }
 }

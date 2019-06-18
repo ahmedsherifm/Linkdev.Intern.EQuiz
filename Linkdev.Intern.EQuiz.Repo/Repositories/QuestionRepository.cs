@@ -107,7 +107,7 @@ namespace Linkdev.Intern.EQuiz.Repo.Repositories
             }
         }
 
-        public IEnumerable<Question> GetQuestionsByText(string text, int pageIndex, int pageSize = 10)
+        public IEnumerable<Question> FilterQuestionsByText(string text, int pageIndex, int pageSize = 10)
         {
             return EQuizContext.Questions
                     .Where(q => q.Text.ToLower().Contains(text.ToLower()))
