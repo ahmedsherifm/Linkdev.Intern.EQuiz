@@ -134,6 +134,13 @@ namespace Linkdev.Intern.EQuiz.Repo.Repositories
                     .AsEnumerable();
         }
 
+        public string GetQuestionHint(int id)
+        {
+            return EQuizContext.Questions
+                    .SingleOrDefault(q => q.ID == id)
+                    .Hint;
+        }
+
         
     }
 }

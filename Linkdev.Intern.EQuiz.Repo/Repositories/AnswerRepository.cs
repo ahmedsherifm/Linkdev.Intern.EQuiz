@@ -9,8 +9,24 @@ namespace Linkdev.Intern.EQuiz.Repo.Repositories
 {
     public class AnswerRepository : Repository<Answer>, IAnswerRepository
     {
+        public EQuizContext EQuizContext
+        {
+            get
+            {
+                return Context as EQuizContext;
+            }
+        }
+
         public AnswerRepository(EQuizContext context) : base(context)
         {
+        }
+
+        public IEnumerable<Answer> GetAnswersByQuestion(int qid)
+        {
+            return EQuizContext.Questions
+                    .SingleOrDefault(q => q.ID == qid)
+                    .Answers
+                    .AsEnumerable();
         }
     }
 }

@@ -124,6 +124,12 @@ namespace Linkdev.Intern.EQuiz.Repo.Repositories
                 return false;
         }
 
+        public Topic GetTopicByQuestion(int qid)
+        {
+            return EQuizContext.Questions
+                    .SingleOrDefault(q => q.ID == qid)
+                    .Topic;
+        }
 
     }
 }

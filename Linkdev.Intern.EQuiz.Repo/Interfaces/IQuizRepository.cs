@@ -9,5 +9,6 @@ namespace Linkdev.Intern.EQuiz.Repo.Interfaces
 {
     public interface IQuizRepository :  IRepository<Quiz>
     {
+        IEnumerable<Quiz> GetQuizesByQuestion(int qid);
     }
 }

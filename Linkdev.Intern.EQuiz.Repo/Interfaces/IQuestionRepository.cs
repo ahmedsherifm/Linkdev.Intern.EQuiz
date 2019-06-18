@@ -18,5 +18,9 @@ namespace Linkdev.Intern.EQuiz.Repo.Interfaces
         IEnumerable<Question> GetQuestionsByTopic(Topic topic, int pageIndex, int pageSize = 10);
 
         IEnumerable<Question> GetQuestionsByTopicName(string topicName, int pageIndex, int pageSize = 10);
+
+        string GetQuestionHint(int id);
+
+
     }
 }
