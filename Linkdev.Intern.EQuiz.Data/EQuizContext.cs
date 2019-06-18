@@ -17,23 +17,12 @@ namespace Linkdev.Intern.EQuiz.Data
         public virtual DbSet<Employees_Questions_Templates> Employees_Questions_Templates { get; set; }
         public virtual DbSet<Employees_Templates> Employees_Templates { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
+        public virtual DbSet<Questions_Quizes> Questions_Quizes { get; set; }
         public virtual DbSet<Questions_Templates> Questions_Templates { get; set; }
         public virtual DbSet<Quiz> Quizes { get; set; }
         public virtual DbSet<Template> Templates { get; set; }
         public virtual DbSet<Topic> Topics { get; set; }
-        //public void Test()
-        //{
-        //    using (var context = new EQuizContext())
-        //    {
-        //        var query = context.Topics.Where(t => t.IsDeleted);
-        //        query = query.Take(10).Skip(5);
-        //        query = query.Where(t => t.ID > 0);
-        //        query = query.OrderByDescending(t => t.ID);
-        //        var output = query.ToList();
-           
-                
-        //    }
-        //}
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Answer>()
@@ -67,8 +56,19 @@ namespace Linkdev.Intern.EQuiz.Data
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Question>()
+                .HasMany(e => e.Questions_Quizes)
+                .WithRequired(e => e.Question)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Question>()
                 .HasMany(e => e.Questions_Templates)
                 .WithRequired(e => e.Question)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Quiz>()
+                .HasMany(e => e.Questions_Quizes)
+                .WithRequired(e => e.Quiz)
+                .HasForeignKey(e => e.QuizID)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Quiz>()

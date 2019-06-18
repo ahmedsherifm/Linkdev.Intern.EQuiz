@@ -11,6 +11,7 @@ namespace Linkdev.Intern.EQuiz.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Quiz()
         {
+            Questions_Quizes = new HashSet<Questions_Quizes>();
             Templates = new HashSet<Template>();
         }
 
@@ -28,6 +29,7 @@ namespace Linkdev.Intern.EQuiz.Data
 
         public DateTime ActivationDate { get; set; }
 
+        public DateTime? ExpirationDate { get; set; }
 
         public int? NumberOfTrials { get; set; }
 
@@ -40,6 +42,9 @@ namespace Linkdev.Intern.EQuiz.Data
         public bool IsActive { get; set; }
 
         public bool IsDeleted { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Questions_Quizes> Questions_Quizes { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Template> Templates { get; set; }
