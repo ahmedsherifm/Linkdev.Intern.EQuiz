@@ -29,6 +29,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             if (entity != null)
             {
                 var dtoTopic = DTOMapper.Mapper.Map<Topic, Data.Topic>(entity);
+                dtoTopic.CreationDate = DateTime.Now;
                 UnitOfWork.TopicRepository.Add(dtoTopic);
                 UnitOfWork.SaveChanges();
 
