@@ -134,6 +134,6 @@ namespace Linkdev.Intern.EQuiz.Repo.Repositories
                     .AsEnumerable();
         }
 
-        override 
+        
     }
 }
