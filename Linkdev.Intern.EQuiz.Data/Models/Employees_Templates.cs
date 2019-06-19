@@ -6,6 +6,11 @@ namespace Linkdev.Intern.EQuiz.Data
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
+    public enum EmployeeTemplateStatus
+    {
+        Assigned, Missed, Successed, Failed, Submitted
+    }
+
     public partial class Employees_Templates
     {
         public int ID { get; set; }
@@ -18,7 +23,7 @@ namespace Linkdev.Intern.EQuiz.Data
 
         public int Score { get; set; }
 
-        public int Status { get; set; }
+        public EmployeeTemplateStatus Status { get; set; }
 
         public int? TimeTaken { get; set; }
 
