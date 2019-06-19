@@ -26,6 +26,7 @@ namespace Linkdev.Intern.EQuiz.Repo.Repositories
         {
             return EQuizContext.Questions_Quizes
                     .Where(q => q.Question.ID == qid)
+                    .Include(q => q.Quiz)
                     .Select(q => q.Quiz)
                     .AsEnumerable();
         }
