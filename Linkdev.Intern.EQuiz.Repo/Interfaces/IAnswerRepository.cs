@@ -10,5 +10,7 @@ namespace Linkdev.Intern.EQuiz.Repo.Interfaces
 {
     public interface IAnswerRepository : IRepository<Answer>
     {
+        // For Listing Question details requirement
+        IEnumerable<Answer> GetAnswersByQuestion(int qid);
     }
 }

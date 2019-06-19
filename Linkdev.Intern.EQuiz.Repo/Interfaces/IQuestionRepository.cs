@@ -21,10 +21,14 @@ namespace Linkdev.Intern.EQuiz.Repo.Interfaces
 
         IEnumerable<Question> GetQuestionsByName(bool ascending, int pageIndex, int pageSize = 10);
 
-        IEnumerable<Question> GetQuestionsByText(string text, int pageIndex, int pageSize = 10);
+        IEnumerable<Question> FilterQuestionsByText(string text, int pageIndex, int pageSize = 10);
 
         IEnumerable<Question> GetQuestionsByTopic(Topic topic, int pageIndex, int pageSize = 10);
 
         IEnumerable<Question> GetQuestionsByTopicName(string topicName, int pageIndex, int pageSize = 10);
+
+        string GetQuestionHint(int id);
+
+
     }
 }

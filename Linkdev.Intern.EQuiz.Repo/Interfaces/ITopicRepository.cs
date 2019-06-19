@@ -22,5 +22,8 @@ namespace Linkdev.Intern.EQuiz.Repo.Interfaces
         bool? TopicHasQuestionUsed(int id);
 
         bool? ChangeTopicName(int id, string name);
+
+        // for Question Details Requirements
+        Topic GetTopicByQuestion(int qid);
     }
 }
