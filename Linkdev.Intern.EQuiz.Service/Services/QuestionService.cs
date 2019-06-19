@@ -34,15 +34,26 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         {
             if (answers != null)
             {
-                var dtoAnswers = DTOMapper.Mapper.Map<ICollection<Answer>, ICollection<Data.Answer>>(answers);
+                /// if question assigned to active or deactive quiz
+                /// where one or more user solved it
+                /// we should return that question status as used
+                /// but if no one solved it
+                /// the action should apply
 
-                var result = UnitOfWork.QuestionRepository.ChangeCorrectAnswers(questionId, dtoAnswers);
-                UnitOfWork.SaveChanges();
+                if (!IsQuestionUsed(questionId)) 
+                {
+                    /// needs to check if e-quiz is not submitted
+                    
+                    var dtoAnswers = DTOMapper.Mapper.Map<ICollection<Answer>, ICollection<Data.Answer>>(answers);
 
-                return (bool)result;
+                    var result = UnitOfWork.QuestionRepository.ChangeCorrectAnswers(questionId, dtoAnswers);
+                    UnitOfWork.SaveChanges();
+
+                    return (bool)result;
+                }
             }
-            else
-                return false;
+            
+            return false;
         }
 
         public bool EditQuestion(Question question)
@@ -57,11 +68,9 @@ namespace Linkdev.Intern.EQuiz.Service.Services
 
                     return (bool)result;
                 }
-                else
-                    return false;
             }
-            else
-                return false;
+            
+            return false;
         }
 
         public bool IsQuestionActive(int id)
@@ -74,21 +83,25 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             return (bool)UnitOfWork.QuestionRepository.IsQuestionUsed(id);
         }
 
-        //public bool IsQuestionRemovable(int id)
-        //{
-        //    if(UnitOfWork.QuestionRepository.IsQuestionUsed(id) == false)
-        //}
-
         public bool Remove(int id)
         {
             var ques = GetQuestionByID(id);
             if (ques != null)
             {
-                var dtoQuestion = DTOMapper.Mapper.Map<Question, Data.Question>(ques);
-                var result = UnitOfWork.QuestionRepository.Remove(dtoQuestion);
-                UnitOfWork.SaveChanges();
+                /// if question assigned to active or deactive quiz
+                /// where one or more user solved it
+                /// we should return that question status as used
+                /// but if no one solved it
+                /// the action should apply
+                
+                if (!IsQuestionUsed(id)) // needs to check if e-quiz is not submitted
+                {
+                    var dtoQuestion = DTOMapper.Mapper.Map<Question, Data.Question>(ques);
+                    var result = UnitOfWork.QuestionRepository.Remove(dtoQuestion);
+                    UnitOfWork.SaveChanges();
 
-                return (bool)result;
+                    return (bool)result;
+                }
             }
 
             return false;
