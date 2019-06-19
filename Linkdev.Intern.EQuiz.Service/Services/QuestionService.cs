@@ -39,6 +39,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
                 /// we should return that question status as used
                 /// but if no one solved it
                 /// the action should apply
+                /// var quizes = UnitOfWork.QuizRepository.GetQuizesByQuestion(questionId);
 
                 if (!IsQuestionUsed(questionId)) 
                 {
