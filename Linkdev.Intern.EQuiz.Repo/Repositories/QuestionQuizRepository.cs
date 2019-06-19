@@ -41,5 +41,22 @@ namespace Linkdev.Intern.EQuiz.Repo.Repositories
             else
                 return false;
         }
+
+        /// I need Include ?!!!
+        public IEnumerable<Question> GetQuizQuestions(Quiz quiz)
+        {          
+                return EQuizContext.Questions_Quizes
+                        .Where(qq => qq.QuizID == quiz.ID)
+                        .Select(qq => qq.Question)
+                        .AsEnumerable();
+        }
+
+        public IEnumerable<Question> GetQuizQuestionsByQuizID(int quizID)
+        {
+            return EQuizContext.Questions_Quizes
+                    .Where(qq => qq.QuizID == quizID)
+                    .Select(qq => qq.Question)
+                    .AsEnumerable();
+        }
     }
 }

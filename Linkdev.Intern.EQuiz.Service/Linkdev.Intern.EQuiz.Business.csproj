@@ -81,10 +81,12 @@
   <ItemGroup>
     <Compile Include="Interfaces\IQuestionService.cs" />
     <Compile Include="Interfaces\IQuizService.cs" />
+    <Compile Include="Interfaces\ITemplateService.cs" />
     <Compile Include="Interfaces\ITopicService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\QuestionService.cs" />
     <Compile Include="Services\QuizService.cs" />
+    <Compile Include="Services\TemplateService.cs" />
     <Compile Include="Services\TopicService.cs" />
     <Compile Include="Utility\Output.cs" />
   </ItemGroup>
