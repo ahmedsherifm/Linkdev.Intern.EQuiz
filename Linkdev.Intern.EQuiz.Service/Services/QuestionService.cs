@@ -39,12 +39,11 @@ namespace Linkdev.Intern.EQuiz.Service.Services
                 /// we should return that question status as used
                 /// but if no one solved it
                 /// the action should apply
-                /// var quizes = UnitOfWork.QuizRepository.GetQuizesByQuestion(questionId);
 
-                if (!IsQuestionUsed(questionId)) 
+                /// check if e-quiz is not submitted
+
+                if (!IsQuestionUsed(questionId) || !IsQuestionUsedInSubmittedQuiz(questionId))
                 {
-                    /// needs to check if e-quiz is not submitted
-                    
                     var dtoAnswers = DTOMapper.Mapper.Map<ICollection<Answer>, ICollection<Data.Answer>>(answers);
 
                     var result = UnitOfWork.QuestionRepository.ChangeCorrectAnswers(questionId, dtoAnswers);
@@ -53,8 +52,19 @@ namespace Linkdev.Intern.EQuiz.Service.Services
                     return (bool)result;
                 }
             }
-            
+
             return false;
+        }
+
+        private bool IsQuestionUsedInSubmittedQuiz(int questionId)
+        {
+            var empsTemps = UnitOfWork.EmployeeTemplateRepository.GetEmployeesTemplatesByQuestionId(questionId);
+
+            if (empsTemps.Any(et => et.Status != Data.EmployeeTemplateStatus.Assigned
+                                     && et.Status != Data.EmployeeTemplateStatus.Missed))
+                return true;
+            else
+                return false;
         }
 
         public bool EditQuestion(Question question)
@@ -70,7 +80,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
                     return (bool)result;
                 }
             }
-            
+
             return false;
         }
 
@@ -94,8 +104,10 @@ namespace Linkdev.Intern.EQuiz.Service.Services
                 /// we should return that question status as used
                 /// but if no one solved it
                 /// the action should apply
-                
-                if (!IsQuestionUsed(id)) // needs to check if e-quiz is not submitted
+
+                /// needs to check if e-quiz is not submitted
+
+                if (!IsQuestionUsed(id) || !IsQuestionUsedInSubmittedQuiz(id))
                 {
                     var dtoQuestion = DTOMapper.Mapper.Map<Question, Data.Question>(ques);
                     var result = UnitOfWork.QuestionRepository.Remove(dtoQuestion);

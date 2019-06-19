@@ -9,5 +9,7 @@ namespace Linkdev.Intern.EQuiz.Repo.Interfaces
 {
     public interface IEmployeeTemplateRepository : IRepository<Employees_Templates>
     {
+        IEnumerable<Employees_Templates> GetEmployeesTemplatesByQuestionId(int qid);
+
     }
 }
