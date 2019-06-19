@@ -27,6 +27,8 @@ namespace Linkdev.Intern.EQuiz.Repo.UnitOfWork
 
         ITopicRepository TopicRepository { get; set; }
 
+        IQuestionQuizRepository QuestionQuizRepository { get; set; }
+
         void SaveChanges();
     }
 }

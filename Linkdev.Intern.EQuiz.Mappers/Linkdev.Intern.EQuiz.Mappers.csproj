@@ -85,6 +85,7 @@
     <Compile Include="Models\Employees_Questions_Templates.cs" />
     <Compile Include="Models\Employees_Templates.cs" />
     <Compile Include="Models\Question.cs" />
+    <Compile Include="Models\Questions_Quizes.cs" />
     <Compile Include="Models\Questions_Templates.cs" />
     <Compile Include="Models\Quiz.cs" />
     <Compile Include="Models\Template.cs" />

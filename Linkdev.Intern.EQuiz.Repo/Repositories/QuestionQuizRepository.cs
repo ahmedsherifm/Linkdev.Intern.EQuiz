@@ -20,5 +20,26 @@ namespace Linkdev.Intern.EQuiz.Repo.Repositories
         public QuestionQuizRepository(EQuizContext context) : base(context)
         {
         }
+
+
+        public  bool?  Add(IEnumerable<Question> questions,Quiz quiz)
+        {
+            if (questions != null && quiz != null)
+            {
+                foreach (var item in questions)
+                {
+                    Add(new Questions_Quizes()
+                    {
+                        QuestionID = item.ID,
+                        QuizID = quiz.ID,
+                        Question = item,
+                        Quiz = quiz
+                    });
+                }
+                return true;
+            }
+            else
+                return false;
+        }
     }
 }

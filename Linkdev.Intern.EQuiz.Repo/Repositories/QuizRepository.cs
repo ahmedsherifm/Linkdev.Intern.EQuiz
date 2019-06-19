@@ -30,5 +30,7 @@ namespace Linkdev.Intern.EQuiz.Repo.Repositories
                     .Select(q => q.Quiz)
                     .AsEnumerable();
         }
+
+        
     }
 }
