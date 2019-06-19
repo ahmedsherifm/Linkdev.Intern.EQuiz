@@ -8,11 +8,6 @@ using System.Web;
 
 namespace Linkdev.Intern.EQuiz.Repo.Repositories
 {
-    public enum TopicQuestionsState
-    {
-        NoQuestionsAssigned,NoQuestionsUsed,QuestionsUsed
-    }
-
 
     public class TopicRepository : Repository<Topic>, ITopicRepository
     {

@@ -80,6 +80,7 @@
     <Compile Include="Interfaces\IEmployeeRepository.cs" />
     <Compile Include="Interfaces\IEmployeeQuestionTemplateRepository.cs" />
     <Compile Include="Interfaces\IEmployeeTemplateRepository.cs" />
+    <Compile Include="Interfaces\IQuestionQuizRepository.cs" />
     <Compile Include="Interfaces\IQuestionRepository.cs" />
     <Compile Include="Interfaces\IQuestionTemplateRepository.cs" />
     <Compile Include="Interfaces\IQuizRepository.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Repositories\EmployeeQuestionTemplateRepository.cs" />
     <Compile Include="Repositories\EmployeeRepository.cs" />
     <Compile Include="Repositories\EmployeeTemplateRepository.cs" />
+    <Compile Include="Repositories\QuestionQuizRepository.cs" />
     <Compile Include="Repositories\QuestionRepository.cs" />
     <Compile Include="Repositories\QuestionTemplateRepository.cs" />
     <Compile Include="Repositories\QuizRepository.cs" />

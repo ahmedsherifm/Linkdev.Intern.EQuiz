@@ -17,7 +17,7 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
 
         public QuestionsController(IQuestionService questionService)
         {
-            this._questionService = questionService;
+            _questionService = questionService;
         }
         public QuestionsController()
         {
