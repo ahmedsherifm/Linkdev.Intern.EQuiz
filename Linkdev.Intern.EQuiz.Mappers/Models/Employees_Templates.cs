@@ -1,7 +1,12 @@
 using System;
 
 namespace Linkdev.Intern.EQuiz.Mappers
-{ 
+{
+    public enum EmployeeTemplateStatus
+    {
+        Assigned, Missed, Successed, Failed, Submitted, InProgress
+    }
+
     public class Employees_Templates
     {
         public int ID { get; set; }
@@ -14,7 +19,7 @@ namespace Linkdev.Intern.EQuiz.Mappers
 
         public int Score { get; set; }
 
-        public int Status { get; set; }
+        public EmployeeTemplateStatus Status { get; set; }
 
         public int? TimeTaken { get; set; }
 

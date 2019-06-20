@@ -26,5 +26,8 @@ namespace Linkdev.Intern.EQuiz.Mappers
         public bool IsActive { get; set; }
 
         public bool IsDeleted { get; set; }
+
+        public int QuestionsNumber { get; set; }
+
     }
 }

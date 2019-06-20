@@ -43,6 +43,8 @@ namespace Linkdev.Intern.EQuiz.Data
 
         public bool IsDeleted { get; set; }
 
+        public int QuestionsNumber { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Questions_Quizes> Questions_Quizes { get; set; }
 

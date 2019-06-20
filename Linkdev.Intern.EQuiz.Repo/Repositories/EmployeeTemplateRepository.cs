@@ -10,8 +10,38 @@ namespace Linkdev.Intern.EQuiz.Repo.Repositories
 {
     public class EmployeeTemplateRepository : Repository<Employees_Templates>, IEmployeeTemplateRepository
     {
+        public EQuizContext EQuizContext
+        {
+            get
+            {
+                return Context as EQuizContext;
+            }
+        }
         public EmployeeTemplateRepository(EQuizContext context) : base(context)
         {
+        }
+
+        public EmployeeTemplateStatus CheckTemplateStatusForEmployee(int templateID,int employeeID)
+        {
+            return EQuizContext.Employees_Templates
+                .SingleOrDefault(et => et.TemplateID == templateID && et.EmployeeID == employeeID)
+                .Status;
+        }
+
+        public bool? ChangeEmployeeTemplateStatus(EmployeeTemplateStatus newStatus,int employeeID,int templateID)
+        {
+            var employee = EQuizContext.Employees.SingleOrDefault(e => e.ID == employeeID);
+            var template = EQuizContext.Templates.SingleOrDefault(t => t.ID == templateID);
+
+            if (employee != null && template != null)
+            {
+                var oldStatus = EQuizContext.Employees_Templates.SingleOrDefault(et => et.EmployeeID == employeeID && et.TemplateID == templateID).Status;
+                oldStatus = newStatus;
+
+                return true;
+            }
+            else
+                return false;
         }
     }
 }

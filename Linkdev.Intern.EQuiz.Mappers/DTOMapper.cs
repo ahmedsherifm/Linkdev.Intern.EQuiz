@@ -45,8 +45,11 @@ namespace Linkdev.Intern.EQuiz.Mappers
 
                 cfg.CreateMap<Questions_Quizes, Data.Questions_Quizes>().ReverseMap();
                 cfg.CreateMap<Expression<Func<Questions_Quizes, bool>>, Expression<Func<Data.Questions_Quizes, bool>>>();
-            });
 
+                cfg.CreateMap<EmployeeTemplateStatus, Data.EmployeeTemplateStatus>().ReverseMap();
+
+            });
+            
             Mapper = config.CreateMapper();
         }
     }

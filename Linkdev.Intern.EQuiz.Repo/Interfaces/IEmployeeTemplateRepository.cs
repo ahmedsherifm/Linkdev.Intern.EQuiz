@@ -10,5 +10,8 @@ namespace Linkdev.Intern.EQuiz.Repo.Interfaces
 {
     public interface IEmployeeTemplateRepository : IRepository<Employees_Templates>
     {
+        EmployeeTemplateStatus CheckTemplateStatusForEmployee(int templateID, int employeeID);
+
+        bool? ChangeEmployeeTemplateStatus(EmployeeTemplateStatus newStatus, int employeeID, int templateID);
     }
 }

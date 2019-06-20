@@ -13,8 +13,6 @@ namespace Linkdev.Intern.EQuiz.Mappers
 
         public int QuizID { get; set; }
 
-        public virtual Question Question { get; set; }
-
-        public virtual Quiz Quiz { get; set; }
+       
     }
 }
