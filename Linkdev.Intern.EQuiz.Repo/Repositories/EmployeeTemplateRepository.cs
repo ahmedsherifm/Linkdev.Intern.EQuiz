@@ -36,9 +36,16 @@ namespace Linkdev.Intern.EQuiz.Repo.Repositories
         {
             if (employees != null)
             {
+                //var empTemp = EQuizContext.Employees_Templates
+                //        .Include(et => et.Template)
+                //        .Include(et => et.Employee)
+                //        .Where(et => et.Template.QuizID == id)
+                //        .AsEnumerable();
 
                 foreach (var emp in employees)
                 {
+                    //empTemp.Select(et => { et.Employee = emp; return et; });
+
                     //quiz.Templates
                     //    .Where(t => t.QuizID == id)
                     //    .Select(t => t.Employees_Templates
