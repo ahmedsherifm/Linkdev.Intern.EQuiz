@@ -14,12 +14,22 @@ namespace Linkdev.Intern.EQuiz.Repo.Interfaces
         // quiz answer ? wlla template answer ?
         IEnumerable<Answer> GetQuizAnswers(int id);
 
-        bool? AssignEmployeesToQuiz(int id, ICollection<Employee> employees);
-
-        bool? ReleaseQuizFromEmployees(int id, ICollection<Employee> employees);
-
-        bool? AssignEmployeesToReTakeQuiz(int id, ICollection<Employee> employees);
-
         bool? ExtendExpirationDate(int id, DateTime expirationDate);
+
+        bool? DeactivateQuiz(int id);
+
+        bool? DeactivateQuizesList(ICollection<int> quizesIds);
+
+        bool? ActivateQuiz(int id);
+
+        bool? UpdateNumberOfTrials(int id, int numberOfTrials);
+
+        bool? UpdatePassingScore(int id, int passingScore);
+
+        bool? ChangeQuizName(int id, string name);
+
+        bool? IsQuizActive(int id);
+
+        bool? RemoveSelectedDeactivatedQuizesList(ICollection<int> quizesIds);
     }
 }

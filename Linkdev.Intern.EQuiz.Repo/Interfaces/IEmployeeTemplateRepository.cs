@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Linkdev.Intern.EQuiz.Data;
 
 namespace Linkdev.Intern.EQuiz.Repo.Interfaces
 {
@@ -12,5 +11,10 @@ namespace Linkdev.Intern.EQuiz.Repo.Interfaces
     {
         IEnumerable<Employees_Templates> GetEmployeesTemplatesByQuestionId(int qid);
 
+        bool? AssignEmployeesToQuiz(int id, ICollection<Employee> employees);
+
+        bool? ReleaseQuizFromEmployees(int id, ICollection<Employee> employees);
+
+        bool? AssignEmployeesToReTakeQuiz(int id, ICollection<Employee> employees);
     }
 }
