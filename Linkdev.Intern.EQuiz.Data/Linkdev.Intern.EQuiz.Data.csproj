@@ -87,7 +87,7 @@
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\Questions_Quizes.cs" />
     <Compile Include="Models\Questions_Templates.cs" />
-    <Compile Include="Models\Quiz.cs" />
+    <Compile Include="Models\Quize.cs" />
     <Compile Include="Models\Template.cs" />
     <Compile Include="Models\Topic.cs" />
   </ItemGroup>

@@ -9,7 +9,7 @@ namespace Linkdev.Intern.EQuiz.Service.Interfaces
 {
     public interface IQuizService
     {
-        bool? CreateQuizWithQuestions(Quiz quiz, IEnumerable<Question> questions);
+        //bool? CreateQuizWithQuestions(Quiz quiz, IEnumerable<int> questionsIds);
         IEnumerable<Quiz> GetQuizesByQuestionID(int qid);
 
         Quiz GetQuizByID(int id);
@@ -34,5 +34,9 @@ namespace Linkdev.Intern.EQuiz.Service.Interfaces
         bool IsQuizActive(int id);
 
         bool RemoveSelectedDeactivatedQuizesList(ICollection<int> quizesIds);
+
+        bool? CreateQuiz(Quiz quiz);
+
+        bool? AddQuestionsToQuiz(int quizId, IEnumerable<int> questionsIds);
     }
 }

@@ -120,7 +120,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         public IEnumerable<Quiz> GetQuestionQuizez(int id)
         {
             var quizez = UnitOfWork.QuizRepository.GetQuizesByQuestion(id);
-            var dtoQuizez = DTOMapper.Mapper.Map<IEnumerable<Data.Quiz>, IEnumerable<Quiz>>(quizez);
+            var dtoQuizez = DTOMapper.Mapper.Map<IEnumerable<Data.Quize>, IEnumerable<Quiz>>(quizez);
 
             return dtoQuizez;
         }

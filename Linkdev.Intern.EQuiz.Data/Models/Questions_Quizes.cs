@@ -16,6 +16,6 @@ namespace Linkdev.Intern.EQuiz.Data
 
         public virtual Question Question { get; set; }
 
-        public virtual Quiz Quiz { get; set; }
+        public virtual Quize Quiz { get; set; }
     }
 }

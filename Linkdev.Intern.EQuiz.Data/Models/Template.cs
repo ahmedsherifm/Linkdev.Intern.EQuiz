@@ -35,6 +35,6 @@ namespace Linkdev.Intern.EQuiz.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Questions_Templates> Questions_Templates { get; set; }
 
-        public virtual Quiz Quiz { get; set; }
+        public virtual Quize Quiz { get; set; }
     }
 }

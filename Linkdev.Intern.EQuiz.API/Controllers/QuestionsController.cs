@@ -50,7 +50,7 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
             return result;
         }
 
-        [Route("{pageIndex:int,pageSize:int}")]
+        [Route("{pageIndex:int}/{pageSize:int}")]
         public IEnumerable<Question> GetQuestionsByCreationDate(int pageIndex, int pageSize = 10)
         {
             var questions = _questionService.GetQuestionsByCreationDate(pageIndex, pageSize);
@@ -58,7 +58,7 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
             return questions;
         }
 
-        [Route("{pageIndex:int,pageSize:int,ascending:int}")]
+        [Route("{pageIndex:int}/{pageSize:int}/{ascending:int}")]
         public IEnumerable<Question> GetQuestionsByName(bool ascending, int pageIndex, int pageSize = 10)
         {
             var questions = _questionService.GetQuestionsByName(ascending, pageIndex, pageSize);
@@ -66,7 +66,7 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
             return questions;
         }
 
-        [Route("bytext/{pageIndex:int,pageSize:int,text:alpha}")]
+        [Route("bytext/{pageIndex:int}/{pageSize:int}/{text:alpha}")]
         public IEnumerable<Question> FilterQuestionsByText(string text, int pageIndex, int pageSize = 10)
         {
             var questions = _questionService.FilterQuestionsByText(text, pageIndex, pageSize);
@@ -75,7 +75,7 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
         }
         // Can get Have body
         [HttpGet]
-        [Route("bytopic/{pageIndex:int,pageSize:int}")]
+        [Route("bytopic/{pageIndex:int}/{pageSize:int}")]
         public IEnumerable<Question> GetQuestionsByTopic([FromBody] Topic topic, int pageIndex, int pageSize = 10)
         {
             var questions = _questionService.GetQuestionsByTopic(topic, pageIndex, pageSize);
@@ -83,7 +83,7 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
             return questions;
         }
 
-        [Route("bytopic/{pageIndex:int,pageSize:int,topicName:alpha}")]
+        [Route("bytopic/{pageIndex:int}/{pageSize:int}/{topicName:alpha}")]
         public IEnumerable<Question> GetQuestionsByTopicName(string topicName, int pageIndex, int pageSize = 10)
         {
             var questions = _questionService.GetQuestionsByTopicName(topicName, pageIndex, pageSize);

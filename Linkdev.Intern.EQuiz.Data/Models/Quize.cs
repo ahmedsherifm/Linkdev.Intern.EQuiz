@@ -6,10 +6,10 @@ namespace Linkdev.Intern.EQuiz.Data
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Quiz
+    public partial class Quize
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Quiz()
+        public Quize()
         {
             Questions_Quizes = new HashSet<Questions_Quizes>();
             Templates = new HashSet<Template>();
@@ -44,6 +44,8 @@ namespace Linkdev.Intern.EQuiz.Data
         public bool IsDeleted { get; set; }
 
         public int QuestionsNumber { get; set; }
+
+        public DateTime CreationDate { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Questions_Quizes> Questions_Quizes { get; set; }

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Linkdev.Intern.EQuiz.Repo.Interfaces
 {
-    public interface IQuizRepository :  IRepository<Quiz>
+    public interface IQuizRepository :  IRepository<Quize>
     {
-        IEnumerable<Quiz> GetQuizesByQuestion(int qid);
+        IEnumerable<Quize> GetQuizesByQuestion(int qid);
 
         // quiz answer ? wlla template answer ?
         IEnumerable<Answer> GetQuizAnswers(int id);
@@ -31,5 +31,17 @@ namespace Linkdev.Intern.EQuiz.Repo.Interfaces
         bool? IsQuizActive(int id);
 
         bool? RemoveSelectedDeactivatedQuizesList(ICollection<int> quizesIds);
+
+        IEnumerable<Quize> GetQuizesByCreationDate(int pageIndex, int pageSize = 10);
+
+        IEnumerable<Quize> GetQuizesByName(bool ascending, int pageIndex, int pageSize = 10);
+
+        IEnumerable<Quize> FilterQuizesByName(string name, int pageIndex, int pageSize = 10);
+
+        IEnumerable<Quize> GetActiveQuizes(int pageIndex, int pageSize = 10);
+
+        IEnumerable<Quize> FilterQuizesByQuarter(int quarter, int pageIndex, int pageSize = 10);
+
+        IEnumerable<Quize> FilterQuizesByYear(int year, int pageIndex, int pageSize = 10);
     }
 }

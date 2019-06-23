@@ -25,6 +25,7 @@ namespace Linkdev.Intern.EQuiz.Repo.UnitOfWork
             QuizRepository = new QuizRepository(_context);
             TemplateRepository = new TemplateRepository(_context);
             TopicRepository = new TopicRepository(_context);
+            QuestionQuizRepository = new QuestionQuizRepository(_context);
         }
 
         public IAnswerRepository AnswerRepository { get; set; }
@@ -36,6 +37,7 @@ namespace Linkdev.Intern.EQuiz.Repo.UnitOfWork
         public IQuizRepository QuizRepository { get; set; }
         public ITemplateRepository TemplateRepository { get; set; }
         public ITopicRepository TopicRepository { get; set; }
+        public IQuestionQuizRepository QuestionQuizRepository { get; set; }
 
         public void SaveChanges()
         {

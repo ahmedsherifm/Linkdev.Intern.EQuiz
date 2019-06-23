@@ -19,7 +19,7 @@ namespace Linkdev.Intern.EQuiz.Data
         public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<Questions_Quizes> Questions_Quizes { get; set; }
         public virtual DbSet<Questions_Templates> Questions_Templates { get; set; }
-        public virtual DbSet<Quiz> Quizes { get; set; }
+        public virtual DbSet<Quize> Quizes { get; set; }
         public virtual DbSet<Template> Templates { get; set; }
         public virtual DbSet<Topic> Topics { get; set; }
 
@@ -65,13 +65,13 @@ namespace Linkdev.Intern.EQuiz.Data
                 .WithRequired(e => e.Question)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Quiz>()
+            modelBuilder.Entity<Quize>()
                 .HasMany(e => e.Questions_Quizes)
                 .WithRequired(e => e.Quiz)
                 .HasForeignKey(e => e.QuizID)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Quiz>()
+            modelBuilder.Entity<Quize>()
                 .HasMany(e => e.Templates)
                 .WithRequired(e => e.Quiz)
                 .HasForeignKey(e => e.QuizID)

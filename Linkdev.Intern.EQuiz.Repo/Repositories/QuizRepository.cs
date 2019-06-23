@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Linkdev.Intern.EQuiz.Repo.Repositories
 {
-    public class QuizRepository : Repository<Quiz>, IQuizRepository
+    public class QuizRepository : Repository<Quize>, IQuizRepository
     {
         public EQuizContext EQuizContext
         {
@@ -22,7 +22,7 @@ namespace Linkdev.Intern.EQuiz.Repo.Repositories
         {
         }
 
-        public IEnumerable<Quiz> GetQuizesByQuestion(int qid)
+        public IEnumerable<Quize> GetQuizesByQuestion(int qid)
         {
             return EQuizContext.Questions_Quizes
                     .Where(q => q.Question.ID == qid)
@@ -192,6 +192,70 @@ namespace Linkdev.Intern.EQuiz.Repo.Repositories
             }
 
             return false;
+        }
+
+        public IEnumerable<Quize> GetQuizesByCreationDate(int pageIndex, int pageSize = 10)
+        {
+            return EQuizContext.Quizes
+                    .Skip((pageIndex - 1) * pageSize)
+                    .Take(pageSize)
+                    .OrderByDescending(q => q.CreationDate)
+                    .AsEnumerable();
+        }
+
+        public IEnumerable<Quize> GetQuizesByName(bool ascending, int pageIndex, int pageSize = 10)
+        {
+            if (ascending)
+            {
+                return EQuizContext.Quizes
+                        .Skip((pageIndex - 1) * pageSize)
+                        .Take(pageSize)
+                        .OrderBy(q => q.Name);
+            }
+            else
+            {
+                return EQuizContext.Quizes
+                        .Skip((pageIndex - 1) * pageSize)
+                        .Take(pageSize)
+                        .OrderByDescending(q => q.Name);
+            }
+        }
+
+        public IEnumerable<Quize> FilterQuizesByName(string name, int pageIndex, int pageSize = 10)
+        {
+            return EQuizContext.Quizes
+                    .Where(q => q.Name.ToLower()
+                    .Contains(name.ToLower()))
+                    .Skip((pageIndex - 1) * pageSize)
+                    .Take(pageSize)
+                    .AsEnumerable();
+        }
+
+        public IEnumerable<Quize> GetActiveQuizes(int pageIndex, int pageSize = 10)
+        {
+            return EQuizContext.Quizes
+                    .Where(q => q.IsActive)
+                    .Skip((pageIndex - 1) * pageSize)
+                    .Take(pageSize)
+                    .AsEnumerable();
+        }
+
+        public IEnumerable<Quize> FilterQuizesByQuarter(int quarter, int pageIndex, int pageSize = 10)
+        {
+            return EQuizContext.Quizes
+                    .Where(q => q.Quarter == quarter)
+                    .Skip((pageIndex - 1) * pageSize)
+                    .Take(pageSize)
+                    .AsEnumerable();
+        }
+
+        public IEnumerable<Quize> FilterQuizesByYear(int year, int pageIndex, int pageSize = 10)
+        {
+            return EQuizContext.Quizes
+                    .Where(q => q.Year == year)
+                    .Skip((pageIndex - 1) * pageSize)
+                    .Take(pageSize)
+                    .AsEnumerable();
         }
     }
 }

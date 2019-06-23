@@ -14,6 +14,7 @@ namespace Linkdev.Intern.EQuiz.Mappers
 
         public DateTime ActivationDate { get; set; }
 
+        public DateTime? ExpirationDate { get; set; }
 
         public int? NumberOfTrials { get; set; }
 
@@ -28,6 +29,8 @@ namespace Linkdev.Intern.EQuiz.Mappers
         public bool IsDeleted { get; set; }
 
         public int QuestionsNumber { get; set; }
+
+        public DateTime CreationDate { get; set; }
 
     }
 }

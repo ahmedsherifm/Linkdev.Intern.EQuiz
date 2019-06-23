@@ -108,5 +108,19 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
         {
             return _quizService.RemoveSelectedDeactivatedQuizesList(quizesIds);
         }
+
+        [HttpPost]
+        [Route("")]
+        public bool? CreateQuiz([FromBody] Quiz quiz)
+        {
+            return _quizService.CreateQuiz(quiz);
+        }
+
+        [HttpPost]
+        [Route("addQuestions/{quizId:int}")]
+        public bool? AddQuestionsToQuiz([FromUri]int quizId,[FromBody] IEnumerable<int> questionsIds)
+        {
+            return _quizService.AddQuestionsToQuiz(quizId,questionsIds);
+        }
     }
 }

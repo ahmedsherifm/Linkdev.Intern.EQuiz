@@ -9,7 +9,7 @@ namespace Linkdev.Intern.EQuiz.Service.Interfaces
 {
     public interface ITemplateService
     {
-        bool? CreateEmptyTemplateToAssignedEmployee(Quiz quiz, Employee employee);
+        bool? CreateEmptyTemplateToAssignedEmployee(int quizId, int employeeId);
         bool? EmployeeTakeTemplate(int employeeID, int quizID, int templateID);
     }
 }

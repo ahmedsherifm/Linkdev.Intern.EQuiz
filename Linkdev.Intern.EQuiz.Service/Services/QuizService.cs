@@ -1,7 +1,6 @@
 ﻿using Linkdev.Intern.EQuiz.Mappers;
 using Linkdev.Intern.EQuiz.Repo.UnitOfWork;
 using Linkdev.Intern.EQuiz.Service.Interfaces;
-using Linkdev.Intern.EQuiz.Mappers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +8,7 @@ using System.Web;
 
 namespace Linkdev.Intern.EQuiz.Service.Services
 {
-    public class QuizService: IQuizService
+    public class QuizService : IQuizService
     {
         private readonly IUnitOfWork UnitOfWork;
 
@@ -26,7 +25,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         public IEnumerable<Quiz> GetQuizesByQuestionID(int qid)
         {
             var dtoQuizes = UnitOfWork.QuizRepository.GetQuizesByQuestion(qid);
-            return DTOMapper.Mapper.Map<IEnumerable<Data.Quiz>, IEnumerable<Quiz>>(dtoQuizes);
+            return DTOMapper.Mapper.Map<IEnumerable<Data.Quize>, IEnumerable<Quiz>>(dtoQuizes);
         }
 
         public IEnumerable<Answer> GetQuizAnswers(int id)
@@ -53,7 +52,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
 
         public bool DeactivateQuizesList(ICollection<int> quizesIds)
         {
-            if(quizesIds != null)
+            if (quizesIds != null)
             {
                 var result = UnitOfWork.QuizRepository.DeactivateQuizesList(quizesIds);
                 UnitOfWork.SaveChanges();
@@ -112,14 +111,14 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         public Quiz GetQuizByID(int id)
         {
             var dtoQuiz = UnitOfWork.QuizRepository.GetByID(id);
-            return DTOMapper.Mapper.Map<Data.Quiz, Quiz>(dtoQuiz);
+            return DTOMapper.Mapper.Map<Data.Quize, Quiz>(dtoQuiz);
         }
 
-        private bool? CreateQuiz(Quiz quiz)
+        public bool? CreateQuiz(Quiz quiz)
         {
             if (quiz != null)
             {
-                var dtoQuiz = DTOMapper.Mapper.Map<Quiz, Data.Quiz>(quiz);
+                var dtoQuiz = DTOMapper.Mapper.Map<Quiz, Data.Quize>(quiz);
                 UnitOfWork.QuizRepository.Add(dtoQuiz);
                 UnitOfWork.SaveChanges();
                 return true;
@@ -128,17 +127,23 @@ namespace Linkdev.Intern.EQuiz.Service.Services
                 return false;
         }
 
-        private bool? CreateQuizQuestion(Quiz quiz, IEnumerable<Question> questions)
+        public bool? AddQuestionsToQuiz(int quizId, IEnumerable<int> questionsIds)
         {
-            if (quiz != null && questions != null)
+            var dtoQuiz = UnitOfWork.QuizRepository.GetByID(quizId);
+            if (questionsIds != null && dtoQuiz != null)
             {
-                var dtoQuiz = DTOMapper.Mapper.Map<Quiz, Data.Quiz>(quiz);
+                //var dtoQuiz = DTOMapper.Mapper.Map<Quiz, Data.Quiz>(quiz);
                 ICollection<Questions_Quizes> Questions_Quizes = new List<Questions_Quizes>();
 
-                foreach (var item in questions)
+                foreach (var item in questionsIds)
                 {
-                    var QuestionQuiz = new Questions_Quizes() { QuizID = quiz.ID, QuestionID = item.ID };
-                    Questions_Quizes.Add(QuestionQuiz);
+                    var question = UnitOfWork.QuestionRepository.GetByID(item);
+                    if (question != null)
+                    {
+                        question.IsUsed = true;
+                        var QuestionQuiz = new Questions_Quizes() { QuizID = quizId, QuestionID = item };
+                        Questions_Quizes.Add(QuestionQuiz);
+                    }
                 }
 
                 var dtoQuestionQuizList = DTOMapper.Mapper.Map<ICollection<Questions_Quizes>, ICollection<Data.Questions_Quizes>>(Questions_Quizes);
@@ -151,18 +156,18 @@ namespace Linkdev.Intern.EQuiz.Service.Services
                 return false;
         }
 
-        ///// multiple quiz creation ?!!!
-        public bool? CreateQuizWithQuestions(Quiz quiz, IEnumerable<Question> questions)
-        {
-            if (quiz != null && questions != null)
-            {
-                CreateQuiz(quiz);
-                CreateQuizQuestion(quiz, questions); 
-                return true;
-            }
-            else
-                return false;
-        }
+        /////// multiple quiz creation ?!!!
+        //public bool? CreateQuizWithQuestions(Quiz quiz, IEnumerable<int> questionsIds)
+        //{
+        //    if (quiz != null && questionsIds != null)
+        //    {
+        //        CreateQuiz(quiz);
+        //        CreateQuizQuestion(quiz, questionsIds);
+        //        return true;
+        //    }
+        //    else
+        //        return false;
+        //}
 
     }
 }

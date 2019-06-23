@@ -22,7 +22,7 @@ namespace Linkdev.Intern.EQuiz.Repo.Repositories
         }
 
 
-        public  bool?  Add(IEnumerable<Question> questions,Quiz quiz)
+        public  bool?  Add(IEnumerable<Question> questions,Quize quiz)
         {
             if (questions != null && quiz != null)
             {
@@ -43,7 +43,7 @@ namespace Linkdev.Intern.EQuiz.Repo.Repositories
         }
 
         /// I need Include ?!!!
-        public IEnumerable<Question> GetQuizQuestions(Quiz quiz)
+        public IEnumerable<Question> GetQuizQuestions(Quize quiz)
         {          
                 return EQuizContext.Questions_Quizes
                         .Where(qq => qq.QuizID == quiz.ID)
