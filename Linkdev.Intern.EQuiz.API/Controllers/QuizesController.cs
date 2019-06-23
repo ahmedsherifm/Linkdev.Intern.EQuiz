@@ -1,4 +1,5 @@
-﻿using Linkdev.Intern.EQuiz.Service.Interfaces;
+﻿using Linkdev.Intern.EQuiz.Mappers;
+using Linkdev.Intern.EQuiz.Service.Interfaces;
 using Linkdev.Intern.EQuiz.Service.Services;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Web.Http;
 
 namespace Linkdev.Intern.EQuiz.API.Controllers
 {
+    [RoutePrefix("api/quizes")]
     public class QuizesController : ApiController
     {
         private readonly IQuizService _quizService;
@@ -22,31 +24,89 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
             _quizService = new QuizService();
         }
 
-        // GET: api/Quizes
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
+        [HttpGet]
+        [Route("{id:int}")]
         // GET: api/Quizes/5
-        public string Get(int id)
+        public Quiz GetQuizByID(int id)
         {
-            return "value";
+            return _quizService.GetQuizByID(id);
+        }
+        
+        [HttpGet]
+        [Route("question/{qid:int}")]
+        public IEnumerable<Quiz> GetQuizesByQuestionID(int qid)
+        {
+            return _quizService.GetQuizesByQuestionID(qid);
         }
 
-        // POST: api/Quizes
-        public void Post([FromBody]string value)
+        [HttpGet]
+        [Route("~/api/answers/quiz/{id:int}")]
+        public IEnumerable<Answer> GetQuizAnswers(int id)
         {
+            return _quizService.GetQuizAnswers(id);
         }
 
-        // PUT: api/Quizes/5
-        public void Put(int id, [FromBody]string value)
+        [HttpPost]
+        [Route("expiredate/{id:int}")]
+        public bool ExtendExpirationDate([FromUri]int id,[FromBody] DateTime expirationDate)
         {
+            return _quizService.ExtendExpirationDate(id, expirationDate);
         }
 
-        // DELETE: api/Quizes/5
-        public void Delete(int id)
+        [HttpPost]
+        [Route("deactivate/{id:int}")]
+        public bool DeactivateQuiz(int id)
         {
+            return _quizService.DeactivateQuiz(id);
+        }
+
+        [HttpPost]
+        [Route("deactivate")]
+        public bool DeactivateQuizesList([FromBody]ICollection<int> quizesIds)
+        {
+            return _quizService.DeactivateQuizesList(quizesIds);
+        }
+
+        [HttpPost]
+        [Route("activate/{id:int}")]
+        public bool ActivateQuiz(int id)
+        {
+            return _quizService.ActivateQuiz(id);
+        }
+
+        [HttpPost]
+        [Route("{id:int}/trials")]
+        public bool UpdateNumberOfTrials([FromUri] int id,[FromBody] int numberOfTrials)
+        {
+            return _quizService.UpdateNumberOfTrials(id, numberOfTrials);
+        }
+
+        [HttpPost]
+        [Route("{id:int}/passingScore")]
+        public bool UpdatePassingScore([FromUri]int id,[FromBody] int passingScore)
+        {
+            return _quizService.UpdatePassingScore(id, passingScore);
+        }
+
+        [HttpPost]
+        [Route("{id:int}/name")]
+        public bool ChangeQuizName([FromUri]int id,[FromBody] string name)
+        {
+            return _quizService.ChangeQuizName(id, name);
+        }
+
+        [HttpGet]
+        [Route("activeStatus/{id:int}")]
+        public bool CheckIsQuizActive(int id)
+        {
+            return _quizService.IsQuizActive(id);
+        }
+
+        [HttpPost]
+        [Route("removelist")]
+        public bool RemoveSelectedDeactivatedQuizesList([FromBody] ICollection<int> quizesIds)
+        {
+            return _quizService.RemoveSelectedDeactivatedQuizesList(quizesIds);
         }
     }
 }
