@@ -21,6 +21,14 @@ namespace Linkdev.Intern.EQuiz.Repo.Repositories
         {
         }
 
+        public IEnumerable<Template> GetTemplatesByQuestionId(int qid)
+        {
+            return EQuizContext.Templates
+                .Include(t => t.Questions_Templates)
+                .Where(t => t.Questions_Templates.Any(qt => qt.QuestionID == qid))
+                .AsEnumerable();
+        }
+
         // no need to generate random here it will be in service
        
     }

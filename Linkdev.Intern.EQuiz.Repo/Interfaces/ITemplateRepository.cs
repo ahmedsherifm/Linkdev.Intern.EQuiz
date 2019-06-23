@@ -10,5 +10,7 @@ namespace Linkdev.Intern.EQuiz.Repo.Interfaces
 {
     public interface ITemplateRepository : IRepository<Template>
     {
+        IEnumerable<Template> GetTemplatesByQuestionId(int qid);
+
     }
 }

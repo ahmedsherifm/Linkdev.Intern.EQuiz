@@ -13,5 +13,7 @@ namespace Linkdev.Intern.EQuiz.Repo.Interfaces
         EmployeeTemplateStatus CheckTemplateStatusForEmployee(int templateID, int employeeID);
 
         bool? ChangeEmployeeTemplateStatus(EmployeeTemplateStatus newStatus, int employeeID, int templateID);
+        IEnumerable<Employees_Templates> GetEmployeesTemplatesByQuestionId(int qid);
+
     }
 }
