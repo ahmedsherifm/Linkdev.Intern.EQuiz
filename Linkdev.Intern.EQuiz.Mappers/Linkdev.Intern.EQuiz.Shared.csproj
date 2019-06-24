@@ -107,10 +107,6 @@
       <Project>{1aee0182-c769-4099-b14f-66be7d9c0007}</Project>
       <Name>Linkdev.Intern.EQuiz.Data.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Linkdev.Intern.EQuiz.Data\Linkdev.Intern.EQuiz.Data.EntityFrameWork.csproj">
-      <Project>{11be22e5-51e5-4830-a07e-e253cddf5f0c}</Project>
-      <Name>Linkdev.Intern.EQuiz.Data.EntityFrameWork</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

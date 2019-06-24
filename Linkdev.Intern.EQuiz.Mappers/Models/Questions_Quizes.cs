@@ -15,6 +15,6 @@ namespace Linkdev.Intern.EQuiz.Shared
 
         public virtual Question Question { get; set; }
 
-        public virtual Quize Quiz { get; set; }
+        public virtual Quiz Quiz { get; set; }
     }
 }
