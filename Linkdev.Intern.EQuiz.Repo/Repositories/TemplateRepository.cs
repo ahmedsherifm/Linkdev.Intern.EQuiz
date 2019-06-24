@@ -29,7 +29,18 @@ namespace Linkdev.Intern.EQuiz.Repo.Repositories
                 .AsEnumerable();
         }
 
-        // no need to generate random here it will be in service
-       
+        public IEnumerable<Template> GetTemplatesByEmployeeId(int employeeId)
+        {
+            return EQuizContext.Templates
+                .Where(t => t.EmployeeID == employeeId)
+                .AsEnumerable();
+        }
+
+        public IEnumerable<Template> GetTemplatesByEmployeeAndQuizIds(int quizId,int employeeId)
+        {
+            return EQuizContext.Templates
+                .Where(t => t.EmployeeID == employeeId && t.QuizID == quizId)
+                .AsEnumerable();
+        }
     }
 }

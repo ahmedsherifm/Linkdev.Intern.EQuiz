@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Linkdev.Intern.EQuiz.Data;
 
 namespace Linkdev.Intern.EQuiz.Repo.Interfaces
 {
@@ -12,5 +11,8 @@ namespace Linkdev.Intern.EQuiz.Repo.Interfaces
     {
         IEnumerable<Template> GetTemplatesByQuestionId(int qid);
 
+        IEnumerable<Template> GetTemplatesByEmployeeId(int employeeId);
+
+        IEnumerable<Template> GetTemplatesByEmployeeAndQuizIds(int quizId, int employeeId);
     }
 }

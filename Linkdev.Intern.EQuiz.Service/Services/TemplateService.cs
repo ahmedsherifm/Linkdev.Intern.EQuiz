@@ -63,7 +63,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             });
 
             //dtoTemplate.Employees_Templates = DTOMapper.Mapper.Map<ICollection<Employees_Templates>, ICollection<Data.Employees_Templates>>(employees_Templates);
-            
+
 
         }
 
@@ -72,13 +72,19 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             var template = CreateTemplate(quizId, employeeId);
             if (template != null)
             {
-                AssignEmployeeToTemplate(template.ID, employeeId);
-                UnitOfWork.SaveChanges();
+                var trialsNo = UnitOfWork.QuizRepository.GetTrialsNoForEmployee(quizId, employeeId);
+                var quiz = UnitOfWork.QuizRepository.GetByID(quizId);
 
-                return true;
+                if (trialsNo < quiz.NumberOfTrials)
+                { 
+                    AssignEmployeeToTemplate(template.ID, employeeId);
+                    UnitOfWork.SaveChanges();
+
+                    return true;
+                }
+
             }
-            else
-                return false;
+            return false;
         }
 
         private bool? AddQuestionsToQuestionsTemplates(int templateId, int quizId)
@@ -120,7 +126,6 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         {
             var dtoStatus = DTOMapper.Mapper.Map<EmployeeTemplateStatus, Data.EmployeeTemplateStatus>(newStatus);
             return UnitOfWork.EmployeeTemplateRepository.ChangeEmployeeTemplateStatus(dtoStatus, templateID, employeeID);
-
         }
 
         public EmployeeTemplateStatus CheckEmployeeTemplateStatus(int templateID, int employeeID)
@@ -128,7 +133,6 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             var status = UnitOfWork.EmployeeTemplateRepository.CheckTemplateStatusForEmployee(templateID, employeeID);
 
             return DTOMapper.Mapper.Map<Data.EmployeeTemplateStatus, EmployeeTemplateStatus>(status);
-
         }
 
         public bool? EmployeeTakeTemplate(int employeeID, int quizID, int templateID)
@@ -149,7 +153,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
                 if (status == EmployeeTemplateStatus.Assigned)
                 {
                     ChangeEmployeeTemplateStatus(EmployeeTemplateStatus.InProgress, employeeID, templateID);
-                    AddQuestionsToQuestionsTemplates(templateID,quizID);
+                    AddQuestionsToQuestionsTemplates(templateID, quizID);
                     UnitOfWork.SaveChanges();
 
                     return true;
@@ -160,5 +164,22 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             else
                 return false;
         }
+
+
+        //public ICollection<bool> AssignEmployeesToRetakeQuiz(int quizId, ICollection<int> employeesIds)
+        //{
+        //    if(employeesIds != null)
+        //    {
+        //        ICollection<bool> empResults = new List<bool>();
+        //        foreach (var empId in employeesIds)
+        //        {
+        //            var result = AssignEmployeeToRetakeQuiz(quizId, empId);
+        //            empResults.Add(result);
+        //        }
+
+        //        return empResults;
+        //    }
+        //    return null;
+        //}
     }
 }

@@ -165,7 +165,8 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             var empsTemps = UnitOfWork.EmployeeTemplateRepository.GetEmployeesTemplatesByQuestionId(questionId);
 
             if (empsTemps.Any(et => et.Status != Data.EmployeeTemplateStatus.Assigned
-                                     && et.Status != Data.EmployeeTemplateStatus.Missed))
+                                     && et.Status != Data.EmployeeTemplateStatus.Missed
+                                     && et.Status != Data.EmployeeTemplateStatus.InProgress))
                 return true;
             else
                 return false;

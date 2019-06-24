@@ -122,5 +122,19 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
         {
             return _quizService.AddQuestionsToQuiz(quizId,questionsIds);
         }
+
+        [HttpPost]
+        [Route("releaseEmployee/{quizId:int}/{employeeId:int}")]
+        public bool ReleaseQuizFromEmployee(int quizId, int employeeId)
+        {
+            return _quizService.ReleaseQuizFromEmployee(quizId, employeeId);
+        }
+
+        [HttpPost]
+        [Route("releaseEmployees/{quizId:int}")]
+        public ICollection<bool> ReleaseQuizFromEmployee([FromUri]int quizId,[FromBody] ICollection<int> employeesIds)
+        {
+            return _quizService.ReleaseQuizFromEmployees(quizId, employeesIds);
+        }
     }
 }
