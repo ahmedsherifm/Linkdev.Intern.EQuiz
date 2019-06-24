@@ -234,6 +234,74 @@ namespace Linkdev.Intern.EQuiz.Shared
 
         #endregion
 
+        #region EmployeeTemplateStatus
+
+        public static Data.Domain.EmployeeTemplateStatus Map(EmployeeTemplateStatus from)
+        {
+            Data.Domain.EmployeeTemplateStatus to = new Data.Domain.EmployeeTemplateStatus();
+
+            switch (from)
+            {
+                case EmployeeTemplateStatus.Assigned:
+                    to = Data.Domain.EmployeeTemplateStatus.Assigned;
+                    break;
+                case EmployeeTemplateStatus.Failed:
+                    to = Data.Domain.EmployeeTemplateStatus.Failed;
+                    break;
+                case EmployeeTemplateStatus.InProgress:
+                    to = Data.Domain.EmployeeTemplateStatus.InProgress;
+                    break;
+                case EmployeeTemplateStatus.Missed:
+                    to = Data.Domain.EmployeeTemplateStatus.Missed;
+                    break;
+                case EmployeeTemplateStatus.Released:
+                    to = Data.Domain.EmployeeTemplateStatus.Released;
+                    break;
+                case EmployeeTemplateStatus.Submitted:
+                    to = Data.Domain.EmployeeTemplateStatus.Submitted;
+                    break;
+                case EmployeeTemplateStatus.Successed:
+                    to = Data.Domain.EmployeeTemplateStatus.Successed;
+                    break;
+            }
+
+            return to;
+        }
+
+        public static EmployeeTemplateStatus Map(Data.Domain.EmployeeTemplateStatus from)
+        {
+            EmployeeTemplateStatus to = new EmployeeTemplateStatus();
+
+            switch (from)
+            {
+                case Data.Domain.EmployeeTemplateStatus.Assigned:
+                    to = EmployeeTemplateStatus.Assigned;
+                    break;
+                case Data.Domain.EmployeeTemplateStatus.Failed:
+                    to = EmployeeTemplateStatus.Failed;
+                    break;
+                case Data.Domain.EmployeeTemplateStatus.InProgress:
+                    to = EmployeeTemplateStatus.InProgress;
+                    break;
+                case Data.Domain.EmployeeTemplateStatus.Missed:
+                    to = EmployeeTemplateStatus.Missed;
+                    break;
+                case Data.Domain.EmployeeTemplateStatus.Released:
+                    to = EmployeeTemplateStatus.Released;
+                    break;
+                case Data.Domain.EmployeeTemplateStatus.Submitted:
+                    to = EmployeeTemplateStatus.Submitted;
+                    break;
+                case Data.Domain.EmployeeTemplateStatus.Successed:
+                    to = EmployeeTemplateStatus.Successed;
+                    break;
+            }
+
+            return to;
+        }
+
+        #endregion
+
         #region Question
 
         public static Data.Domain.Question Map(Question from)
@@ -824,9 +892,7 @@ namespace Linkdev.Intern.EQuiz.Shared
             }
         }
         #endregion
-
-
-        // mapping lists
+        
         #region TopicsList
 
         public static ICollection<Data.Domain.Topic> Map(ICollection<Topic> from)
