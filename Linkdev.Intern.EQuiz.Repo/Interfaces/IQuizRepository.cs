@@ -43,5 +43,7 @@ namespace Linkdev.Intern.EQuiz.Repo.Interfaces
         IEnumerable<Quize> FilterQuizesByQuarter(int quarter, int pageIndex, int pageSize = 10);
 
         IEnumerable<Quize> FilterQuizesByYear(int year, int pageIndex, int pageSize = 10);
+
+        int GetTrialsNoForEmployee(int quizId, int employeeId);
     }
 }

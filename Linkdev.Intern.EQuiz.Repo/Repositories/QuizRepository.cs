@@ -258,6 +258,13 @@ namespace Linkdev.Intern.EQuiz.Repo.Repositories
                     .AsEnumerable();
         }
 
-
+        public int GetTrialsNoForEmployee(int quizId, int employeeId)
+        {
+            return EQuizContext.Employees_Templates
+                    .Include(et=>et.Template)
+                    .Where(et => et.EmployeeID == employeeId)
+                    .Where(et => et.Template.QuizID == quizId)
+                    .Count();
+        }
     }
 }

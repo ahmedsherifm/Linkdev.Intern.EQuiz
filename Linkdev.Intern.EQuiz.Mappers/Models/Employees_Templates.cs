@@ -4,7 +4,7 @@ namespace Linkdev.Intern.EQuiz.Mappers
 {
     public enum EmployeeTemplateStatus
     {
-        Assigned, Missed, Successed, Failed, Submitted, InProgress
+        Assigned, Missed, Successed, Failed, Submitted, InProgress, Released
     }
 
     public class Employees_Templates

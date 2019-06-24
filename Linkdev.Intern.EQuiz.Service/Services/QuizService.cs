@@ -156,6 +156,41 @@ namespace Linkdev.Intern.EQuiz.Service.Services
                 return false;
         }
 
+        public ICollection<bool> ReleaseQuizFromEmployees(int quizId, ICollection<int> employeesIds)
+        {
+            if (employeesIds != null)
+            {
+                ICollection<bool> empResults = new List<bool>();
+
+                foreach (var empId in employeesIds)
+                {
+                    var result = ReleaseQuizFromEmployee(quizId, empId);
+                    empResults.Add(result);
+                }
+
+                return empResults;
+            }
+
+            return null;
+        }
+
+        public bool ReleaseQuizFromEmployee(int quizId, int employeeId)
+        {
+            var templates = UnitOfWork.TemplateRepository.GetTemplatesByEmployeeAndQuizIds(quizId, employeeId);
+
+            if (templates != null)
+            {
+                templates.Select(t => t.Employees_Templates
+                    .Select(et => et.Status = Data.EmployeeTemplateStatus.Released));
+
+                UnitOfWork.SaveChanges();
+
+                return true;
+            }
+
+            return false;
+        }
+
         /////// multiple quiz creation ?!!!
         //public bool? CreateQuizWithQuestions(Quiz quiz, IEnumerable<int> questionsIds)
         //{

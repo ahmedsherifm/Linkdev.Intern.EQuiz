@@ -7,7 +7,7 @@ namespace Linkdev.Intern.EQuiz.Data
     using System.Data.Entity.Spatial;
     public enum EmployeeTemplateStatus
     {
-        Assigned, Missed, Successed, Failed, Submitted, InProgress
+        Assigned, Missed, Successed, Failed, Submitted, InProgress, Released
     }
     public partial class Employees_Templates
     {

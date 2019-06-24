@@ -38,5 +38,11 @@ namespace Linkdev.Intern.EQuiz.Service.Interfaces
         bool? CreateQuiz(Quiz quiz);
 
         bool? AddQuestionsToQuiz(int quizId, IEnumerable<int> questionsIds);
+
+        ICollection<bool> ReleaseQuizFromEmployees(int quizId, ICollection<int> employeesIds);
+
+        bool ReleaseQuizFromEmployee(int quizId, int employeeId);
+
+        
     }
 }
