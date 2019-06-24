@@ -1,34 +1,31 @@
-namespace Linkdev.Intern.EQuiz.Data
+namespace Linkdev.Intern.EQuiz.Data.Domain
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
+    //using System.Data.Entity.Spatial;
 
-    public partial class Answer
+    public partial class Topic
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Answer()
+        public Topic()
         {
-            Employees_Questions_Templates = new HashSet<Employees_Questions_Templates>();
+            Questions = new HashSet<Question>();
         }
 
         public int ID { get; set; }
 
-        public int QuestionID { get; set; }
-
         [Required]
-        [StringLength(500)]
-        public string Text { get; set; }
+        [StringLength(100)]
+        public string Name { get; set; }
 
-        public bool IsCorrect { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime CreationDate { get; set; }
 
         public bool IsDeleted { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Employees_Questions_Templates> Employees_Questions_Templates { get; set; }
-
-        public virtual Question Question { get; set; }
+        public virtual ICollection<Question> Questions { get; set; }
     }
 }

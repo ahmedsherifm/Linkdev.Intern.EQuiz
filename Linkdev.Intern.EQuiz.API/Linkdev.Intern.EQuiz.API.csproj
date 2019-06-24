@@ -114,9 +114,9 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Linkdev.Intern.EQuiz.Mappers\Linkdev.Intern.EQuiz.Mappers.csproj">
+    <ProjectReference Include="..\Linkdev.Intern.EQuiz.Mappers\Linkdev.Intern.EQuiz.Shared.csproj">
       <Project>{57a6abeb-1678-448f-b41c-062669b19103}</Project>
-      <Name>Linkdev.Intern.EQuiz.Mappers</Name>
+      <Name>Linkdev.Intern.EQuiz.Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\Linkdev.Intern.EQuiz.Service\Linkdev.Intern.EQuiz.Business.csproj">
       <Project>{5353a379-bc5f-4422-bdc5-b70f0dbc7b35}</Project>

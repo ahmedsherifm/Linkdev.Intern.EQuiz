@@ -7,12 +7,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{57A6ABEB-1678-448F-B41C-062669B19103}</ProjectGuid>
+    <ProjectGuid>{1AEE0182-C769-4099-B14F-66BE7D9C0007}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Linkdev.Intern.EQuiz.Mappers</RootNamespace>
-    <AssemblyName>Linkdev.Intern.EQuiz.Mappers</AssemblyName>
+    <RootNamespace>Linkdev.Intern.EQuiz.Data.Domain</RootNamespace>
+    <AssemblyName>Linkdev.Intern.EQuiz.Data.Domain</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -43,15 +43,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=8.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.8.1.1\lib\net461\AutoMapper.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -79,7 +70,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTOMapper.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\Employees_Questions_Templates.cs" />
@@ -87,7 +77,7 @@
     <Compile Include="Models\Question.cs" />
     <Compile Include="Models\Questions_Quizes.cs" />
     <Compile Include="Models\Questions_Templates.cs" />
-    <Compile Include="Models\Quiz.cs" />
+    <Compile Include="Models\Quize.cs" />
     <Compile Include="Models\Template.cs" />
     <Compile Include="Models\Topic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -100,12 +90,6 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Linkdev.Intern.EQuiz.Data\Linkdev.Intern.EQuiz.Data.csproj">
-      <Project>{11be22e5-51e5-4830-a07e-e253cddf5f0c}</Project>
-      <Name>Linkdev.Intern.EQuiz.Data</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -120,9 +104,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>59905</DevelopmentServerPort>
+          <DevelopmentServerPort>61552</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:59905/</IISUrl>
+          <IISUrl>http://localhost:61552/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

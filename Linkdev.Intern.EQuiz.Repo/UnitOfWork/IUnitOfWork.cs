@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Linkdev.Intern.EQuiz.Repo.Interfaces;
+using Linkdev.Intern.EQuiz.Data.Repository.Interfaces;
 
-namespace Linkdev.Intern.EQuiz.Repo.UnitOfWork
+namespace Linkdev.Intern.EQuiz.Data.Repository.UnitOfWork
 {
     public interface IUnitOfWork
     {

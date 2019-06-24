@@ -1,4 +1,4 @@
-namespace Linkdev.Intern.EQuiz.Mappers
+namespace Linkdev.Intern.EQuiz.Shared
 {
     public class Questions_Templates
     {
@@ -7,5 +7,9 @@ namespace Linkdev.Intern.EQuiz.Mappers
         public int QuestionID { get; set; }
 
         public int TemplateID { get; set; }
+
+        public virtual Question Question { get; set; }
+
+        public virtual Template Template { get; set; }
     }
 }

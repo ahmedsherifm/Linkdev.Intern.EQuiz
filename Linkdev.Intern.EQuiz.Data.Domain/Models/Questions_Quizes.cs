@@ -1,10 +1,10 @@
-namespace Linkdev.Intern.EQuiz.Data
+namespace Linkdev.Intern.EQuiz.Data.Domain
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
+    //using System.Data.Entity.Spatial;
 
     public partial class Questions_Quizes
     {

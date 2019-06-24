@@ -1,5 +1,5 @@
 ﻿using Linkdev.Intern.EQuiz.Mappers;
-using Linkdev.Intern.EQuiz.Repo.UnitOfWork;
+using Linkdev.Intern.EQuiz.Data.Repository.UnitOfWork;
 using Linkdev.Intern.EQuiz.Service.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -19,19 +19,19 @@ namespace Linkdev.Intern.EQuiz.Service.Services
 
         public QuizService()
         {
-            UnitOfWork = new UnitOfWork(new Data.EQuizContext());
+            UnitOfWork = new UnitOfWork(new Data.EntityFrameWork.EQuizContext());
         }
 
         public IEnumerable<Quiz> GetQuizesByQuestionID(int qid)
         {
             var dtoQuizes = UnitOfWork.QuizRepository.GetQuizesByQuestion(qid);
-            return DTOMapper.Mapper.Map<IEnumerable<Data.Quize>, IEnumerable<Quiz>>(dtoQuizes);
+            return DTOMapper.Mapper.Map<IEnumerable<Data.Domain.Quize>, IEnumerable<Quiz>>(dtoQuizes);
         }
 
         public IEnumerable<Answer> GetQuizAnswers(int id)
         {
             var dtoAnswers = UnitOfWork.QuizRepository.GetQuizAnswers(id);
-            return DTOMapper.Mapper.Map<IEnumerable<Data.Answer>, IEnumerable<Answer>>(dtoAnswers);
+            return DTOMapper.Mapper.Map<IEnumerable<Data.Domain.Answer>, IEnumerable<Answer>>(dtoAnswers);
         }
 
         public bool ExtendExpirationDate(int id, DateTime expirationDate)
@@ -111,14 +111,14 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         public Quiz GetQuizByID(int id)
         {
             var dtoQuiz = UnitOfWork.QuizRepository.GetByID(id);
-            return DTOMapper.Mapper.Map<Data.Quize, Quiz>(dtoQuiz);
+            return DTOMapper.Mapper.Map<Data.Domain.Quize, Quiz>(dtoQuiz);
         }
 
         public bool? CreateQuiz(Quiz quiz)
         {
             if (quiz != null)
             {
-                var dtoQuiz = DTOMapper.Mapper.Map<Quiz, Data.Quize>(quiz);
+                var dtoQuiz = DTOMapper.Mapper.Map<Quiz, Data.Domain.Quize>(quiz);
                 UnitOfWork.QuizRepository.Add(dtoQuiz);
                 UnitOfWork.SaveChanges();
                 return true;
@@ -132,7 +132,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             var dtoQuiz = UnitOfWork.QuizRepository.GetByID(quizId);
             if (questionsIds != null && dtoQuiz != null)
             {
-                //var dtoQuiz = DTOMapper.Mapper.Map<Quiz, Data.Quiz>(quiz);
+                //var dtoQuiz = DTOMapper.Mapper.Map<Quiz, Data.Domain.Quiz>(quiz);
                 ICollection<Questions_Quizes> Questions_Quizes = new List<Questions_Quizes>();
 
                 foreach (var item in questionsIds)
@@ -146,7 +146,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
                     }
                 }
 
-                var dtoQuestionQuizList = DTOMapper.Mapper.Map<ICollection<Questions_Quizes>, ICollection<Data.Questions_Quizes>>(Questions_Quizes);
+                var dtoQuestionQuizList = DTOMapper.Mapper.Map<ICollection<Questions_Quizes>, ICollection<Data.Domain.Questions_Quizes>>(Questions_Quizes);
                 dtoQuiz.Questions_Quizes = dtoQuestionQuizList;
                 UnitOfWork.SaveChanges();
 
@@ -181,7 +181,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             if (templates != null)
             {
                 templates.Select(t => t.Employees_Templates
-                    .Select(et => et.Status = Data.EmployeeTemplateStatus.Released));
+                    .Select(et => et.Status = Data.Domain.EmployeeTemplateStatus.Released));
 
                 UnitOfWork.SaveChanges();
 

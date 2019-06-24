@@ -1,4 +1,4 @@
-﻿using Linkdev.Intern.EQuiz.Repo.Interfaces;
+﻿using Linkdev.Intern.EQuiz.Data.Repository.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
 
-namespace Linkdev.Intern.EQuiz.Repo.Repositories
+namespace Linkdev.Intern.EQuiz.Data.Repository.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {

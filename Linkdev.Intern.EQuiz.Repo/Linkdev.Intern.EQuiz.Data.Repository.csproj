@@ -7,12 +7,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5353A379-BC5F-4422-BDC5-B70F0DBC7B35}</ProjectGuid>
+    <ProjectGuid>{0F58FEC5-028F-4F49-AF58-614276D66447}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Linkdev.Intern.EQuiz.Service</RootNamespace>
-    <AssemblyName>Linkdev.Intern.EQuiz.Service</AssemblyName>
+    <RootNamespace>Linkdev.Intern.EQuiz.Repo</RootNamespace>
+    <AssemblyName>Linkdev.Intern.EQuiz.Repo</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
@@ -43,9 +43,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=8.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.8.1.1\lib\net461\AutoMapper.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -79,16 +76,31 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IQuestionService.cs" />
-    <Compile Include="Interfaces\IQuizService.cs" />
-    <Compile Include="Interfaces\ITemplateService.cs" />
-    <Compile Include="Interfaces\ITopicService.cs" />
+    <Compile Include="Interfaces\IAnswerRepository.cs" />
+    <Compile Include="Interfaces\IEmployeeRepository.cs" />
+    <Compile Include="Interfaces\IEmployeeQuestionTemplateRepository.cs" />
+    <Compile Include="Interfaces\IEmployeeTemplateRepository.cs" />
+    <Compile Include="Interfaces\IQuestionQuizRepository.cs" />
+    <Compile Include="Interfaces\IQuestionRepository.cs" />
+    <Compile Include="Interfaces\IQuestionTemplateRepository.cs" />
+    <Compile Include="Interfaces\IQuizRepository.cs" />
+    <Compile Include="Interfaces\ITemplateRepository.cs" />
+    <Compile Include="Interfaces\ITopicRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\QuestionService.cs" />
-    <Compile Include="Services\QuizService.cs" />
-    <Compile Include="Services\TemplateService.cs" />
-    <Compile Include="Services\TopicService.cs" />
-    <Compile Include="Utility\Output.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Repositories\AnswerRepository.cs" />
+    <Compile Include="Repositories\EmployeeQuestionTemplateRepository.cs" />
+    <Compile Include="Repositories\EmployeeRepository.cs" />
+    <Compile Include="Repositories\EmployeeTemplateRepository.cs" />
+    <Compile Include="Repositories\QuestionQuizRepository.cs" />
+    <Compile Include="Repositories\QuestionRepository.cs" />
+    <Compile Include="Repositories\QuestionTemplateRepository.cs" />
+    <Compile Include="Repositories\QuizRepository.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\TemplateRepository.cs" />
+    <Compile Include="Repositories\TopicRepository.cs" />
+    <Compile Include="UnitOfWork\IUnitOfWork.cs" />
+    <Compile Include="UnitOfWork\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -108,14 +120,6 @@
       <Project>{11be22e5-51e5-4830-a07e-e253cddf5f0c}</Project>
       <Name>Linkdev.Intern.EQuiz.Data.EntityFrameWork</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Linkdev.Intern.EQuiz.Mappers\Linkdev.Intern.EQuiz.Shared.csproj">
-      <Project>{57a6abeb-1678-448f-b41c-062669b19103}</Project>
-      <Name>Linkdev.Intern.EQuiz.Shared</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Linkdev.Intern.EQuiz.Repo\Linkdev.Intern.EQuiz.Data.Repository.csproj">
-      <Project>{0f58fec5-028f-4f49-af58-614276d66447}</Project>
-      <Name>Linkdev.Intern.EQuiz.Data.Repository</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
@@ -131,9 +135,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>54239</DevelopmentServerPort>
+          <DevelopmentServerPort>54234</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:54239/</IISUrl>
+          <IISUrl>http://localhost:54234/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

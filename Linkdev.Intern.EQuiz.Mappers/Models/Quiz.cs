@@ -1,6 +1,7 @@
-namespace Linkdev.Intern.EQuiz.Mappers
+namespace Linkdev.Intern.EQuiz.Shared
 {
     using System;
+    using System.Collections.Generic;
 
     public class Quiz
     {
@@ -32,5 +33,8 @@ namespace Linkdev.Intern.EQuiz.Mappers
 
         public DateTime CreationDate { get; set; }
 
+        public virtual ICollection<Questions_Quizes> Questions_Quizes { get; set; }
+
+        public virtual ICollection<Template> Templates { get; set; }
     }
 }

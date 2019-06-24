@@ -1,6 +1,6 @@
 using System;
 
-namespace Linkdev.Intern.EQuiz.Mappers
+namespace Linkdev.Intern.EQuiz.Shared
 {
     public enum EmployeeTemplateStatus
     {
@@ -24,6 +24,10 @@ namespace Linkdev.Intern.EQuiz.Mappers
         public int? TimeTaken { get; set; }
 
         public DateTime? ExpirationDate { get; set; }
+
+        public virtual Employee Employee { get; set; }
+
+        public virtual Template Template { get; set; }
 
     }
 }

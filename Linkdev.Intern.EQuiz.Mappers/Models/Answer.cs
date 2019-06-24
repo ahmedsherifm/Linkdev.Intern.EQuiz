@@ -1,4 +1,6 @@
-namespace Linkdev.Intern.EQuiz.Mappers
+using System.Collections.Generic;
+
+namespace Linkdev.Intern.EQuiz.Shared
 {
     public class Answer
     {
@@ -11,5 +13,9 @@ namespace Linkdev.Intern.EQuiz.Mappers
         public bool IsCorrect { get; set; }
 
         public bool IsDeleted { get; set; }
+
+        public virtual ICollection<Employees_Questions_Templates> Employees_Questions_Templates { get; set; }
+
+        public virtual Question Question { get; set; }
     }
 }

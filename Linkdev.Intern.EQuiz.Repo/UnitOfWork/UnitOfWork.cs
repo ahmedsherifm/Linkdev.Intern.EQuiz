@@ -1,12 +1,12 @@
-﻿using Linkdev.Intern.EQuiz.Data;
-using Linkdev.Intern.EQuiz.Repo.Interfaces;
-using Linkdev.Intern.EQuiz.Repo.Repositories;
+﻿using Linkdev.Intern.EQuiz.Data.EntityFrameWork;
+using Linkdev.Intern.EQuiz.Data.Repository.Interfaces;
+using Linkdev.Intern.EQuiz.Data.Repository.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Linkdev.Intern.EQuiz.Repo.UnitOfWork
+namespace Linkdev.Intern.EQuiz.Data.Repository.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {

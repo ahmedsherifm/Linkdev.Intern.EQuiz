@@ -1,5 +1,5 @@
 ﻿using Linkdev.Intern.EQuiz.Mappers;
-using Linkdev.Intern.EQuiz.Repo.UnitOfWork;
+using Linkdev.Intern.EQuiz.Data.Repository.UnitOfWork;
 using Linkdev.Intern.EQuiz.Service.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -19,7 +19,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
 
         public TemplateService()
         {
-            UnitOfWork = new UnitOfWork(new Data.EQuizContext());
+            UnitOfWork = new UnitOfWork(new Data.EntityFrameWork.EQuizContext());
         }
 
         private Template CreateTemplate(int quizId, int employeeId)
@@ -29,7 +29,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
 
             if (dtoQuiz != null && dtoEmployee != null)
             {
-                var dtoTemplate = new Data.Template()
+                var dtoTemplate = new Data.Domain.Template()
                 {
                     Quiz = dtoQuiz,
                     CreationDate = DateTime.Now,
@@ -37,7 +37,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
                 };
                 UnitOfWork.TemplateRepository.Add(dtoTemplate);
                 UnitOfWork.SaveChanges();
-                var template = DTOMapper.Mapper.Map<Data.Template, Template>(dtoTemplate);
+                var template = DTOMapper.Mapper.Map<Data.Domain.Template, Template>(dtoTemplate);
 
                 return template;
             }
@@ -48,16 +48,16 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         private void AssignEmployeeToTemplate(int templateId)
         {
             var dtoTemplate = UnitOfWork.TemplateRepository.GetByID(templateId);
-            dtoTemplate.Employees_Templates.Add(new Data.Employees_Templates()
+            dtoTemplate.Employees_Templates.Add(new Data.Domain.Employees_Templates()
             {
                 EmployeeID = dtoTemplate.EmployeeID,
                 TemplateID = dtoTemplate.ID,
                 TrialNo = 0,
                 Score = 0,
-                Status = Data.EmployeeTemplateStatus.Assigned
+                Status = Data.Domain.EmployeeTemplateStatus.Assigned
             });
 
-            //dtoTemplate.Employees_Templates = DTOMapper.Mapper.Map<ICollection<Employees_Templates>, ICollection<Data.Employees_Templates>>(employees_Templates);
+            //dtoTemplate.Employees_Templates = DTOMapper.Mapper.Map<ICollection<Employees_Templates>, ICollection<Data.Domain.Employees_Templates>>(employees_Templates);
         }
 
 
@@ -96,7 +96,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
 
         //            if (dtoEmployee != null)
         //            {
-        //                var dtoTemplate = new Data.Template()
+        //                var dtoTemplate = new Data.Domain.Template()
         //                {
         //                    Quiz = dtoQuiz,
         //                    CreationDate = DateTime.Now,
@@ -104,7 +104,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         //                };
 
         //                UnitOfWork.TemplateRepository.Add(dtoTemplate);
-        //                var template = DTOMapper.Mapper.Map<Data.Template, Template>(dtoTemplate);
+        //                var template = DTOMapper.Mapper.Map<Data.Domain.Template, Template>(dtoTemplate);
         //                templates.Add(template);
         //            }
         //            else
@@ -124,13 +124,13 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         //    for (int i = 0; i < templates.Count; i++)
         //    {
         //        var dtoTemplate = UnitOfWork.TemplateRepository.GetByID(templatesList[i].ID);
-        //        dtoTemplate.Employees_Templates.Add(new Data.Employees_Templates()
+        //        dtoTemplate.Employees_Templates.Add(new Data.Domain.Employees_Templates()
         //        {
         //            EmployeeID = dtoTemplate.EmployeeID,
         //            TemplateID = dtoTemplate.ID,
         //            TrialNo = 0,
         //            Score = 0,
-        //            Status = Data.EmployeeTemplateStatus.Assigned
+        //            Status = Data.Domain.EmployeeTemplateStatus.Assigned
         //        });
         //    }
         //}
@@ -176,7 +176,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
                     }
                 }
 
-                var dtoQuestions_Templates = DTOMapper.Mapper.Map<ICollection<Questions_Templates>, ICollection<Data.Questions_Templates>>(questions_Templates);
+                var dtoQuestions_Templates = DTOMapper.Mapper.Map<ICollection<Questions_Templates>, ICollection<Data.Domain.Questions_Templates>>(questions_Templates);
                 dtoTemplate.Questions_Templates = dtoQuestions_Templates;
 
                 return true;
@@ -187,7 +187,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
 
         private bool? ChangeEmployeeTemplateStatus(EmployeeTemplateStatus newStatus, int templateID, int employeeID)
         {
-            var dtoStatus = DTOMapper.Mapper.Map<EmployeeTemplateStatus, Data.EmployeeTemplateStatus>(newStatus);
+            var dtoStatus = DTOMapper.Mapper.Map<EmployeeTemplateStatus, Data.Domain.EmployeeTemplateStatus>(newStatus);
             return UnitOfWork.EmployeeTemplateRepository.ChangeEmployeeTemplateStatus(dtoStatus, templateID, employeeID);
         }
 
@@ -195,7 +195,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         {
             var status = UnitOfWork.EmployeeTemplateRepository.CheckTemplateStatusForEmployee(templateID, employeeID);
 
-            return DTOMapper.Mapper.Map<Data.EmployeeTemplateStatus, EmployeeTemplateStatus>(status);
+            return DTOMapper.Mapper.Map<Data.Domain.EmployeeTemplateStatus, EmployeeTemplateStatus>(status);
         }
 
         public bool? EmployeeTakeTemplate(int employeeID, int quizID, int templateID)
@@ -207,7 +207,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             if (dtoEmployee != null && dtoQuiz != null && dtoTemplate != null)
             {
                 var dtoStatus = UnitOfWork.EmployeeTemplateRepository.CheckTemplateStatusForEmployee(templateID, employeeID);
-                var status = DTOMapper.Mapper.Map<Data.EmployeeTemplateStatus, EmployeeTemplateStatus>(dtoStatus);
+                var status = DTOMapper.Mapper.Map<Data.Domain.EmployeeTemplateStatus, EmployeeTemplateStatus>(dtoStatus);
 
                 if (status == EmployeeTemplateStatus.Assigned)
                 {

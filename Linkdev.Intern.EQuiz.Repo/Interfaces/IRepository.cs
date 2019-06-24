@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Linkdev.Intern.EQuiz.Repo.Interfaces
+namespace Linkdev.Intern.EQuiz.Data.Repository.Interfaces
 {
     public interface IRepository<TEntity> where TEntity : class
     {

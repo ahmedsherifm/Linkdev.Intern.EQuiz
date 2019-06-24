@@ -1,9 +1,10 @@
-namespace Linkdev.Intern.EQuiz.Data
+namespace Linkdev.Intern.EQuiz.Data.EntityFrameWork
 {
     using System;
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
+    using Linkdev.Intern.EQuiz.Data.Domain;
 
     public partial class EQuizContext : DbContext
     {

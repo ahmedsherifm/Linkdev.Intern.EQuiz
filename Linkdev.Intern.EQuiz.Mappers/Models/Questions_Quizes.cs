@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Linkdev.Intern.EQuiz.Mappers
+namespace Linkdev.Intern.EQuiz.Shared
 {
     public class Questions_Quizes
     {
@@ -13,6 +13,8 @@ namespace Linkdev.Intern.EQuiz.Mappers
 
         public int QuizID { get; set; }
 
-       
+        public virtual Question Question { get; set; }
+
+        public virtual Quize Quiz { get; set; }
     }
 }
