@@ -28,5 +28,15 @@ namespace Linkdev.Intern.EQuiz.Repo.Repositories
                     .Answers
                     .AsEnumerable();
         }
+
+        public IEnumerable<Answer> GetCorrectAnswersByQuestion(int qid)
+        {
+            return EQuizContext.Questions
+                    .SingleOrDefault(q => q.ID == qid)
+                    .Answers
+                    .Where(a => a.IsCorrect == true)
+                    .AsEnumerable();
+        }
+
     }
 }

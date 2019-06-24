@@ -12,5 +12,7 @@ namespace Linkdev.Intern.EQuiz.Repo.Interfaces
     {
         // For Listing Question details requirement
         IEnumerable<Answer> GetAnswersByQuestion(int qid);
+
+        IEnumerable<Answer> GetCorrectAnswersByQuestion(int qid);
     }
 }

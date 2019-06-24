@@ -32,6 +32,8 @@ namespace Linkdev.Intern.EQuiz.Service.Interfaces
 
         IEnumerable<Answer> GetQuestionAnswers(int id);
 
+        IEnumerable<Answer> GetCorrectQuestionAnswers(int id);
+
         IEnumerable<Quiz> GetQuestionQuizez(int id);
 
         Topic GetQuestionTopic(int id);

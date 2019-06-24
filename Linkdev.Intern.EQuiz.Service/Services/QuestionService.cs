@@ -117,6 +117,18 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             return dtoAnswers;
         }
 
+        public IEnumerable<Answer> GetCorrectQuestionAnswers(int id)
+        {
+            var answers = UnitOfWork.AnswerRepository.GetCorrectAnswersByQuestion(id);
+            var dtoAnswers = DTOMapper.Mapper.Map<IEnumerable<Data.Answer>,IEnumerable<Answer>>(answers);
+
+            return dtoAnswers;
+        }
+
+
+   
+        
+
         public IEnumerable<Quiz> GetQuestionQuizez(int id)
         {
             var quizez = UnitOfWork.QuizRepository.GetQuizesByQuestion(id);

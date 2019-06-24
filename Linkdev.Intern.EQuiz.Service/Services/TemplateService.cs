@@ -45,17 +45,12 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             return null;
         }
 
-        /// why there is list of employeestemplates between both entities, why there is many between employeees and templates
-        /// 
-
-        private void AssignEmployeeToTemplate(int templateId, int employeeId)
+        private void AssignEmployeeToTemplate(int templateId)
         {
             var dtoTemplate = UnitOfWork.TemplateRepository.GetByID(templateId);
-            var dtoEmployee = UnitOfWork.EmployeeRepository.GetByID(employeeId);
-            //ICollection<Employees_Templates> employees_Templates = new List<Employees_Templates>();
             dtoTemplate.Employees_Templates.Add(new Data.Employees_Templates()
             {
-                EmployeeID = employeeId,
+                EmployeeID = dtoTemplate.EmployeeID,
                 TemplateID = dtoTemplate.ID,
                 TrialNo = 0,
                 Score = 0,
@@ -63,16 +58,83 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             });
 
             //dtoTemplate.Employees_Templates = DTOMapper.Mapper.Map<ICollection<Employees_Templates>, ICollection<Data.Employees_Templates>>(employees_Templates);
-            
-
         }
+       
 
         public bool? CreateEmptyTemplateToAssignedEmployee(int quizId, int employeeId)
         {
             var template = CreateTemplate(quizId, employeeId);
             if (template != null)
             {
-                AssignEmployeeToTemplate(template.ID, employeeId);
+                AssignEmployeeToTemplate(template.ID);
+                UnitOfWork.SaveChanges();
+
+                return true;
+            }
+            else
+                return false;
+        }
+
+
+        private ICollection<Template> CreateTemplateList(int quizId, ICollection<int> employeeIds)
+        {
+            var dtoQuiz = UnitOfWork.QuizRepository.GetByID(quizId);
+            if (dtoQuiz != null && employeeIds.Count > 0)
+            {
+                var employeesList = employeeIds.ToList();
+                ICollection<Template> templates = new List<Template>();
+
+                for (int i = 0; i < employeeIds.Count; i++)
+                {
+                    var dtoEmployee = UnitOfWork.EmployeeRepository.GetByID(employeesList[i]);
+
+                    if (dtoEmployee != null)
+                    {
+                        var dtoTemplate = new Data.Template()
+                        {
+                            Quiz = dtoQuiz,
+                            CreationDate = DateTime.Now,
+                            Employee = dtoEmployee
+                        };
+
+                        UnitOfWork.TemplateRepository.Add(dtoTemplate);
+                        var template = DTOMapper.Mapper.Map<Data.Template, Template>(dtoTemplate);
+                        templates.Add(template);
+                    }
+                    else
+                        return null;
+                }
+
+                UnitOfWork.SaveChanges();
+                return templates;
+            }
+            else
+                return null;
+        }
+
+        private void AssignEmployeesToTemplatesList(ICollection<Template> templates)
+        {
+            var templatesList = templates.ToList();
+            for (int i = 0; i < templates.Count; i++)
+            {
+                var dtoTemplate = UnitOfWork.TemplateRepository.GetByID(templatesList[i].ID);
+                dtoTemplate.Employees_Templates.Add(new Data.Employees_Templates()
+                {
+                    EmployeeID = dtoTemplate.EmployeeID,
+                    TemplateID = dtoTemplate.ID,
+                    TrialNo = 0,
+                    Score = 0,
+                    Status = Data.EmployeeTemplateStatus.Assigned
+                });
+            }
+        }
+
+        public bool? CreateEmptyTemplatesToAssignedEmployees(int quizId, ICollection<int> employeeIds)
+        {
+            var templates = CreateTemplateList(quizId, employeeIds);
+            if (templates != null)
+            {
+                AssignEmployeesToTemplatesList(templates);
                 UnitOfWork.SaveChanges();
 
                 return true;
@@ -139,10 +201,6 @@ namespace Linkdev.Intern.EQuiz.Service.Services
 
             if (dtoEmployee != null && dtoQuiz != null && dtoTemplate != null)
             {
-                //var employee = DTOMapper.Mapper.Map<Data.Employee, Employee>(dtoEmployee);
-                //var quiz = DTOMapper.Mapper.Map<Data.Quize, Quiz>(dtoQuiz);
-                //var template = DTOMapper.Mapper.Map<Data.Template, Template>(dtoTemplate);
-
                 var dtoStatus = UnitOfWork.EmployeeTemplateRepository.CheckTemplateStatusForEmployee(templateID, employeeID);
                 var status = DTOMapper.Mapper.Map<Data.EmployeeTemplateStatus, EmployeeTemplateStatus>(dtoStatus);
 

@@ -107,6 +107,14 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
             return answers;
         }
 
+        [Route("questioncorrectanswers/{id:int}")]
+        public IEnumerable<Answer> GetCorrectQuestionAnswers(int id)
+        {
+            var answers = _questionService.GetCorrectQuestionAnswers(id);
+
+            return answers;
+        }
+
         [Route("questionquizes/{id:int}")]
         public IEnumerable<Quiz> GetQuestionQuizez(int id)
         {

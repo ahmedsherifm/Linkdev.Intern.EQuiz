@@ -31,6 +31,13 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
         }
 
         [HttpPost]
+        [Route("createEmpty/{quizId:int}")]
+        public bool CreateEmptyTemplateToAssignedEmployee(int quizId, ICollection<int> employeeIds)
+        {
+            return (bool)_templateService.CreateEmptyTemplatesToAssignedEmployees(quizId, employeeIds);
+        }
+
+        [HttpPost]
         [Route("takeTemplate/{quizId:int}/{employeeId:int}/{templateId:int}")]
         public bool EmployeeTakeTemplate(int employeeId, int quizId, int templateId)
         {
