@@ -32,9 +32,9 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
 
         [HttpPost]
         [Route("createEmpty/{quizId:int}")]
-        public bool CreateEmptyTemplateToAssignedEmployee(int quizId, ICollection<int> employeeIds)
+        public ICollection<bool> CreateEmptyTemplateToAssignedEmployee(int quizId, ICollection<int> employeeIds)
         {
-            return (bool)_templateService.CreateEmptyTemplatesToAssignedEmployees(quizId, employeeIds);
+            return _templateService.CreateEmptyTemplatesToAssignedEmployees(quizId, employeeIds);
         }
 
         [HttpPost]

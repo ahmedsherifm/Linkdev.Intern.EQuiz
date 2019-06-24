@@ -11,6 +11,8 @@ namespace Linkdev.Intern.EQuiz.Service.Interfaces
     {
         bool? CreateEmptyTemplateToAssignedEmployee(int quizId, int employeeId);
         bool? EmployeeTakeTemplate(int employeeID, int quizID, int templateID);
-        bool? CreateEmptyTemplatesToAssignedEmployees(int quizId, ICollection<int> employeeIds);
+        //bool? CreateEmptyTemplatesToAssignedEmployees(int quizId, ICollection<int> employeeIds);
+
+        ICollection<bool> CreateEmptyTemplatesToAssignedEmployees(int quizId, ICollection<int> employeeIds);
     }
 }

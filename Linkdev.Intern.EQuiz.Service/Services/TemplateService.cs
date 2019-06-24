@@ -82,70 +82,72 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         }
 
 
-        private ICollection<Template> CreateTemplateList(int quizId, ICollection<int> employeeIds)
-        {
-            var dtoQuiz = UnitOfWork.QuizRepository.GetByID(quizId);
-            if (dtoQuiz != null && employeeIds.Count > 0)
-            {
-                var employeesList = employeeIds.ToList();
-                ICollection<Template> templates = new List<Template>();
+        //private ICollection<Template> CreateTemplateList(int quizId, ICollection<int> employeeIds)
+        //{
+        //    var dtoQuiz = UnitOfWork.QuizRepository.GetByID(quizId);
+        //    if (dtoQuiz != null && employeeIds.Count > 0)
+        //    {
+        //        var employeesList = employeeIds.ToList();
+        //        ICollection<Template> templates = new List<Template>();
 
-                for (int i = 0; i < employeeIds.Count; i++)
+        //        for (int i = 0; i < employeeIds.Count; i++)
+        //        {
+        //            var dtoEmployee = UnitOfWork.EmployeeRepository.GetByID(employeesList[i]);
+
+        //            if (dtoEmployee != null)
+        //            {
+        //                var dtoTemplate = new Data.Template()
+        //                {
+        //                    Quiz = dtoQuiz,
+        //                    CreationDate = DateTime.Now,
+        //                    Employee = dtoEmployee
+        //                };
+
+        //                UnitOfWork.TemplateRepository.Add(dtoTemplate);
+        //                var template = DTOMapper.Mapper.Map<Data.Template, Template>(dtoTemplate);
+        //                templates.Add(template);
+        //            }
+        //            else
+        //                return null;
+        //        }
+
+        //        UnitOfWork.SaveChanges();
+        //        return templates;
+        //    }
+        //    else
+        //        return null;
+        //}
+
+        //private void AssignEmployeesToTemplatesList(ICollection<Template> templates)
+        //{
+        //    var templatesList = templates.ToList();
+        //    for (int i = 0; i < templates.Count; i++)
+        //    {
+        //        var dtoTemplate = UnitOfWork.TemplateRepository.GetByID(templatesList[i].ID);
+        //        dtoTemplate.Employees_Templates.Add(new Data.Employees_Templates()
+        //        {
+        //            EmployeeID = dtoTemplate.EmployeeID,
+        //            TemplateID = dtoTemplate.ID,
+        //            TrialNo = 0,
+        //            Score = 0,
+        //            Status = Data.EmployeeTemplateStatus.Assigned
+        //        });
+        //    }
+        //}
+
+        public ICollection<bool> CreateEmptyTemplatesToAssignedEmployees(int quizId, ICollection<int> employeeIds)
+        {
+            if(employeeIds != null)
+            {
+                var empResults = new List<bool>();
+                foreach (var item in employeeIds)
                 {
-                    var dtoEmployee = UnitOfWork.EmployeeRepository.GetByID(employeesList[i]);
-
-                    if (dtoEmployee != null)
-                    {
-                        var dtoTemplate = new Data.Template()
-                        {
-                            Quiz = dtoQuiz,
-                            CreationDate = DateTime.Now,
-                            Employee = dtoEmployee
-                        };
-
-                        UnitOfWork.TemplateRepository.Add(dtoTemplate);
-                        var template = DTOMapper.Mapper.Map<Data.Template, Template>(dtoTemplate);
-                        templates.Add(template);
-                    }
-                    else
-                        return null;
-                }
-
-                UnitOfWork.SaveChanges();
-                return templates;
+                    var result = (bool)CreateEmptyTemplateToAssignedEmployee(quizId, item);
+                    empResults.Add(result);
+                }           
+                return empResults;
             }
-            else
-                return null;
-        }
-
-        private void AssignEmployeesToTemplatesList(ICollection<Template> templates)
-        {
-            var templatesList = templates.ToList();
-            for (int i = 0; i < templates.Count; i++)
-            {
-                var dtoTemplate = UnitOfWork.TemplateRepository.GetByID(templatesList[i].ID);
-                dtoTemplate.Employees_Templates.Add(new Data.Employees_Templates()
-                {
-                    EmployeeID = dtoTemplate.EmployeeID,
-                    TemplateID = dtoTemplate.ID,
-                    TrialNo = 0,
-                    Score = 0,
-                    Status = Data.EmployeeTemplateStatus.Assigned
-                });
-            }
-        }
-
-        public bool? CreateEmptyTemplatesToAssignedEmployees(int quizId, ICollection<int> employeeIds)
-        {
-            var templates = CreateTemplateList(quizId, employeeIds);
-            if (templates != null)
-            {
-                AssignEmployeesToTemplatesList(templates);
-                UnitOfWork.SaveChanges();
-
-                return true;
-            }
-            return false;
+            return null;
         }
 
         private bool? AddQuestionsToQuestionsTemplates(int templateId, int quizId)
