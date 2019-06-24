@@ -1,4 +1,4 @@
-﻿using Linkdev.Intern.EQuiz.Mappers;
+﻿using Linkdev.Intern.EQuiz.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +16,7 @@ namespace Linkdev.Intern.EQuiz.Service.Interfaces
 
         Question GetQuestionById(int id);
 
-        IEnumerable<Question> FindQuestions(Expression<Func<Question, bool>> predicate);
+        //IEnumerable<Question> FindQuestions(Expression<Func<Question, bool>> predicate);
 
         IEnumerable<Question> GetQuestionsByCreationDate(int pageIndex, int pageSize = 10);
 

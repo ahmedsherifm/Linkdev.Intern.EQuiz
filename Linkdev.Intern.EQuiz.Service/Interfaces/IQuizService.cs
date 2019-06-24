@@ -1,4 +1,4 @@
-﻿using Linkdev.Intern.EQuiz.Mappers;
+﻿using Linkdev.Intern.EQuiz.Shared;
 using System;
 using System.Collections.Generic;
 using System.Linq;

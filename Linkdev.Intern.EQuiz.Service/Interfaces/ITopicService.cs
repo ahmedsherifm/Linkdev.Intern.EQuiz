@@ -1,4 +1,4 @@
-﻿using Linkdev.Intern.EQuiz.Mappers;
+﻿using Linkdev.Intern.EQuiz.Shared;
 using Linkdev.Intern.EQuiz.Service.Utility;
 using System;
 using System.Collections.Generic;
@@ -18,9 +18,9 @@ namespace Linkdev.Intern.EQuiz.Service.Interfaces
 
         bool? AddTopic(Topic entity);
 
-        IEnumerable<Topic> FindTopic(Expression<Func<Topic, bool>> predict);
+        //IEnumerable<Topic> FindTopic(Expression<Func<Topic, bool>> predict);
 
-        Topic GetTopicSingleOrDefault(Expression<Func<Topic, bool>> predict);
+        //Topic GetTopicSingleOrDefault(Expression<Func<Topic, bool>> predict);
 
         // implemeting topic repo services
         IEnumerable<Topic> GetTopicsByCreationDate(int pageIndex, int pageSize = 10);

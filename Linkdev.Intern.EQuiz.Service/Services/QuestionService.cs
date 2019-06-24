@@ -1,4 +1,4 @@
-﻿using Linkdev.Intern.EQuiz.Mappers;
+﻿using Linkdev.Intern.EQuiz.Shared;
 using Linkdev.Intern.EQuiz.Data.Repository.UnitOfWork;
 using Linkdev.Intern.EQuiz.Service.Interfaces;
 using System;
@@ -27,7 +27,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         {
             if (question != null)
             {
-                var dtoQuestion = DTOMapper.Mapper.Map<Question, Data.Domain.Question>(question);
+                var dtoQuestion = SMapper.Map(question);
                 var result = UnitOfWork.QuestionRepository.Add(dtoQuestion);
                 UnitOfWork.SaveChanges();
 
@@ -40,7 +40,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         public IEnumerable<Question> GetAllQuestions()
         {
             var questions = UnitOfWork.QuestionRepository.GetAll();
-            var dtoQuestions = DTOMapper.Mapper.Map<IEnumerable<Data.Domain.Question>,IEnumerable<Question>>(questions);
+            var dtoQuestions = SMapper.Map(questions.ToList());
 
             return dtoQuestions;
         }
@@ -48,23 +48,23 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         public Question GetQuestionById(int id)
         {
             var question = UnitOfWork.QuestionRepository.GetByID(id);
-            var dtoQuestion = DTOMapper.Mapper.Map<Data.Domain.Question, Question>(question);
+            var dtoQuestion = SMapper.Map(question);
             return dtoQuestion;
         }
 
-        public IEnumerable<Question> FindQuestions(Expression<Func<Question, bool>> predicate)
-        {
-            var repoPredicate = DTOMapper.Mapper.Map<Expression<Func<Question, bool>>, Expression<Func<Data.Domain.Question, bool>>>(predicate);
-            var questions = UnitOfWork.QuestionRepository.Find(repoPredicate);
-            var dtoQuestions = DTOMapper.Mapper.Map<IEnumerable<Data.Domain.Question>,IEnumerable<Question>>(questions);
+        //public IEnumerable<Question> FindQuestions(Expression<Func<Question, bool>> predicate)
+        //{
+        //    var repoPredicate = DTOMapper.Mapper.Map<Expression<Func<Question, bool>>, Expression<Func<Data.Domain.Question, bool>>>(predicate);
+        //    var questions = UnitOfWork.QuestionRepository.Find(repoPredicate);
+        //    var dtoQuestions = DTOMapper.Mapper.Map<IEnumerable<Data.Domain.Question>,IEnumerable<Question>>(questions);
 
-            return dtoQuestions;
-        }
+        //    return dtoQuestions;
+        //}
 
         public IEnumerable<Question> GetQuestionsByCreationDate(int pageIndex, int pageSize = 10)
         {
             var questions = UnitOfWork.QuestionRepository.GetQuestionsByCreationDate(pageIndex, pageSize);
-            var dtoQuestions = DTOMapper.Mapper.Map<IEnumerable<Data.Domain.Question>, IEnumerable<Question>>(questions);
+            var dtoQuestions = SMapper.Map(questions.ToList());
 
             return dtoQuestions;
         }
@@ -72,7 +72,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         public IEnumerable<Question> GetQuestionsByName(bool ascending, int pageIndex, int pageSize = 10)
         {
             var questions = UnitOfWork.QuestionRepository.GetQuestionsByName(ascending, pageIndex, pageSize);
-            var dtoQuestions = DTOMapper.Mapper.Map<IEnumerable<Data.Domain.Question>, IEnumerable<Question>>(questions);
+            var dtoQuestions = SMapper.Map(questions.ToList());
 
             return dtoQuestions;
         }
@@ -80,16 +80,16 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         public IEnumerable<Question> FilterQuestionsByText(string text,int pageIndex, int pageSize = 10)
         {
             var questions = UnitOfWork.QuestionRepository.FilterQuestionsByText(text, pageIndex, pageSize);
-            var dtoQuestions = DTOMapper.Mapper.Map<IEnumerable<Data.Domain.Question>, IEnumerable<Question>>(questions);
+            var dtoQuestions = SMapper.Map(questions.ToList());
 
             return dtoQuestions;
         }
 
         public IEnumerable<Question> GetQuestionsByTopic(Topic topic,int pageIndex, int pageSize = 10)
         {
-            var modelTopic = DTOMapper.Mapper.Map<Topic, Data.Domain.Topic>(topic);
+            var modelTopic = SMapper.Map(topic);
             var questions = UnitOfWork.QuestionRepository.GetQuestionsByTopic(modelTopic, pageIndex, pageSize);
-            var dtoQuestions = DTOMapper.Mapper.Map<IEnumerable<Data.Domain.Question>, IEnumerable<Question>>(questions);
+            var dtoQuestions = SMapper.Map(questions.ToList());
 
             return dtoQuestions;
         }
@@ -97,7 +97,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         public IEnumerable<Question> GetQuestionsByTopicName(string topicName, int pageIndex, int pageSize = 10)
         {
             var questions = UnitOfWork.QuestionRepository.GetQuestionsByTopicName(topicName, pageIndex, pageSize);
-            var dtoQuestions = DTOMapper.Mapper.Map<IEnumerable<Data.Domain.Question>, IEnumerable<Question>>(questions);
+            var dtoQuestions = SMapper.Map(questions.ToList());
 
             return dtoQuestions;
         }
@@ -112,7 +112,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         public IEnumerable<Answer> GetQuestionAnswers(int id)
         {
             var answers = UnitOfWork.AnswerRepository.GetAnswersByQuestion(id);
-            var dtoAnswers = DTOMapper.Mapper.Map<IEnumerable<Data.Domain.Answer>,IEnumerable<Answer>>(answers);
+            var dtoAnswers = SMapper.Map(answers.ToList());
 
             return dtoAnswers;
         }
@@ -120,7 +120,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         public IEnumerable<Answer> GetCorrectQuestionAnswers(int id)
         {
             var answers = UnitOfWork.AnswerRepository.GetCorrectAnswersByQuestion(id);
-            var dtoAnswers = DTOMapper.Mapper.Map<IEnumerable<Data.Domain.Answer>,IEnumerable<Answer>>(answers);
+            var dtoAnswers = SMapper.Map(answers.ToList());
 
             return dtoAnswers;
         }
@@ -132,7 +132,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         public IEnumerable<Quiz> GetQuestionQuizez(int id)
         {
             var quizez = UnitOfWork.QuizRepository.GetQuizesByQuestion(id);
-            var dtoQuizez = DTOMapper.Mapper.Map<IEnumerable<Data.Domain.Quize>, IEnumerable<Quiz>>(quizez);
+            var dtoQuizez = SMapper.Map(quizez.ToList());
 
             return dtoQuizez;
         }
@@ -140,7 +140,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         public Topic GetQuestionTopic(int id)
         {
             var topic = UnitOfWork.TopicRepository.GetTopicByQuestion(id);
-            var dtoTopic = DTOMapper.Mapper.Map<Data.Domain.Topic, Topic>(topic);
+            var dtoTopic = SMapper.Map(topic);
 
             return dtoTopic;
         }
@@ -160,7 +160,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
 
                 if (!IsQuestionUsed(questionId) || !IsQuestionUsedInSubmittedQuiz(questionId))
                 {
-                    var dtoAnswers = DTOMapper.Mapper.Map<ICollection<Answer>, ICollection<Data.Domain.Answer>>(answers);
+                    var dtoAnswers = SMapper.Map(answers);
 
                     var result = UnitOfWork.QuestionRepository.ChangeCorrectAnswers(questionId, dtoAnswers);
                     UnitOfWork.SaveChanges();
@@ -190,7 +190,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             {
                 if (IsQuestionUsed(question.ID) == false)
                 {
-                    var dtoQuestion = DTOMapper.Mapper.Map<Question, Data.Domain.Question>(question);
+                    var dtoQuestion = SMapper.Map(question);
                     var result = UnitOfWork.QuestionRepository.EditQuestion(dtoQuestion);
                     UnitOfWork.SaveChanges();
 
@@ -226,7 +226,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
 
                 if (!IsQuestionUsed(id) || !IsQuestionUsedInSubmittedQuiz(id))
                 {
-                    var dtoQuestion = DTOMapper.Mapper.Map<Question, Data.Domain.Question>(ques);
+                    var dtoQuestion = SMapper.Map(ques);
                     var result = UnitOfWork.QuestionRepository.Remove(dtoQuestion);
                     UnitOfWork.SaveChanges();
 

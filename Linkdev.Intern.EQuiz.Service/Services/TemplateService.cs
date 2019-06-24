@@ -1,4 +1,4 @@
-﻿using Linkdev.Intern.EQuiz.Mappers;
+﻿using Linkdev.Intern.EQuiz.Shared;
 using Linkdev.Intern.EQuiz.Data.Repository.UnitOfWork;
 using Linkdev.Intern.EQuiz.Service.Interfaces;
 using System;
@@ -37,7 +37,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
                 };
                 UnitOfWork.TemplateRepository.Add(dtoTemplate);
                 UnitOfWork.SaveChanges();
-                var template = DTOMapper.Mapper.Map<Data.Domain.Template, Template>(dtoTemplate);
+                var template = SMapper.Map(dtoTemplate);
 
                 return template;
             }
@@ -176,7 +176,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
                     }
                 }
 
-                var dtoQuestions_Templates = DTOMapper.Mapper.Map<ICollection<Questions_Templates>, ICollection<Data.Domain.Questions_Templates>>(questions_Templates);
+                var dtoQuestions_Templates = SMapper.Map(questions_Templates);
                 dtoTemplate.Questions_Templates = dtoQuestions_Templates;
 
                 return true;
@@ -187,7 +187,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
 
         private bool? ChangeEmployeeTemplateStatus(EmployeeTemplateStatus newStatus, int templateID, int employeeID)
         {
-            var dtoStatus = DTOMapper.Mapper.Map<EmployeeTemplateStatus, Data.Domain.EmployeeTemplateStatus>(newStatus);
+            var dtoStatus = SMapper.Map(newStatus);
             return UnitOfWork.EmployeeTemplateRepository.ChangeEmployeeTemplateStatus(dtoStatus, templateID, employeeID);
         }
 
@@ -195,7 +195,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         {
             var status = UnitOfWork.EmployeeTemplateRepository.CheckTemplateStatusForEmployee(templateID, employeeID);
 
-            return DTOMapper.Mapper.Map<Data.Domain.EmployeeTemplateStatus, EmployeeTemplateStatus>(status);
+            return SMapper.Map(status);
         }
 
         public bool? EmployeeTakeTemplate(int employeeID, int quizID, int templateID)
@@ -207,7 +207,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             if (dtoEmployee != null && dtoQuiz != null && dtoTemplate != null)
             {
                 var dtoStatus = UnitOfWork.EmployeeTemplateRepository.CheckTemplateStatusForEmployee(templateID, employeeID);
-                var status = DTOMapper.Mapper.Map<Data.Domain.EmployeeTemplateStatus, EmployeeTemplateStatus>(dtoStatus);
+                var status = SMapper.Map(dtoStatus);
 
                 if (status == EmployeeTemplateStatus.Assigned)
                 {

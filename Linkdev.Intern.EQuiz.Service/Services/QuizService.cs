@@ -1,4 +1,4 @@
-﻿using Linkdev.Intern.EQuiz.Mappers;
+﻿using Linkdev.Intern.EQuiz.Shared;
 using Linkdev.Intern.EQuiz.Data.Repository.UnitOfWork;
 using Linkdev.Intern.EQuiz.Service.Interfaces;
 using System;
@@ -25,13 +25,13 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         public IEnumerable<Quiz> GetQuizesByQuestionID(int qid)
         {
             var dtoQuizes = UnitOfWork.QuizRepository.GetQuizesByQuestion(qid);
-            return DTOMapper.Mapper.Map<IEnumerable<Data.Domain.Quize>, IEnumerable<Quiz>>(dtoQuizes);
+            return SMapper.Map(dtoQuizes.ToList());
         }
 
         public IEnumerable<Answer> GetQuizAnswers(int id)
         {
             var dtoAnswers = UnitOfWork.QuizRepository.GetQuizAnswers(id);
-            return DTOMapper.Mapper.Map<IEnumerable<Data.Domain.Answer>, IEnumerable<Answer>>(dtoAnswers);
+            return SMapper.Map(dtoAnswers.ToList());
         }
 
         public bool ExtendExpirationDate(int id, DateTime expirationDate)
@@ -111,14 +111,14 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         public Quiz GetQuizByID(int id)
         {
             var dtoQuiz = UnitOfWork.QuizRepository.GetByID(id);
-            return DTOMapper.Mapper.Map<Data.Domain.Quize, Quiz>(dtoQuiz);
+            return SMapper.Map(dtoQuiz);
         }
 
         public bool? CreateQuiz(Quiz quiz)
         {
             if (quiz != null)
             {
-                var dtoQuiz = DTOMapper.Mapper.Map<Quiz, Data.Domain.Quize>(quiz);
+                var dtoQuiz = SMapper.Map(quiz);
                 UnitOfWork.QuizRepository.Add(dtoQuiz);
                 UnitOfWork.SaveChanges();
                 return true;
@@ -146,7 +146,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
                     }
                 }
 
-                var dtoQuestionQuizList = DTOMapper.Mapper.Map<ICollection<Questions_Quizes>, ICollection<Data.Domain.Questions_Quizes>>(Questions_Quizes);
+                var dtoQuestionQuizList = SMapper.Map(Questions_Quizes);
                 dtoQuiz.Questions_Quizes = dtoQuestionQuizList;
                 UnitOfWork.SaveChanges();
 
