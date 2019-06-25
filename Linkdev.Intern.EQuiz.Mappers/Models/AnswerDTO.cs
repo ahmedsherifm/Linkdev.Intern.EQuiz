@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Linkdev.Intern.EQuiz.Shared
 {
-    public class Answer
+    public class AnswerDTO
     {
         public int ID { get; set; }
 
@@ -14,8 +14,8 @@ namespace Linkdev.Intern.EQuiz.Shared
 
         public bool IsDeleted { get; set; }
 
-        public virtual ICollection<Employees_Questions_Templates> Employees_Questions_Templates { get; set; }
+        public virtual ICollection<Employees_Questions_TemplatesDTO> Employees_Questions_Templates { get; set; }
 
-        public virtual Question Question { get; set; }
+        public virtual QuestionDTO Question { get; set; }
     }
 }

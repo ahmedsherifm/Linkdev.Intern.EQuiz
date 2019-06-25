@@ -10,41 +10,41 @@ namespace Linkdev.Intern.EQuiz.Service.Interfaces
 {
     public interface IQuestionService
     {
-        bool? Add(Question question);
+        bool? Add(QuestionDTO question);
 
-        IEnumerable<Question> GetAllQuestions();
+        IEnumerable<QuestionDTO> GetAllQuestions();
 
-        Question GetQuestionById(int id);
+        QuestionDTO GetQuestionById(int id);
 
         //IEnumerable<Question> FindQuestions(Expression<Func<Question, bool>> predicate);
 
-        IEnumerable<Question> GetQuestionsByCreationDate(int pageIndex, int pageSize = 10);
+        IEnumerable<QuestionDTO> GetQuestionsByCreationDate(int pageIndex, int pageSize = 10);
 
-        IEnumerable<Question> GetQuestionsByName(bool ascending, int pageIndex, int pageSize = 10);
+        IEnumerable<QuestionDTO> GetQuestionsByName(bool ascending, int pageIndex, int pageSize = 10);
 
-        IEnumerable<Question> FilterQuestionsByText(string text, int pageIndex, int pageSize = 10);
+        IEnumerable<QuestionDTO> FilterQuestionsByText(string text, int pageIndex, int pageSize = 10);
 
-        IEnumerable<Question> GetQuestionsByTopic(Topic topic, int pageIndex, int pageSize = 10);
+        IEnumerable<QuestionDTO> GetQuestionsByTopic(TopicDTO topic, int pageIndex, int pageSize = 10);
 
-        IEnumerable<Question> GetQuestionsByTopicName(string topicName, int pageIndex, int pageSize = 10);
+        IEnumerable<QuestionDTO> GetQuestionsByTopicName(string topicName, int pageIndex, int pageSize = 10);
 
         string GetQuestionHint(int id);
 
-        IEnumerable<Answer> GetQuestionAnswers(int id);
+        IEnumerable<AnswerDTO> GetQuestionAnswers(int id);
 
-        IEnumerable<Answer> GetCorrectQuestionAnswers(int id);
+        IEnumerable<AnswerDTO> GetCorrectQuestionAnswers(int id);
 
-        IEnumerable<Quiz> GetQuestionQuizez(int id);
+        IEnumerable<QuizDTO> GetQuestionQuizez(int id);
 
-        Topic GetQuestionTopic(int id);
+        TopicDTO GetQuestionTopic(int id);
 
         bool IsQuestionActive(int id);
 
         bool IsQuestionUsed(int id);
 
-        bool EditQuestion(Question question);
+        bool EditQuestion(QuestionDTO question);
 
-        bool ChangeCorrectAnswers(int questionId, ICollection<Answer> answers);
+        bool ChangeCorrectAnswers(int questionId, ICollection<AnswerDTO> answers);
 
         bool Remove(int id);
     }

@@ -22,7 +22,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             UnitOfWork = new UnitOfWork(new Data.EntityFrameWork.EQuizContext());
         }
 
-        private Template CreateTemplate(int quizId, int employeeId)
+        private TemplateDTO CreateTemplate(int quizId, int employeeId)
         {
             var dtoQuiz = UnitOfWork.QuizRepository.GetByID(quizId);
             var dtoEmployee = UnitOfWork.EmployeeRepository.GetByID(employeeId);
@@ -156,7 +156,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             var dtoQuiz = UnitOfWork.QuizRepository.GetByID(quizId);
             if (dtoTemplate != null && dtoQuiz != null)
             {
-                ICollection<Questions_Templates> questions_Templates = new List<Questions_Templates>();
+                ICollection<Questions_TemplatesDTO> questions_Templates = new List<Questions_TemplatesDTO>();
                 var random = new Random();
                 var questionsList = UnitOfWork.QuestionQuizRepository.GetQuizQuestions(dtoQuiz).ToList();
                 var questionsNumber = dtoQuiz.QuestionsNumber;
@@ -168,7 +168,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
                     if (!questions_Templates.Any(q => q.QuestionID == question.ID))
                     {
                         question.IsActive = true;
-                        questions_Templates.Add(new Questions_Templates()
+                        questions_Templates.Add(new Questions_TemplatesDTO()
                         {
                             QuestionID = question.ID,
                             TemplateID = dtoTemplate.ID,
@@ -185,13 +185,13 @@ namespace Linkdev.Intern.EQuiz.Service.Services
                 return false;
         }
 
-        private bool? ChangeEmployeeTemplateStatus(EmployeeTemplateStatus newStatus, int templateID, int employeeID)
+        private bool? ChangeEmployeeTemplateStatus(EmployeeTemplateStatusDTO newStatus, int templateID, int employeeID)
         {
             var dtoStatus = SMapper.Map(newStatus);
             return UnitOfWork.EmployeeTemplateRepository.ChangeEmployeeTemplateStatus(dtoStatus, templateID, employeeID);
         }
 
-        public EmployeeTemplateStatus CheckEmployeeTemplateStatus(int templateID, int employeeID)
+        public EmployeeTemplateStatusDTO CheckEmployeeTemplateStatus(int templateID, int employeeID)
         {
             var status = UnitOfWork.EmployeeTemplateRepository.CheckTemplateStatusForEmployee(templateID, employeeID);
 
@@ -209,9 +209,9 @@ namespace Linkdev.Intern.EQuiz.Service.Services
                 var dtoStatus = UnitOfWork.EmployeeTemplateRepository.CheckTemplateStatusForEmployee(templateID, employeeID);
                 var status = SMapper.Map(dtoStatus);
 
-                if (status == EmployeeTemplateStatus.Assigned)
+                if (status == EmployeeTemplateStatusDTO.Assigned)
                 {
-                    ChangeEmployeeTemplateStatus(EmployeeTemplateStatus.InProgress, employeeID, templateID);
+                    ChangeEmployeeTemplateStatus(EmployeeTemplateStatusDTO.InProgress, employeeID, templateID);
                     AddQuestionsToQuestionsTemplates(templateID, quizID);
                     UnitOfWork.SaveChanges();
 

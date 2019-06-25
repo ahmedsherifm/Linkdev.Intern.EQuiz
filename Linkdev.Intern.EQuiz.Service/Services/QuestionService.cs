@@ -23,7 +23,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             UnitOfWork = new UnitOfWork(new Data.EntityFrameWork.EQuizContext());
         }
 
-        public bool? Add(Question question)
+        public bool? Add(QuestionDTO question)
         {
             if (question != null)
             {
@@ -37,7 +37,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
                 return false;
         }
 
-        public IEnumerable<Question> GetAllQuestions()
+        public IEnumerable<QuestionDTO> GetAllQuestions()
         {
             var questions = UnitOfWork.QuestionRepository.GetAll();
             var dtoQuestions = SMapper.Map(questions.ToList());
@@ -45,7 +45,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             return dtoQuestions;
         }
 
-        public Question GetQuestionById(int id)
+        public QuestionDTO GetQuestionById(int id)
         {
             var question = UnitOfWork.QuestionRepository.GetByID(id);
             var dtoQuestion = SMapper.Map(question);
@@ -61,7 +61,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         //    return dtoQuestions;
         //}
 
-        public IEnumerable<Question> GetQuestionsByCreationDate(int pageIndex, int pageSize = 10)
+        public IEnumerable<QuestionDTO> GetQuestionsByCreationDate(int pageIndex, int pageSize = 10)
         {
             var questions = UnitOfWork.QuestionRepository.GetQuestionsByCreationDate(pageIndex, pageSize);
             var dtoQuestions = SMapper.Map(questions.ToList());
@@ -69,7 +69,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             return dtoQuestions;
         }
 
-        public IEnumerable<Question> GetQuestionsByName(bool ascending, int pageIndex, int pageSize = 10)
+        public IEnumerable<QuestionDTO> GetQuestionsByName(bool ascending, int pageIndex, int pageSize = 10)
         {
             var questions = UnitOfWork.QuestionRepository.GetQuestionsByName(ascending, pageIndex, pageSize);
             var dtoQuestions = SMapper.Map(questions.ToList());
@@ -77,7 +77,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             return dtoQuestions;
         }
 
-        public IEnumerable<Question> FilterQuestionsByText(string text,int pageIndex, int pageSize = 10)
+        public IEnumerable<QuestionDTO> FilterQuestionsByText(string text,int pageIndex, int pageSize = 10)
         {
             var questions = UnitOfWork.QuestionRepository.FilterQuestionsByText(text, pageIndex, pageSize);
             var dtoQuestions = SMapper.Map(questions.ToList());
@@ -85,7 +85,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             return dtoQuestions;
         }
 
-        public IEnumerable<Question> GetQuestionsByTopic(Topic topic,int pageIndex, int pageSize = 10)
+        public IEnumerable<QuestionDTO> GetQuestionsByTopic(TopicDTO topic,int pageIndex, int pageSize = 10)
         {
             var modelTopic = SMapper.Map(topic);
             var questions = UnitOfWork.QuestionRepository.GetQuestionsByTopic(modelTopic, pageIndex, pageSize);
@@ -94,7 +94,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             return dtoQuestions;
         }
 
-        public IEnumerable<Question> GetQuestionsByTopicName(string topicName, int pageIndex, int pageSize = 10)
+        public IEnumerable<QuestionDTO> GetQuestionsByTopicName(string topicName, int pageIndex, int pageSize = 10)
         {
             var questions = UnitOfWork.QuestionRepository.GetQuestionsByTopicName(topicName, pageIndex, pageSize);
             var dtoQuestions = SMapper.Map(questions.ToList());
@@ -109,7 +109,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             return hint;
         }
 
-        public IEnumerable<Answer> GetQuestionAnswers(int id)
+        public IEnumerable<AnswerDTO> GetQuestionAnswers(int id)
         {
             var answers = UnitOfWork.AnswerRepository.GetAnswersByQuestion(id);
             var dtoAnswers = SMapper.Map(answers.ToList());
@@ -117,7 +117,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             return dtoAnswers;
         }
 
-        public IEnumerable<Answer> GetCorrectQuestionAnswers(int id)
+        public IEnumerable<AnswerDTO> GetCorrectQuestionAnswers(int id)
         {
             var answers = UnitOfWork.AnswerRepository.GetCorrectAnswersByQuestion(id);
             var dtoAnswers = SMapper.Map(answers.ToList());
@@ -129,7 +129,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
    
         
 
-        public IEnumerable<Quiz> GetQuestionQuizez(int id)
+        public IEnumerable<QuizDTO> GetQuestionQuizez(int id)
         {
             var quizez = UnitOfWork.QuizRepository.GetQuizesByQuestion(id);
             var dtoQuizez = SMapper.Map(quizez.ToList());
@@ -137,7 +137,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             return dtoQuizez;
         }
 
-        public Topic GetQuestionTopic(int id)
+        public TopicDTO GetQuestionTopic(int id)
         {
             var topic = UnitOfWork.TopicRepository.GetTopicByQuestion(id);
             var dtoTopic = SMapper.Map(topic);
@@ -146,7 +146,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         }
 
 
-        public bool ChangeCorrectAnswers(int questionId, ICollection<Answer> answers)
+        public bool ChangeCorrectAnswers(int questionId, ICollection<AnswerDTO> answers)
         {
             if (answers != null)
             {
@@ -184,7 +184,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
                 return false;
         }
 
-        public bool EditQuestion(Question question)
+        public bool EditQuestion(QuestionDTO question)
         {
             if (question != null)
             {

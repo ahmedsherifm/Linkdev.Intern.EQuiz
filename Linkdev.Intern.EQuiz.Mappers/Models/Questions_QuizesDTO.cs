@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Linkdev.Intern.EQuiz.Shared
 {
-    public class Questions_Quizes
+    public class Questions_QuizesDTO
     {
         public int ID { get; set; }
 
@@ -13,8 +13,8 @@ namespace Linkdev.Intern.EQuiz.Shared
 
         public int QuizID { get; set; }
 
-        public virtual Question Question { get; set; }
+        public virtual QuestionDTO Question { get; set; }
 
-        public virtual Quiz Quiz { get; set; }
+        public virtual QuizDTO Quiz { get; set; }
     }
 }

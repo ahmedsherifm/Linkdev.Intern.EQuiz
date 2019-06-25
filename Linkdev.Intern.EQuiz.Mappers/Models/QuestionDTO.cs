@@ -3,7 +3,7 @@ namespace Linkdev.Intern.EQuiz.Shared
     using System;
     using System.Collections.Generic;
 
-    public class Question
+    public class QuestionDTO
     {
         public int ID { get; set; }
 
@@ -21,14 +21,14 @@ namespace Linkdev.Intern.EQuiz.Shared
 
         public bool IsUsed { get; set; }
 
-        public virtual ICollection<Answer> Answers { get; set; }
+        public virtual ICollection<AnswerDTO> Answers { get; set; }
 
-        public virtual ICollection<Employees_Questions_Templates> Employees_Questions_Templates { get; set; }
+        public virtual ICollection<Employees_Questions_TemplatesDTO> Employees_Questions_Templates { get; set; }
 
-        public virtual ICollection<Questions_Quizes> Questions_Quizes { get; set; }
+        public virtual ICollection<Questions_QuizesDTO> Questions_Quizes { get; set; }
 
-        public virtual ICollection<Questions_Templates> Questions_Templates { get; set; }
+        public virtual ICollection<Questions_TemplatesDTO> Questions_Templates { get; set; }
 
-        public virtual Topic Topic { get; set; }
+        public virtual TopicDTO Topic { get; set; }
     }
 }

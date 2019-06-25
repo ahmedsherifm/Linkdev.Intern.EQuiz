@@ -10,12 +10,12 @@ namespace Linkdev.Intern.EQuiz.Service.Interfaces
     public interface IQuizService
     {
         //bool? CreateQuizWithQuestions(Quiz quiz, IEnumerable<int> questionsIds);
-        IEnumerable<Quiz> GetQuizesByQuestionID(int qid);
+        IEnumerable<QuizDTO> GetQuizesByQuestionID(int qid);
 
-        Quiz GetQuizByID(int id);
+        QuizDTO GetQuizByID(int id);
 
         // quiz answer ? wlla template answer ?
-        IEnumerable<Answer> GetQuizAnswers(int id);
+        IEnumerable<AnswerDTO> GetQuizAnswers(int id);
 
         bool ExtendExpirationDate(int id, DateTime expirationDate);
 
@@ -35,7 +35,7 @@ namespace Linkdev.Intern.EQuiz.Service.Interfaces
 
         bool RemoveSelectedDeactivatedQuizesList(ICollection<int> quizesIds);
 
-        bool? CreateQuiz(Quiz quiz);
+        bool? CreateQuiz(QuizDTO quiz);
 
         bool? AddQuestionsToQuiz(int quizId, IEnumerable<int> questionsIds);
 

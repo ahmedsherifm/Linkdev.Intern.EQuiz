@@ -10,7 +10,7 @@ namespace Linkdev.Intern.EQuiz.Shared
     {
         #region Topic
 
-        public static Data.Domain.Topic Map(Topic from)
+        public static Data.Domain.Topic Map(TopicDTO from)
         {
             try
             { 
@@ -34,14 +34,14 @@ namespace Linkdev.Intern.EQuiz.Shared
             }
         }
 
-        public static Topic Map(Data.Domain.Topic from)
+        public static TopicDTO Map(Data.Domain.Topic from)
         {
             try
             {
                 if (from == null)
                     return null;
 
-                var to = new Topic
+                var to = new TopicDTO
                 {
                     ID = from.ID,
                     CreationDate = from.CreationDate,
@@ -62,7 +62,7 @@ namespace Linkdev.Intern.EQuiz.Shared
 
         #region Employee
 
-        public static Data.Domain.Employee Map(Employee from)
+        public static Data.Domain.Employee Map(EmployeeDTO from)
         {
             try
             {
@@ -87,14 +87,14 @@ namespace Linkdev.Intern.EQuiz.Shared
             }
         }
 
-        public static Employee Map(Data.Domain.Employee from)
+        public static EmployeeDTO Map(Data.Domain.Employee from)
         {
             try
             {
                 if (from == null)
                     return null;
 
-                var to = new Employee
+                var to = new EmployeeDTO
                 {
                     ID = from.ID,
                     Name = from.Name,
@@ -116,7 +116,7 @@ namespace Linkdev.Intern.EQuiz.Shared
 
         #region EmployeeQuestionTemplate
 
-        public static Data.Domain.Employees_Questions_Templates Map(Employees_Questions_Templates from)
+        public static Data.Domain.Employees_Questions_Templates Map(Employees_Questions_TemplatesDTO from)
         {
             try
             {
@@ -130,10 +130,10 @@ namespace Linkdev.Intern.EQuiz.Shared
                     EmployeeID = from.EmployeeID,
                     AnswerID = from.AnswerID,
                     TemplateID = from.TemplateID,
-                    Question = Map(from.Question),
-                    Employee = Map(from.Employee),
-                    Answer = Map(from.Answer),
-                    Template = Map(from.Template)
+                    //Question = Map(from.Question),
+                    //Employee = Map(from.Employee),
+                    //Answer = Map(from.Answer),
+                    //Template = Map(from.Template)
                 };
 
                 return to;
@@ -144,24 +144,24 @@ namespace Linkdev.Intern.EQuiz.Shared
             }
         }
 
-        public static Employees_Questions_Templates Map(Data.Domain.Employees_Questions_Templates from)
+        public static Employees_Questions_TemplatesDTO Map(Data.Domain.Employees_Questions_Templates from)
         {
             try
             {
                 if (from == null)
                     return null;
 
-                var to = new Employees_Questions_Templates
+                var to = new Employees_Questions_TemplatesDTO
                 {
                     ID = from.ID,
                     QuestionID = from.QuestionID,
                     EmployeeID = from.EmployeeID,
                     AnswerID = from.AnswerID,
                     TemplateID = from.TemplateID,
-                    Question = Map(from.Question),
-                    Employee = Map(from.Employee),
-                    Answer = Map(from.Answer),
-                    Template = Map(from.Template)
+                    //Question = Map(from.Question),
+                    //Employee = Map(from.Employee),
+                    //Answer = Map(from.Answer),
+                    //Template = Map(from.Template)
                 };
 
                 return to;
@@ -176,7 +176,7 @@ namespace Linkdev.Intern.EQuiz.Shared
 
         #region EmployeeTemplate
 
-        public static Data.Domain.Employees_Templates Map(Employees_Templates from)
+        public static Data.Domain.Employees_Templates Map(Employees_TemplatesDTO from)
         {
             try
             {
@@ -191,8 +191,8 @@ namespace Linkdev.Intern.EQuiz.Shared
                     Score = from.Score,
                     TimeTaken = from.TimeTaken,
                     TrialNo = from.TrialNo,
-                    Employee = Map(from.Employee),
-                    Template = Map(from.Template),
+                    //Employee = Map(from.Employee),
+                    //Template = Map(from.Template),
                     Status = Map(from.Status)
                 };
 
@@ -204,14 +204,14 @@ namespace Linkdev.Intern.EQuiz.Shared
             }
         }
 
-        public static Employees_Templates Map(Data.Domain.Employees_Templates from)
+        public static Employees_TemplatesDTO Map(Data.Domain.Employees_Templates from)
         {
             try
             {
                 if (from == null)
                     return null;
 
-                var to = new Employees_Templates
+                var to = new Employees_TemplatesDTO
                 {
                     ID = from.ID,
                     EmployeeID = from.EmployeeID,
@@ -219,8 +219,8 @@ namespace Linkdev.Intern.EQuiz.Shared
                     Score = from.Score,
                     TimeTaken = from.TimeTaken,
                     TrialNo = from.TrialNo,
-                    Employee = Map(from.Employee),
-                    Template = Map(from.Template),
+                    //Employee = Map(from.Employee),
+                    //Template = Map(from.Template),
                     Status = Map(from.Status)
                 };
 
@@ -236,31 +236,31 @@ namespace Linkdev.Intern.EQuiz.Shared
 
         #region EmployeeTemplateStatus
 
-        public static Data.Domain.EmployeeTemplateStatus Map(EmployeeTemplateStatus from)
+        public static Data.Domain.EmployeeTemplateStatus Map(EmployeeTemplateStatusDTO from)
         {
             Data.Domain.EmployeeTemplateStatus to = new Data.Domain.EmployeeTemplateStatus();
 
             switch (from)
             {
-                case EmployeeTemplateStatus.Assigned:
+                case EmployeeTemplateStatusDTO.Assigned:
                     to = Data.Domain.EmployeeTemplateStatus.Assigned;
                     break;
-                case EmployeeTemplateStatus.Failed:
+                case EmployeeTemplateStatusDTO.Failed:
                     to = Data.Domain.EmployeeTemplateStatus.Failed;
                     break;
-                case EmployeeTemplateStatus.InProgress:
+                case EmployeeTemplateStatusDTO.InProgress:
                     to = Data.Domain.EmployeeTemplateStatus.InProgress;
                     break;
-                case EmployeeTemplateStatus.Missed:
+                case EmployeeTemplateStatusDTO.Missed:
                     to = Data.Domain.EmployeeTemplateStatus.Missed;
                     break;
-                case EmployeeTemplateStatus.Released:
+                case EmployeeTemplateStatusDTO.Released:
                     to = Data.Domain.EmployeeTemplateStatus.Released;
                     break;
-                case EmployeeTemplateStatus.Submitted:
+                case EmployeeTemplateStatusDTO.Submitted:
                     to = Data.Domain.EmployeeTemplateStatus.Submitted;
                     break;
-                case EmployeeTemplateStatus.Successed:
+                case EmployeeTemplateStatusDTO.Successed:
                     to = Data.Domain.EmployeeTemplateStatus.Successed;
                     break;
             }
@@ -268,32 +268,32 @@ namespace Linkdev.Intern.EQuiz.Shared
             return to;
         }
 
-        public static EmployeeTemplateStatus Map(Data.Domain.EmployeeTemplateStatus from)
+        public static EmployeeTemplateStatusDTO Map(Data.Domain.EmployeeTemplateStatus from)
         {
-            EmployeeTemplateStatus to = new EmployeeTemplateStatus();
+            EmployeeTemplateStatusDTO to = new EmployeeTemplateStatusDTO();
 
             switch (from)
             {
                 case Data.Domain.EmployeeTemplateStatus.Assigned:
-                    to = EmployeeTemplateStatus.Assigned;
+                    to = EmployeeTemplateStatusDTO.Assigned;
                     break;
                 case Data.Domain.EmployeeTemplateStatus.Failed:
-                    to = EmployeeTemplateStatus.Failed;
+                    to = EmployeeTemplateStatusDTO.Failed;
                     break;
                 case Data.Domain.EmployeeTemplateStatus.InProgress:
-                    to = EmployeeTemplateStatus.InProgress;
+                    to = EmployeeTemplateStatusDTO.InProgress;
                     break;
                 case Data.Domain.EmployeeTemplateStatus.Missed:
-                    to = EmployeeTemplateStatus.Missed;
+                    to = EmployeeTemplateStatusDTO.Missed;
                     break;
                 case Data.Domain.EmployeeTemplateStatus.Released:
-                    to = EmployeeTemplateStatus.Released;
+                    to = EmployeeTemplateStatusDTO.Released;
                     break;
                 case Data.Domain.EmployeeTemplateStatus.Submitted:
-                    to = EmployeeTemplateStatus.Submitted;
+                    to = EmployeeTemplateStatusDTO.Submitted;
                     break;
                 case Data.Domain.EmployeeTemplateStatus.Successed:
-                    to = EmployeeTemplateStatus.Successed;
+                    to = EmployeeTemplateStatusDTO.Successed;
                     break;
             }
 
@@ -304,7 +304,7 @@ namespace Linkdev.Intern.EQuiz.Shared
 
         #region Question
 
-        public static Data.Domain.Question Map(Question from)
+        public static Data.Domain.Question Map(QuestionDTO from)
         {
             try
             {
@@ -321,7 +321,7 @@ namespace Linkdev.Intern.EQuiz.Shared
                     IsUsed = from.IsUsed,
                     Text = from.Text,
                     TopicID = from.TopicID,
-                    Topic = Map(from.Topic),
+                    //Topic = Map(from.Topic),
                     Answers = Map(from.Answers),
                     Employees_Questions_Templates = Map(from.Employees_Questions_Templates),
                     Questions_Quizes = Map(from.Questions_Quizes),
@@ -336,14 +336,14 @@ namespace Linkdev.Intern.EQuiz.Shared
             }
         }
 
-        public static Question Map(Data.Domain.Question from)
+        public static QuestionDTO Map(Data.Domain.Question from)
         {
             try
             {
                 if (from == null)
                     return null;
 
-                var to = new Question
+                var to = new QuestionDTO
                 {
                     ID = from.ID,
                     CreationDate = from.CreationDate,
@@ -353,7 +353,7 @@ namespace Linkdev.Intern.EQuiz.Shared
                     IsUsed = from.IsUsed,
                     Text = from.Text,
                     TopicID = from.TopicID,
-                    Topic = Map(from.Topic),
+                    //Topic = Map(from.Topic),
                     Answers = Map(from.Answers),
                     Employees_Questions_Templates = Map(from.Employees_Questions_Templates),
                     Questions_Quizes = Map(from.Questions_Quizes),
@@ -371,20 +371,20 @@ namespace Linkdev.Intern.EQuiz.Shared
         #endregion
 
         #region QuestionQuizes
-        public static Questions_Quizes Map(Data.Domain.Questions_Quizes from)
+        public static Questions_QuizesDTO Map(Data.Domain.Questions_Quizes from)
         {
             try
             {
                 if (from != null)
                     return null;
 
-                var to = new Questions_Quizes
+                var to = new Questions_QuizesDTO
                 {
                     ID = from.ID,
                     QuestionID = from.QuestionID,
                     QuizID = from.QuizID,
-                    Question = Map(from.Question),
-                    Quiz = Map(from.Quiz)
+                    //Question = Map(from.Question),
+                    //Quiz = Map(from.Quiz)
                 };
 
                 return to;
@@ -395,7 +395,7 @@ namespace Linkdev.Intern.EQuiz.Shared
             }
         }
 
-        public static Data.Domain.Questions_Quizes Map(Questions_Quizes from)
+        public static Data.Domain.Questions_Quizes Map(Questions_QuizesDTO from)
         {
             try
             {
@@ -407,8 +407,8 @@ namespace Linkdev.Intern.EQuiz.Shared
                     ID = from.ID,
                     QuestionID = from.QuestionID,
                     QuizID = from.QuizID,
-                    Question = Map(from.Question),
-                    Quiz = Map(from.Quiz)
+                    //Question = Map(from.Question),
+                    //Quiz = Map(from.Quiz)
                 };
 
                 return to;
@@ -424,20 +424,20 @@ namespace Linkdev.Intern.EQuiz.Shared
 
         #region QuestionTemplate
 
-        public static Questions_Templates Map(Data.Domain.Questions_Templates from)
+        public static Questions_TemplatesDTO Map(Data.Domain.Questions_Templates from)
         {
             try
             {
                 if (from != null)
                     return null;
 
-                var to = new Questions_Templates
+                var to = new Questions_TemplatesDTO
                 {
                     ID = from.ID,
                     QuestionID = from.QuestionID,
                     TemplateID = from.TemplateID,
-                    Question = Map(from.Question),
-                    Template = Map(from.Template)
+                    //Question = Map(from.Question),
+                    //Template = Map(from.Template)
                 };
 
                 return to;
@@ -448,7 +448,7 @@ namespace Linkdev.Intern.EQuiz.Shared
             }
         }
 
-        public static Data.Domain.Questions_Templates Map(Questions_Templates from)
+        public static Data.Domain.Questions_Templates Map(Questions_TemplatesDTO from)
         {
             try
             {
@@ -460,8 +460,8 @@ namespace Linkdev.Intern.EQuiz.Shared
                     ID = from.ID,
                     QuestionID = from.QuestionID,
                     TemplateID = from.TemplateID,
-                    Question = Map(from.Question),
-                    Template = Map(from.Template)
+                    //Question = Map(from.Question),
+                    //Template = Map(from.Template)
                 };
 
                 return to;
@@ -475,14 +475,14 @@ namespace Linkdev.Intern.EQuiz.Shared
 
         #region Quiz
 
-        public static Quiz Map(Data.Domain.Quize from)
+        public static QuizDTO Map(Data.Domain.Quize from)
         {
             try
             {
                 if (from != null)
                     return null;
 
-                var to = new Quiz
+                var to = new QuizDTO
                 {
                     ID = from.ID,
                     ActivationDate = from.ActivationDate,
@@ -510,7 +510,7 @@ namespace Linkdev.Intern.EQuiz.Shared
             }
         }
 
-        public static Data.Domain.Quize Map(Quiz from)
+        public static Data.Domain.Quize Map(QuizDTO from)
         {
             try
             {
@@ -549,21 +549,21 @@ namespace Linkdev.Intern.EQuiz.Shared
 
         #region Template
 
-        public static Template Map(Data.Domain.Template from)
+        public static TemplateDTO Map(Data.Domain.Template from)
         {
             try
             {
                 if (from != null)
                     return null;
 
-                var to = new Template
+                var to = new TemplateDTO
                 {
                      ID = from.ID,
                      CreationDate = from.CreationDate,
                      EmployeeID = from.EmployeeID,
                      QuizID = from.QuizID,
-                     Employee = Map(from.Employee),
-                     Quiz = Map(from.Quiz),
+                     //Employee = Map(from.Employee),
+                     //Quiz = Map(from.Quiz),
                      Employees_Questions_Templates = Map(from.Employees_Questions_Templates),
                      Employees_Templates = Map(from.Employees_Templates),
                      Questions_Templates = Map(from.Questions_Templates)
@@ -577,7 +577,7 @@ namespace Linkdev.Intern.EQuiz.Shared
             }
         }
 
-        public static Data.Domain.Template Map(Template from)
+        public static Data.Domain.Template Map(TemplateDTO from)
         {
             try
             {
@@ -590,8 +590,8 @@ namespace Linkdev.Intern.EQuiz.Shared
                     CreationDate = from.CreationDate,
                     EmployeeID = from.EmployeeID,
                     QuizID = from.QuizID,
-                    Employee = Map(from.Employee),
-                    Quiz = Map(from.Quiz),
+                    //Employee = Map(from.Employee),
+                    //Quiz = Map(from.Quiz),
                     Employees_Questions_Templates = Map(from.Employees_Questions_Templates),
                     Employees_Templates = Map(from.Employees_Templates),
                     Questions_Templates = Map(from.Questions_Templates)
@@ -608,21 +608,21 @@ namespace Linkdev.Intern.EQuiz.Shared
 
         #region Answer
 
-        public static Answer Map(Data.Domain.Answer from)
+        public static AnswerDTO Map(Data.Domain.Answer from)
         {
             try
             {
                 if (from != null)
                     return null;
 
-                var to = new Answer
+                var to = new AnswerDTO
                 {
                     ID = from.ID,
                     IsCorrect = from.IsCorrect,
                     IsDeleted = from.IsDeleted,
                     Text = from.Text,
                     QuestionID = from.QuestionID,
-                    Question = Map(from.Question),
+                    //Question = Map(from.Question),
                     Employees_Questions_Templates = Map(from.Employees_Questions_Templates),
                 };
 
@@ -634,7 +634,7 @@ namespace Linkdev.Intern.EQuiz.Shared
             }
         }
 
-        public static Data.Domain.Answer Map(Answer from)
+        public static Data.Domain.Answer Map(AnswerDTO from)
         {
             try
             {
@@ -648,7 +648,7 @@ namespace Linkdev.Intern.EQuiz.Shared
                     IsDeleted = from.IsDeleted,
                     Text = from.Text,
                     QuestionID = from.QuestionID,
-                    Question = Map(from.Question),
+                    //Question = Map(from.Question),
                     Employees_Questions_Templates = Map(from.Employees_Questions_Templates),
                 };
 
@@ -662,14 +662,14 @@ namespace Linkdev.Intern.EQuiz.Shared
         #endregion
 
         #region QuestionQuizes-List
-        public static ICollection<Questions_Quizes> Map(ICollection<Data.Domain.Questions_Quizes> from)
+        public static ICollection<Questions_QuizesDTO> Map(ICollection<Data.Domain.Questions_Quizes> from)
         {
             try
             {
                 if (from != null && from.Count > 0)
                     return null;
 
-                var to = new List<Questions_Quizes>();
+                var to = new List<Questions_QuizesDTO>();
 
                 foreach (var item in from)
                 {
@@ -684,7 +684,7 @@ namespace Linkdev.Intern.EQuiz.Shared
             }
         }
 
-        public static ICollection<Data.Domain.Questions_Quizes> Map(ICollection<Questions_Quizes> from)
+        public static ICollection<Data.Domain.Questions_Quizes> Map(ICollection<Questions_QuizesDTO> from)
         {
             try
             {
@@ -709,14 +709,14 @@ namespace Linkdev.Intern.EQuiz.Shared
 
         #region QuestionTemplates- List
 
-        public static ICollection<Questions_Templates> Map(ICollection<Data.Domain.Questions_Templates> from)
+        public static ICollection<Questions_TemplatesDTO> Map(ICollection<Data.Domain.Questions_Templates> from)
         {
             try
             {
                 if (from != null && from.Count > 0)
                     return null;
 
-                var to = new List<Questions_Templates>();
+                var to = new List<Questions_TemplatesDTO>();
 
                 foreach (var item in from)
                 {
@@ -731,7 +731,7 @@ namespace Linkdev.Intern.EQuiz.Shared
             }
         }
 
-        public static ICollection<Data.Domain.Questions_Templates> Map(ICollection<Questions_Templates> from)
+        public static ICollection<Data.Domain.Questions_Templates> Map(ICollection<Questions_TemplatesDTO> from)
         {
             try
             {
@@ -755,14 +755,14 @@ namespace Linkdev.Intern.EQuiz.Shared
         #endregion
 
         #region Quiz-List
-        public static ICollection<Quiz> Map(ICollection<Data.Domain.Quize> from)
+        public static ICollection<QuizDTO> Map(ICollection<Data.Domain.Quize> from)
         {
             try
             {
                 if (from != null && from.Count > 0)
                     return null;
 
-                var to = new List<Quiz>();
+                var to = new List<QuizDTO>();
 
                 foreach (var item in from)
                 {
@@ -777,7 +777,7 @@ namespace Linkdev.Intern.EQuiz.Shared
             }
         }
 
-        public static ICollection<Data.Domain.Quize> Map(ICollection<Quiz> from)
+        public static ICollection<Data.Domain.Quize> Map(ICollection<QuizDTO> from)
         {
             try
             {
@@ -801,14 +801,14 @@ namespace Linkdev.Intern.EQuiz.Shared
         #endregion
 
         #region Template-List
-        public static ICollection<Template> Map(ICollection<Data.Domain.Template> from)
+        public static ICollection<TemplateDTO> Map(ICollection<Data.Domain.Template> from)
         {
             try
             {
                 if (from != null && from.Count > 0)
                     return null;
 
-                var to = new List<Template>();
+                var to = new List<TemplateDTO>();
 
                 foreach (var item in from)
                 {
@@ -823,7 +823,7 @@ namespace Linkdev.Intern.EQuiz.Shared
             }
         }
 
-        public static ICollection<Data.Domain.Template> Map(ICollection<Template> from)
+        public static ICollection<Data.Domain.Template> Map(ICollection<TemplateDTO> from)
         {
             try
             {
@@ -848,14 +848,14 @@ namespace Linkdev.Intern.EQuiz.Shared
 
         #region Answer-List
 
-        public static ICollection<Answer> Map(ICollection<Data.Domain.Answer> from)
+        public static ICollection<AnswerDTO> Map(ICollection<Data.Domain.Answer> from)
         {
             try
             {
                 if (from != null && from.Count > 0)
                     return null;
 
-                var to = new List<Answer>();
+                var to = new List<AnswerDTO>();
 
                 foreach (var item in from)
                 {
@@ -870,7 +870,7 @@ namespace Linkdev.Intern.EQuiz.Shared
             }
         }
 
-        public static ICollection<Data.Domain.Answer> Map(ICollection<Answer> from)
+        public static ICollection<Data.Domain.Answer> Map(ICollection<AnswerDTO> from)
         {
             try
             {
@@ -895,7 +895,7 @@ namespace Linkdev.Intern.EQuiz.Shared
         
         #region TopicsList
 
-        public static ICollection<Data.Domain.Topic> Map(ICollection<Topic> from)
+        public static ICollection<Data.Domain.Topic> Map(ICollection<TopicDTO> from)
         {
             try
             {
@@ -917,14 +917,14 @@ namespace Linkdev.Intern.EQuiz.Shared
             }
         }
 
-        public static ICollection<Topic> Map(ICollection<Data.Domain.Topic> from)
+        public static ICollection<TopicDTO> Map(ICollection<Data.Domain.Topic> from)
         {
             try
             {
                 if (from == null && from.Count == 0)
                     return null;
 
-                var to = new List<Topic>();
+                var to = new List<TopicDTO>();
 
                 foreach (var item in from)
                 {
@@ -943,7 +943,7 @@ namespace Linkdev.Intern.EQuiz.Shared
 
         #region EmployeesList
 
-        public static ICollection<Data.Domain.Employee> Map(ICollection<Employee> from)
+        public static ICollection<Data.Domain.Employee> Map(ICollection<EmployeeDTO> from)
         {
             try
             {
@@ -965,14 +965,14 @@ namespace Linkdev.Intern.EQuiz.Shared
             }
         }
 
-        public static ICollection<Employee> Map(ICollection<Data.Domain.Employee> from)
+        public static ICollection<EmployeeDTO> Map(ICollection<Data.Domain.Employee> from)
         {
             try
             {
                 if (from == null && from.Count == 0)
                     return null;
 
-                var to = new List<Employee>();
+                var to = new List<EmployeeDTO>();
 
                 foreach (var item in from)
                 {
@@ -991,7 +991,7 @@ namespace Linkdev.Intern.EQuiz.Shared
 
         #region EmployeesQuestionsTemplatesList
 
-        public static ICollection<Data.Domain.Employees_Questions_Templates> Map(ICollection<Employees_Questions_Templates> from)
+        public static ICollection<Data.Domain.Employees_Questions_Templates> Map(ICollection<Employees_Questions_TemplatesDTO> from)
         {
             try
             {
@@ -1013,14 +1013,14 @@ namespace Linkdev.Intern.EQuiz.Shared
             }
         }
 
-        public static ICollection<Employees_Questions_Templates> Map(ICollection<Data.Domain.Employees_Questions_Templates> from)
+        public static ICollection<Employees_Questions_TemplatesDTO> Map(ICollection<Data.Domain.Employees_Questions_Templates> from)
         {
             try
             {
                 if (from == null && from.Count == 0)
                     return null;
 
-                var to = new List<Employees_Questions_Templates>();
+                var to = new List<Employees_Questions_TemplatesDTO>();
 
                 foreach (var item in from)
                 {
@@ -1039,7 +1039,7 @@ namespace Linkdev.Intern.EQuiz.Shared
 
         #region EmployeesTemplatesList
 
-        public static ICollection<Data.Domain.Employees_Templates> Map(ICollection<Employees_Templates> from)
+        public static ICollection<Data.Domain.Employees_Templates> Map(ICollection<Employees_TemplatesDTO> from)
         {
             try
             {
@@ -1061,14 +1061,14 @@ namespace Linkdev.Intern.EQuiz.Shared
             }
         }
 
-        public static ICollection<Employees_Templates> Map(ICollection<Data.Domain.Employees_Templates> from)
+        public static ICollection<Employees_TemplatesDTO> Map(ICollection<Data.Domain.Employees_Templates> from)
         {
             try
             {
                 if (from == null && from.Count == 0)
                     return null;
 
-                var to = new List<Employees_Templates>();
+                var to = new List<Employees_TemplatesDTO>();
 
                 foreach (var item in from)
                 {
@@ -1087,7 +1087,7 @@ namespace Linkdev.Intern.EQuiz.Shared
 
         #region QuestionsList
 
-        public static ICollection<Data.Domain.Question> Map(ICollection<Question> from)
+        public static ICollection<Data.Domain.Question> Map(ICollection<QuestionDTO> from)
         {
             try
             {
@@ -1109,14 +1109,14 @@ namespace Linkdev.Intern.EQuiz.Shared
             }
         }
 
-        public static ICollection<Question> Map(ICollection<Data.Domain.Question> from)
+        public static ICollection<QuestionDTO> Map(ICollection<Data.Domain.Question> from)
         {
             try
             {
                 if (from == null && from.Count == 0)
                     return null;
 
-                var to = new List<Question>();
+                var to = new List<QuestionDTO>();
 
                 foreach (var item in from)
                 {

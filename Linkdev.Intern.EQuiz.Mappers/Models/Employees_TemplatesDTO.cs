@@ -2,12 +2,12 @@ using System;
 
 namespace Linkdev.Intern.EQuiz.Shared
 {
-    public enum EmployeeTemplateStatus
+    public enum EmployeeTemplateStatusDTO
     {
         Assigned, Missed, Successed, Failed, Submitted, InProgress, Released
     }
 
-    public class Employees_Templates
+    public class Employees_TemplatesDTO
     {
         public int ID { get; set; }
 
@@ -19,15 +19,15 @@ namespace Linkdev.Intern.EQuiz.Shared
 
         public int Score { get; set; }
 
-        public EmployeeTemplateStatus Status { get; set; }
+        public EmployeeTemplateStatusDTO Status { get; set; }
 
         public int? TimeTaken { get; set; }
 
         public DateTime? ExpirationDate { get; set; }
 
-        public virtual Employee Employee { get; set; }
+        public virtual EmployeeDTO Employee { get; set; }
 
-        public virtual Template Template { get; set; }
+        public virtual TemplateDTO Template { get; set; }
 
     }
 }

@@ -22,13 +22,13 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             UnitOfWork = new UnitOfWork(new Data.EntityFrameWork.EQuizContext());
         }
 
-        public IEnumerable<Quiz> GetQuizesByQuestionID(int qid)
+        public IEnumerable<QuizDTO> GetQuizesByQuestionID(int qid)
         {
             var dtoQuizes = UnitOfWork.QuizRepository.GetQuizesByQuestion(qid);
             return SMapper.Map(dtoQuizes.ToList());
         }
 
-        public IEnumerable<Answer> GetQuizAnswers(int id)
+        public IEnumerable<AnswerDTO> GetQuizAnswers(int id)
         {
             var dtoAnswers = UnitOfWork.QuizRepository.GetQuizAnswers(id);
             return SMapper.Map(dtoAnswers.ToList());
@@ -108,13 +108,13 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             return (bool)result;
         }
 
-        public Quiz GetQuizByID(int id)
+        public QuizDTO GetQuizByID(int id)
         {
             var dtoQuiz = UnitOfWork.QuizRepository.GetByID(id);
             return SMapper.Map(dtoQuiz);
         }
 
-        public bool? CreateQuiz(Quiz quiz)
+        public bool? CreateQuiz(QuizDTO quiz)
         {
             if (quiz != null)
             {
@@ -133,7 +133,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             if (questionsIds != null && dtoQuiz != null)
             {
                 //var dtoQuiz = DTOMapper.Mapper.Map<Quiz, Data.Domain.Quiz>(quiz);
-                ICollection<Questions_Quizes> Questions_Quizes = new List<Questions_Quizes>();
+                ICollection<Questions_QuizesDTO> Questions_Quizes = new List<Questions_QuizesDTO>();
 
                 foreach (var item in questionsIds)
                 {
@@ -141,7 +141,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
                     if (question != null)
                     {
                         question.IsUsed = true;
-                        var QuestionQuiz = new Questions_Quizes() { QuizID = quizId, QuestionID = item };
+                        var QuestionQuiz = new Questions_QuizesDTO() { QuizID = quizId, QuestionID = item };
                         Questions_Quizes.Add(QuestionQuiz);
                     }
                 }

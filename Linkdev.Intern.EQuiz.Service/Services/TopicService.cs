@@ -24,7 +24,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             UnitOfWork = new UnitOfWork(new Data.EntityFrameWork.EQuizContext());
         }
 
-        public bool? AddTopic(Topic entity)
+        public bool? AddTopic(TopicDTO entity)
         {
             if (entity != null)
             {
@@ -45,13 +45,13 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         //    return DTOMapper.Mapper.Map<IEnumerable<Data.Domain.Topic>, IEnumerable<Topic>>(topics);
         //}
 
-        public IEnumerable<Topic> GetAllTopics()
+        public IEnumerable<TopicDTO> GetAllTopics()
         {
             var topics = UnitOfWork.TopicRepository.GetAll();
             return SMapper.Map(topics.ToList());
         }
 
-        public Topic GetTopicByID(int id)
+        public TopicDTO GetTopicByID(int id)
         {
             var topic = UnitOfWork.TopicRepository.GetByID(id);
 
@@ -92,19 +92,19 @@ namespace Linkdev.Intern.EQuiz.Service.Services
         //    return DTOMapper.Mapper.Map<Data.Domain.Topic, Topic>(topics);
         //}
 
-        public IEnumerable<Topic> GetTopicsByCreationDate(int pageIndex, int pageSize = 10)
+        public IEnumerable<TopicDTO> GetTopicsByCreationDate(int pageIndex, int pageSize = 10)
         {
             var topics = UnitOfWork.TopicRepository.GetTopicsByCreationDate(pageIndex,pageSize);
             return SMapper.Map(topics.ToList());
         }
 
-        public IEnumerable<Topic> GetTopicsByName(bool ascending, int pageIndex, int pageSize = 10)
+        public IEnumerable<TopicDTO> GetTopicsByName(bool ascending, int pageIndex, int pageSize = 10)
         {
             var topics = UnitOfWork.TopicRepository.GetTopicsByName(ascending,pageIndex, pageSize);
             return SMapper.Map(topics.ToList());
         }
 
-        public IEnumerable<Topic> FilterTopicsByName(string name, int pageIndex, int pageSize = 10)
+        public IEnumerable<TopicDTO> FilterTopicsByName(string name, int pageIndex, int pageSize = 10)
         {
             var topics = UnitOfWork.TopicRepository.FilterTopicsByName(name,pageIndex, pageSize);
             return SMapper.Map(topics.ToList());
@@ -122,7 +122,7 @@ namespace Linkdev.Intern.EQuiz.Service.Services
                 return false;
         }
 
-        public IEnumerable<Question> GetTopicQuestions(int id)
+        public IEnumerable<QuestionDTO> GetTopicQuestions(int id)
         {
             var questions = UnitOfWork.TopicRepository.GetTopicQuestions(id);
             return SMapper.Map(questions.ToList());

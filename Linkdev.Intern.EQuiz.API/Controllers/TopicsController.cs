@@ -1,6 +1,5 @@
-﻿using Linkdev.Intern.EQuiz.Mappers;
-using Linkdev.Intern.EQuiz.Service.Interfaces;
-using Linkdev.Intern.EQuiz.Service.Services;
+﻿using Linkdev.Intern.EQuiz.Shared;
+using Linkdev.Intern.EQuiz.Service.BusinessUnity;
 using Linkdev.Intern.EQuiz.Service.Utility;
 using System;
 using System.Collections.Generic;
@@ -14,64 +13,53 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
     [RoutePrefix("api/topics")]
     public class TopicsController : ApiController
     {
-        private readonly ITopicService _topicService;
-
-        public TopicsController(ITopicService topicService)
-        {
-            _topicService = topicService;
-        }
-
-        public TopicsController()
-        {
-            _topicService = new TopicService();
-        }
-
+        
         [Route("")]
         // GET: api/topic
-        public IEnumerable<Topic> GetAllTopics()
+        public IEnumerable<TopicDTO> GetAllTopics()
         {
-            var topics = _topicService.GetAllTopics();
+            var topics = BusinessUnity.TopicService.GetAllTopics();
             return topics;
         }
 
         [Route("{pageIndex:int}/{pageSize:int}")]
         // GET: api/topic/2/10
-        public IEnumerable<Topic> GetTopicsPaging(int pageIndex, int pageSize)
+        public IEnumerable<TopicDTO> GetTopicsPaging(int pageIndex, int pageSize)
         {
-            var topics = _topicService.GetTopicsByCreationDate(pageIndex, pageSize).ToList();
+            var topics = BusinessUnity.TopicService.GetTopicsByCreationDate(pageIndex, pageSize).ToList();
             return topics;
         }
 
         [Route("{pageIndex:int}/{pageSize:int}/{name}")]
         // GET: api/topic/2/10/topi
-        public IEnumerable<Topic> FilterTopicsByName(string name, int pageIndex, int pageSize)
+        public IEnumerable<TopicDTO> FilterTopicsByName(string name, int pageIndex, int pageSize)
         {
-            var topics = _topicService.FilterTopicsByName(name, pageIndex, pageSize).ToList();
+            var topics = BusinessUnity.TopicService.FilterTopicsByName(name, pageIndex, pageSize).ToList();
             return topics;
         }
 
         [Route("{id:int}")]
         // GET: api/topic/5
-        public Topic GetTopicByID(int id)
+        public TopicDTO GetTopicByID(int id)
         {
-            var topic = _topicService.GetTopicByID(id);
+            var topic = BusinessUnity.TopicService.GetTopicByID(id);
             return topic;
         }
 
         [Route("ByName/{pageIndex:int}/{pageSize:int}/{ascending:bool}")]
         // GET: api/topic/ByName/2/10/1
-        public IEnumerable<Topic> GetTopicsByName(bool ascending, int pageIndex, int pageSize)
+        public IEnumerable<TopicDTO> GetTopicsByName(bool ascending, int pageIndex, int pageSize)
         {
-            var topics = _topicService.GetTopicsByName(ascending, pageIndex, pageSize).ToList();
+            var topics = BusinessUnity.TopicService.GetTopicsByName(ascending, pageIndex, pageSize).ToList();
             return topics;
         }
 
         [HttpPost]
         [Route("")]
         // POST: api/topic
-        public bool? AddTopic([FromBody]Topic topic)
+        public bool? AddTopic([FromBody]TopicDTO topic)
         {
-            var isAdded = _topicService.AddTopic(topic);
+            var isAdded = BusinessUnity.TopicService.AddTopic(topic);
             return isAdded;
         }
 
@@ -79,21 +67,21 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
         [Route("ChangeName/{id:int}")]
         public bool? ChangeTopicName(int id,[FromBody] string name)
         {
-            return _topicService.ChangeTopicName(id, name);
+            return BusinessUnity.TopicService.ChangeTopicName(id, name);
         }
 
         [HttpGet]
         [Route("Questions/{id:int}")]
-        public IEnumerable<Question> GetTopicQuestions(int id)
+        public IEnumerable<QuestionDTO> GetTopicQuestions(int id)
         {
-            return _topicService.GetTopicQuestions(id).ToList();
+            return BusinessUnity.TopicService.GetTopicQuestions(id).ToList();
         }
 
         [HttpGet]
         [Route("CheckTopicStatus/{id:int}")]
         public Output CheckTopicStatus(int id)
         {
-            return _topicService.CheckTopicStatus(id);
+            return BusinessUnity.TopicService.CheckTopicStatus(id);
         }
 
         [HttpDelete]
@@ -101,7 +89,7 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
         [Route("{id:int}")]
         public bool? RemoveTopic(int id)
         {
-            return _topicService.RemoveTopic(id);
+            return BusinessUnity.TopicService.RemoveTopic(id);
         }
     }
 }

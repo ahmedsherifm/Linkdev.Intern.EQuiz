@@ -79,16 +79,16 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Answer.cs" />
-    <Compile Include="Models\Employee.cs" />
-    <Compile Include="Models\Employees_Questions_Templates.cs" />
-    <Compile Include="Models\Employees_Templates.cs" />
-    <Compile Include="Models\Question.cs" />
-    <Compile Include="Models\Questions_Quizes.cs" />
-    <Compile Include="Models\Questions_Templates.cs" />
-    <Compile Include="Models\Quiz.cs" />
-    <Compile Include="Models\Template.cs" />
-    <Compile Include="Models\Topic.cs" />
+    <Compile Include="Models\AnswerDTO.cs" />
+    <Compile Include="Models\EmployeeDTO.cs" />
+    <Compile Include="Models\Employees_Questions_TemplatesDTO.cs" />
+    <Compile Include="Models\Employees_TemplatesDTO.cs" />
+    <Compile Include="Models\QuestionDTO.cs" />
+    <Compile Include="Models\Questions_QuizesDTO.cs" />
+    <Compile Include="Models\Questions_TemplatesDTO.cs" />
+    <Compile Include="Models\QuizDTO.cs" />
+    <Compile Include="Models\TemplateDTO.cs" />
+    <Compile Include="Models\TopicDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SMapper.cs" />
   </ItemGroup>
