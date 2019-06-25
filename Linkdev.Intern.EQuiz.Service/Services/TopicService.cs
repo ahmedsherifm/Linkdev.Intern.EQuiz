@@ -12,27 +12,20 @@ namespace Linkdev.Intern.EQuiz.Service.Services
 {
     public class TopicService : ITopicService
     {
-        private readonly IUnitOfWork UnitOfWork;
-
-        public TopicService(IUnitOfWork unitOfWork)
-        {
-            UnitOfWork = unitOfWork;
-        }
-
-        public TopicService()
-        {
-            UnitOfWork = new UnitOfWork(new Data.EntityFrameWork.EQuizContext());
-        }
+        
 
         public bool? AddTopic(TopicDTO entity)
         {
             if (entity != null)
             {
-                var dtoTopic = SMapper.Map(entity);
-                var result = UnitOfWork.TopicRepository.Add(dtoTopic);
-                UnitOfWork.SaveChanges();
+                using (var UnitOfWork = new UnitOfWork())
+                {
+                    var dtoTopic = SMapper.Map(entity);
+                    var result = UnitOfWork.TopicRepository.Add(dtoTopic);
+                    UnitOfWork.SaveChanges();
 
-                return result;
+                    return result;
+                }
             }
             else
                 return false;
@@ -47,27 +40,35 @@ namespace Linkdev.Intern.EQuiz.Service.Services
 
         public IEnumerable<TopicDTO> GetAllTopics()
         {
-            var topics = UnitOfWork.TopicRepository.GetAll();
-            return SMapper.Map(topics.ToList());
+            using (var UnitOfWork = new UnitOfWork())
+            {
+                var topics = UnitOfWork.TopicRepository.GetAll();
+                return SMapper.Map(topics.ToList());
+            }
         }
 
         public TopicDTO GetTopicByID(int id)
         {
-            var topic = UnitOfWork.TopicRepository.GetByID(id);
+            using (var UnitOfWork = new UnitOfWork())
+            {
+                var topic = UnitOfWork.TopicRepository.GetByID(id);
 
-            return SMapper.Map(topic);
+                return SMapper.Map(topic);
+            }
         }
 
-        
-        public Output CheckTopicStatus(int id)
-        {         
 
-            if (UnitOfWork.TopicRepository.TopicHasQuestion(id) == false)
-                return Output.Success;
-            else if (UnitOfWork.TopicRepository.TopicHasQuestionUsed(id) == false)
-                return Output.Warning;
-            else
-                return Output.Failure;
+        public Output CheckTopicStatus(int id)
+        {
+            using (var UnitOfWork = new UnitOfWork())
+            {
+                if (UnitOfWork.TopicRepository.TopicHasQuestion(id) == false)
+                    return Output.Success;
+                else if (UnitOfWork.TopicRepository.TopicHasQuestionUsed(id) == false)
+                    return Output.Warning;
+                else
+                    return Output.Failure;
+            }
         }
 
         public bool? RemoveTopic(int id)
@@ -75,11 +76,14 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             var entity = GetTopicByID(id);
             if (entity != null)
             {
-                var dtoTopic = SMapper.Map(entity);
-                var result = UnitOfWork.TopicRepository.Remove(dtoTopic);
-                UnitOfWork.SaveChanges();
+                using (var UnitOfWork = new UnitOfWork())
+                {
+                    var dtoTopic = SMapper.Map(entity);
+                    var result = UnitOfWork.TopicRepository.Remove(dtoTopic);
+                    UnitOfWork.SaveChanges();
 
-                return result;
+                    return result;
+                }
             }
             else
                 return false;
@@ -94,38 +98,53 @@ namespace Linkdev.Intern.EQuiz.Service.Services
 
         public IEnumerable<TopicDTO> GetTopicsByCreationDate(int pageIndex, int pageSize = 10)
         {
-            var topics = UnitOfWork.TopicRepository.GetTopicsByCreationDate(pageIndex,pageSize);
-            return SMapper.Map(topics.ToList());
+            using (var UnitOfWork = new UnitOfWork())
+            {
+                var topics = UnitOfWork.TopicRepository.GetTopicsByCreationDate(pageIndex, pageSize);
+                return SMapper.Map(topics.ToList());
+            }
         }
 
         public IEnumerable<TopicDTO> GetTopicsByName(bool ascending, int pageIndex, int pageSize = 10)
         {
-            var topics = UnitOfWork.TopicRepository.GetTopicsByName(ascending,pageIndex, pageSize);
-            return SMapper.Map(topics.ToList());
+            using (var UnitOfWork = new UnitOfWork())
+            {
+                var topics = UnitOfWork.TopicRepository.GetTopicsByName(ascending, pageIndex, pageSize);
+                return SMapper.Map(topics.ToList());
+            }
         }
 
         public IEnumerable<TopicDTO> FilterTopicsByName(string name, int pageIndex, int pageSize = 10)
         {
-            var topics = UnitOfWork.TopicRepository.FilterTopicsByName(name,pageIndex, pageSize);
-            return SMapper.Map(topics.ToList());
+            using (var UnitOfWork = new UnitOfWork())
+            {
+                var topics = UnitOfWork.TopicRepository.FilterTopicsByName(name, pageIndex, pageSize);
+                return SMapper.Map(topics.ToList());
+            }
         }
 
         public bool? ChangeTopicName(int id, string name)
         {
-            var result = UnitOfWork.TopicRepository.ChangeTopicName(id, name);
-            if ((bool)result)
+            using (var UnitOfWork = new UnitOfWork())
             {
-                UnitOfWork.SaveChanges();
-                return result;
+                var result = UnitOfWork.TopicRepository.ChangeTopicName(id, name);
+                if ((bool)result)
+                {
+                    UnitOfWork.SaveChanges();
+                    return result;
+                }
+                else
+                    return false;
             }
-            else
-                return false;
         }
 
         public IEnumerable<QuestionDTO> GetTopicQuestions(int id)
         {
-            var questions = UnitOfWork.TopicRepository.GetTopicQuestions(id);
-            return SMapper.Map(questions.ToList());
+            using (var UnitOfWork = new UnitOfWork())
+            {
+                var questions = UnitOfWork.TopicRepository.GetTopicQuestions(id);
+                return SMapper.Map(questions.ToList());
+            }
         }
 
        

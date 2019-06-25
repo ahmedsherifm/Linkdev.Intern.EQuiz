@@ -10,54 +10,59 @@ namespace Linkdev.Intern.EQuiz.Service.Services
 {
     public class QuizService : IQuizService
     {
-        private readonly IUnitOfWork UnitOfWork;
-
-        public QuizService(IUnitOfWork unitOfWork)
-        {
-            UnitOfWork = unitOfWork;
-        }
-
-        public QuizService()
-        {
-            UnitOfWork = new UnitOfWork(new Data.EntityFrameWork.EQuizContext());
-        }
+       
 
         public IEnumerable<QuizDTO> GetQuizesByQuestionID(int qid)
         {
-            var dtoQuizes = UnitOfWork.QuizRepository.GetQuizesByQuestion(qid);
-            return SMapper.Map(dtoQuizes.ToList());
+            using (var UnitOfWork = new UnitOfWork())
+            {
+                var dtoQuizes = UnitOfWork.QuizRepository.GetQuizesByQuestion(qid);
+                return SMapper.Map(dtoQuizes.ToList());
+            }
         }
 
         public IEnumerable<AnswerDTO> GetQuizAnswers(int id)
         {
-            var dtoAnswers = UnitOfWork.QuizRepository.GetQuizAnswers(id);
-            return SMapper.Map(dtoAnswers.ToList());
+            using (var UnitOfWork = new UnitOfWork())
+            {
+                var dtoAnswers = UnitOfWork.QuizRepository.GetQuizAnswers(id);
+                return SMapper.Map(dtoAnswers.ToList());
+            }
         }
 
         public bool ExtendExpirationDate(int id, DateTime expirationDate)
         {
-            var result = UnitOfWork.QuizRepository.ExtendExpirationDate(id, expirationDate);
-            UnitOfWork.SaveChanges();
+            using (var UnitOfWork = new UnitOfWork())
+            {
+                var result = UnitOfWork.QuizRepository.ExtendExpirationDate(id, expirationDate);
+                UnitOfWork.SaveChanges();
 
-            return (bool)result;
+                return (bool)result;
+            }
         }
 
         public bool DeactivateQuiz(int id)
         {
-            var result = UnitOfWork.QuizRepository.DeactivateQuiz(id);
-            UnitOfWork.SaveChanges();
+            using (var UnitOfWork = new UnitOfWork())
+            {
+                var result = UnitOfWork.QuizRepository.DeactivateQuiz(id);
+                UnitOfWork.SaveChanges();
 
-            return (bool)result;
+                return (bool)result;
+            }
         }
 
         public bool DeactivateQuizesList(ICollection<int> quizesIds)
         {
             if (quizesIds != null)
             {
-                var result = UnitOfWork.QuizRepository.DeactivateQuizesList(quizesIds);
-                UnitOfWork.SaveChanges();
+                using (var UnitOfWork = new UnitOfWork())
+                {
+                    var result = UnitOfWork.QuizRepository.DeactivateQuizesList(quizesIds);
+                    UnitOfWork.SaveChanges();
 
-                return (bool)result;
+                    return (bool)result;
+                }
             }
 
             return false;
@@ -65,63 +70,87 @@ namespace Linkdev.Intern.EQuiz.Service.Services
 
         public bool ActivateQuiz(int id)
         {
-            var result = UnitOfWork.QuizRepository.ActivateQuiz(id);
-            UnitOfWork.SaveChanges();
+            using (var UnitOfWork = new UnitOfWork())
+            {
+                var result = UnitOfWork.QuizRepository.ActivateQuiz(id);
+                UnitOfWork.SaveChanges();
 
-            return (bool)result;
+                return (bool)result;
+            }
         }
 
         public bool UpdateNumberOfTrials(int id, int numberOfTrials)
         {
-            var result = UnitOfWork.QuizRepository.UpdateNumberOfTrials(id, numberOfTrials);
-            UnitOfWork.SaveChanges();
+            using (var UnitOfWork = new UnitOfWork())
+            {
+                var result = UnitOfWork.QuizRepository.UpdateNumberOfTrials(id, numberOfTrials);
+                UnitOfWork.SaveChanges();
 
-            return (bool)result;
+                return (bool)result;
+            }
         }
 
         public bool UpdatePassingScore(int id, int passingScore)
         {
-            var result = UnitOfWork.QuizRepository.UpdatePassingScore(id, passingScore);
-            UnitOfWork.SaveChanges();
+            using (var UnitOfWork = new UnitOfWork())
+            {
+                var result = UnitOfWork.QuizRepository.UpdatePassingScore(id, passingScore);
+                UnitOfWork.SaveChanges();
 
-            return (bool)result;
+                return (bool)result;
+            }
         }
 
         public bool ChangeQuizName(int id, string name)
         {
-            var result = UnitOfWork.QuizRepository.ChangeQuizName(id, name);
-            UnitOfWork.SaveChanges();
+            using (var UnitOfWork = new UnitOfWork())
+            {
+                var result = UnitOfWork.QuizRepository.ChangeQuizName(id, name);
+                UnitOfWork.SaveChanges();
 
-            return (bool)result;
+                return (bool)result;
+            }
         }
 
         public bool IsQuizActive(int id)
         {
-            return (bool)UnitOfWork.QuizRepository.IsQuizActive(id);
+            using (var UnitOfWork = new UnitOfWork())
+            {
+                return (bool)UnitOfWork.QuizRepository.IsQuizActive(id);
+            }
         }
 
         public bool RemoveSelectedDeactivatedQuizesList(ICollection<int> quizesIds)
         {
-            var result = UnitOfWork.QuizRepository.RemoveSelectedDeactivatedQuizesList(quizesIds);
-            UnitOfWork.SaveChanges();
+            using (var UnitOfWork = new UnitOfWork())
+            {
+                var result = UnitOfWork.QuizRepository.RemoveSelectedDeactivatedQuizesList(quizesIds);
+                UnitOfWork.SaveChanges();
 
-            return (bool)result;
+                return (bool)result;
+            }
         }
 
         public QuizDTO GetQuizByID(int id)
         {
-            var dtoQuiz = UnitOfWork.QuizRepository.GetByID(id);
-            return SMapper.Map(dtoQuiz);
+            using (var UnitOfWork = new UnitOfWork())
+            {
+                var dtoQuiz = UnitOfWork.QuizRepository.GetByID(id);
+                return SMapper.Map(dtoQuiz);
+            }
         }
 
         public bool? CreateQuiz(QuizDTO quiz)
         {
             if (quiz != null)
             {
-                var dtoQuiz = SMapper.Map(quiz);
-                UnitOfWork.QuizRepository.Add(dtoQuiz);
-                UnitOfWork.SaveChanges();
-                return true;
+                using (var UnitOfWork = new UnitOfWork())
+                {
+                    var dtoQuiz = SMapper.Map(quiz);
+                    UnitOfWork.QuizRepository.Add(dtoQuiz);
+                    UnitOfWork.SaveChanges();
+                    return true;
+                }
             }
             else
                 return false;
@@ -129,31 +158,34 @@ namespace Linkdev.Intern.EQuiz.Service.Services
 
         public bool? AddQuestionsToQuiz(int quizId, IEnumerable<int> questionsIds)
         {
-            var dtoQuiz = UnitOfWork.QuizRepository.GetByID(quizId);
-            if (questionsIds != null && dtoQuiz != null)
+            using (var UnitOfWork = new UnitOfWork())
             {
-                //var dtoQuiz = DTOMapper.Mapper.Map<Quiz, Data.Domain.Quiz>(quiz);
-                ICollection<Questions_QuizesDTO> Questions_Quizes = new List<Questions_QuizesDTO>();
-
-                foreach (var item in questionsIds)
+                var dtoQuiz = UnitOfWork.QuizRepository.GetByID(quizId);
+                if (questionsIds != null && dtoQuiz != null)
                 {
-                    var question = UnitOfWork.QuestionRepository.GetByID(item);
-                    if (question != null)
+                    //var dtoQuiz = DTOMapper.Mapper.Map<Quiz, Data.Domain.Quiz>(quiz);
+                    ICollection<Questions_QuizesDTO> Questions_Quizes = new List<Questions_QuizesDTO>();
+
+                    foreach (var item in questionsIds)
                     {
-                        question.IsUsed = true;
-                        var QuestionQuiz = new Questions_QuizesDTO() { QuizID = quizId, QuestionID = item };
-                        Questions_Quizes.Add(QuestionQuiz);
+                        var question = UnitOfWork.QuestionRepository.GetByID(item);
+                        if (question != null)
+                        {
+                            question.IsUsed = true;
+                            var QuestionQuiz = new Questions_QuizesDTO() { QuizID = quizId, QuestionID = item };
+                            Questions_Quizes.Add(QuestionQuiz);
+                        }
                     }
+
+                    var dtoQuestionQuizList = SMapper.Map(Questions_Quizes);
+                    dtoQuiz.Questions_Quizes = dtoQuestionQuizList;
+                    UnitOfWork.SaveChanges();
+
+                    return true;
                 }
-
-                var dtoQuestionQuizList = SMapper.Map(Questions_Quizes);
-                dtoQuiz.Questions_Quizes = dtoQuestionQuizList;
-                UnitOfWork.SaveChanges();
-
-                return true;
+                else
+                    return false;
             }
-            else
-                return false;
         }
 
         public ICollection<bool> ReleaseQuizFromEmployees(int quizId, ICollection<int> employeesIds)
@@ -176,19 +208,22 @@ namespace Linkdev.Intern.EQuiz.Service.Services
 
         public bool ReleaseQuizFromEmployee(int quizId, int employeeId)
         {
-            var templates = UnitOfWork.TemplateRepository.GetTemplatesByEmployeeAndQuizIds(quizId, employeeId);
-
-            if (templates != null)
+            using (var UnitOfWork = new UnitOfWork())
             {
-                templates.Select(t => t.Employees_Templates
-                    .Select(et => et.Status = Data.Domain.EmployeeTemplateStatus.Released));
+                var templates = UnitOfWork.TemplateRepository.GetTemplatesByEmployeeAndQuizIds(quizId, employeeId);
 
-                UnitOfWork.SaveChanges();
+                if (templates != null)
+                {
+                    templates.Select(t => t.Employees_Templates
+                        .Select(et => et.Status = Data.Domain.EmployeeTemplateStatus.Released));
 
-                return true;
+                    UnitOfWork.SaveChanges();
+
+                    return true;
+                }
+
+                return false;
             }
-
-            return false;
         }
 
         /////// multiple quiz creation ?!!!

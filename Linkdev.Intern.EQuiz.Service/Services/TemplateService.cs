@@ -10,36 +10,28 @@ namespace Linkdev.Intern.EQuiz.Service.Services
 {
     public class TemplateService : ITemplateService
     {
-        private readonly IUnitOfWork UnitOfWork;
-
-        public TemplateService(IUnitOfWork unitOfWork)
-        {
-            UnitOfWork = unitOfWork;
-        }
-
-        public TemplateService()
-        {
-            UnitOfWork = new UnitOfWork(new Data.EntityFrameWork.EQuizContext());
-        }
 
         private TemplateDTO CreateTemplate(int quizId, int employeeId)
         {
-            var dtoQuiz = UnitOfWork.QuizRepository.GetByID(quizId);
-            var dtoEmployee = UnitOfWork.EmployeeRepository.GetByID(employeeId);
-
-            if (dtoQuiz != null && dtoEmployee != null)
+            using (var UnitOfWork = new UnitOfWork())
             {
-                var dtoTemplate = new Data.Domain.Template()
-                {
-                    Quiz = dtoQuiz,
-                    CreationDate = DateTime.Now,
-                    Employee = dtoEmployee
-                };
-                UnitOfWork.TemplateRepository.Add(dtoTemplate);
-                UnitOfWork.SaveChanges();
-                var template = SMapper.Map(dtoTemplate);
+                var dtoQuiz = UnitOfWork.QuizRepository.GetByID(quizId);
+                var dtoEmployee = UnitOfWork.EmployeeRepository.GetByID(employeeId);
 
-                return template;
+                if (dtoQuiz != null && dtoEmployee != null)
+                {
+                    var dtoTemplate = new Data.Domain.Template()
+                    {
+                        Quiz = dtoQuiz,
+                        CreationDate = DateTime.Now,
+                        Employee = dtoEmployee
+                    };
+                    UnitOfWork.TemplateRepository.Add(dtoTemplate);
+                    UnitOfWork.SaveChanges();
+                    var template = SMapper.Map(dtoTemplate);
+
+                    return template;
+                }
             }
 
             return null;
@@ -47,35 +39,42 @@ namespace Linkdev.Intern.EQuiz.Service.Services
 
         private void AssignEmployeeToTemplate(int templateId)
         {
-            var dtoTemplate = UnitOfWork.TemplateRepository.GetByID(templateId);
-            dtoTemplate.Employees_Templates.Add(new Data.Domain.Employees_Templates()
+            using (var UnitOfWork = new UnitOfWork())
             {
-                EmployeeID = dtoTemplate.EmployeeID,
-                TemplateID = dtoTemplate.ID,
-                TrialNo = 0,
-                Score = 0,
-                Status = Data.Domain.EmployeeTemplateStatus.Assigned
-            });
-
+                var dtoTemplate = UnitOfWork.TemplateRepository.GetByID(templateId);
+                dtoTemplate.Employees_Templates.Add(new Data.Domain.Employees_Templates()
+                {
+                    EmployeeID = dtoTemplate.EmployeeID,
+                    TemplateID = dtoTemplate.ID,
+                    TrialNo = 0,
+                    Score = 0,
+                    Status = Data.Domain.EmployeeTemplateStatus.Assigned
+                });
+                UnitOfWork.SaveChanges();
+            }
             //dtoTemplate.Employees_Templates = DTOMapper.Mapper.Map<ICollection<Employees_Templates>, ICollection<Data.Domain.Employees_Templates>>(employees_Templates);
         }
 
 
         public bool? CreateEmptyTemplateToAssignedEmployee(int quizId, int employeeId)
         {
+
             var template = CreateTemplate(quizId, employeeId);
             if (template != null)
             {
-                var trialsNo = UnitOfWork.QuizRepository.GetTrialsNoForEmployee(quizId, employeeId);
-                var quiz = UnitOfWork.QuizRepository.GetByID(quizId);
-
-                if (trialsNo < quiz.NumberOfTrials)
+                using (var UnitOfWork = new UnitOfWork())
                 {
+                    var trialsNo = UnitOfWork.QuizRepository.GetTrialsNoForEmployee(quizId, employeeId);
+                    var quiz = UnitOfWork.QuizRepository.GetByID(quizId);
 
-                    AssignEmployeeToTemplate(template.ID);
-                    UnitOfWork.SaveChanges();
+                    if (trialsNo < quiz.NumberOfTrials)
+                    {
+
+                        AssignEmployeeToTemplate(template.ID);
+                        UnitOfWork.SaveChanges();
+                    }
+                    return true;
                 }
-                return true;
             }
             else
                 return false;
@@ -152,76 +151,88 @@ namespace Linkdev.Intern.EQuiz.Service.Services
 
         private bool? AddQuestionsToQuestionsTemplates(int templateId, int quizId)
         {
-            var dtoTemplate = UnitOfWork.TemplateRepository.GetByID(templateId);
-            var dtoQuiz = UnitOfWork.QuizRepository.GetByID(quizId);
-            if (dtoTemplate != null && dtoQuiz != null)
+            using (var UnitOfWork = new UnitOfWork())
             {
-                ICollection<Questions_TemplatesDTO> questions_Templates = new List<Questions_TemplatesDTO>();
-                var random = new Random();
-                var questionsList = UnitOfWork.QuestionQuizRepository.GetQuizQuestions(dtoQuiz).ToList();
-                var questionsNumber = dtoQuiz.QuestionsNumber;
-
-                while (questions_Templates.Count != questionsNumber)
+                var dtoTemplate = UnitOfWork.TemplateRepository.GetByID(templateId);
+                var dtoQuiz = UnitOfWork.QuizRepository.GetByID(quizId);
+                if (dtoTemplate != null && dtoQuiz != null)
                 {
-                    int index = random.Next(questionsList.Count);
-                    var question = questionsList[index];
-                    if (!questions_Templates.Any(q => q.QuestionID == question.ID))
+                    ICollection<Questions_TemplatesDTO> questions_Templates = new List<Questions_TemplatesDTO>();
+                    var random = new Random();
+                    var questionsList = UnitOfWork.QuestionQuizRepository.GetQuizQuestions(dtoQuiz).ToList();
+                    var questionsNumber = dtoQuiz.QuestionsNumber;
+
+                    while (questions_Templates.Count != questionsNumber)
                     {
-                        question.IsActive = true;
-                        questions_Templates.Add(new Questions_TemplatesDTO()
+                        int index = random.Next(questionsList.Count);
+                        var question = questionsList[index];
+                        if (!questions_Templates.Any(q => q.QuestionID == question.ID))
                         {
-                            QuestionID = question.ID,
-                            TemplateID = dtoTemplate.ID,
-                        });
+                            question.IsActive = true;
+                            questions_Templates.Add(new Questions_TemplatesDTO()
+                            {
+                                QuestionID = question.ID,
+                                TemplateID = dtoTemplate.ID,
+                            });
+                        }
                     }
-                }
 
-                var dtoQuestions_Templates = SMapper.Map(questions_Templates);
-                dtoTemplate.Questions_Templates = dtoQuestions_Templates;
-
-                return true;
-            }
-            else
-                return false;
-        }
-
-        private bool? ChangeEmployeeTemplateStatus(EmployeeTemplateStatusDTO newStatus, int templateID, int employeeID)
-        {
-            var dtoStatus = SMapper.Map(newStatus);
-            return UnitOfWork.EmployeeTemplateRepository.ChangeEmployeeTemplateStatus(dtoStatus, templateID, employeeID);
-        }
-
-        public EmployeeTemplateStatusDTO CheckEmployeeTemplateStatus(int templateID, int employeeID)
-        {
-            var status = UnitOfWork.EmployeeTemplateRepository.CheckTemplateStatusForEmployee(templateID, employeeID);
-
-            return SMapper.Map(status);
-        }
-
-        public bool? EmployeeTakeTemplate(int employeeID, int quizID, int templateID)
-        {
-            var dtoEmployee = UnitOfWork.EmployeeRepository.GetByID(employeeID);
-            var dtoQuiz = UnitOfWork.QuizRepository.GetByID(quizID);
-            var dtoTemplate = UnitOfWork.TemplateRepository.GetByID(templateID);
-
-            if (dtoEmployee != null && dtoQuiz != null && dtoTemplate != null)
-            {
-                var dtoStatus = UnitOfWork.EmployeeTemplateRepository.CheckTemplateStatusForEmployee(templateID, employeeID);
-                var status = SMapper.Map(dtoStatus);
-
-                if (status == EmployeeTemplateStatusDTO.Assigned)
-                {
-                    ChangeEmployeeTemplateStatus(EmployeeTemplateStatusDTO.InProgress, employeeID, templateID);
-                    AddQuestionsToQuestionsTemplates(templateID, quizID);
-                    UnitOfWork.SaveChanges();
+                    var dtoQuestions_Templates = SMapper.Map(questions_Templates);
+                    dtoTemplate.Questions_Templates = dtoQuestions_Templates;
 
                     return true;
                 }
                 else
                     return false;
             }
-            else
-                return false;
+        }
+
+        private bool? ChangeEmployeeTemplateStatus(EmployeeTemplateStatusDTO newStatus, int templateID, int employeeID)
+        {
+            using (var UnitOfWork = new UnitOfWork())
+            {
+                var dtoStatus = SMapper.Map(newStatus);
+                return UnitOfWork.EmployeeTemplateRepository.ChangeEmployeeTemplateStatus(dtoStatus, templateID, employeeID);
+            }
+        }
+
+        public EmployeeTemplateStatusDTO CheckEmployeeTemplateStatus(int templateID, int employeeID)
+        {
+            using (var UnitOfWork = new UnitOfWork())
+            {
+                var status = UnitOfWork.EmployeeTemplateRepository.CheckTemplateStatusForEmployee(templateID, employeeID);
+
+                return SMapper.Map(status);
+            }
+        }
+
+        public bool? EmployeeTakeTemplate(int employeeID, int quizID, int templateID)
+        {
+            using (var UnitOfWork = new UnitOfWork())
+            {
+                var dtoEmployee = UnitOfWork.EmployeeRepository.GetByID(employeeID);
+                var dtoQuiz = UnitOfWork.QuizRepository.GetByID(quizID);
+                var dtoTemplate = UnitOfWork.TemplateRepository.GetByID(templateID);
+
+                if (dtoEmployee != null && dtoQuiz != null && dtoTemplate != null)
+                {
+                    var dtoStatus = UnitOfWork.EmployeeTemplateRepository.CheckTemplateStatusForEmployee(templateID, employeeID);
+                    var status = SMapper.Map(dtoStatus);
+
+                    if (status == EmployeeTemplateStatusDTO.Assigned)
+                    {
+                        ChangeEmployeeTemplateStatus(EmployeeTemplateStatusDTO.InProgress, employeeID, templateID);
+                        AddQuestionsToQuestionsTemplates(templateID, quizID);
+                        UnitOfWork.SaveChanges();
+
+                        return true;
+                    }
+                    else
+                        return false;
+                }
+                else
+                    return false;
+            }
         }
     }
 }

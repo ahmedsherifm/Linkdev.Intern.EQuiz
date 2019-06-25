@@ -25,11 +25,10 @@ namespace Linkdev.Intern.EQuiz.Service.BusinessUnity
         {
             try
             {
-                var unitOfWork = new UnitOfWork(new Data.EntityFrameWork.EQuizContext());
-                QuestionService = new QuestionService(unitOfWork);
-                QuizService = new QuizService(unitOfWork);
-                TemplateService = new TemplateService(unitOfWork);
-                TopicService = new TopicService(unitOfWork);
+                QuestionService = new QuestionService();
+                QuizService = new QuizService();
+                TemplateService = new TemplateService();
+                TopicService = new TopicService();
 
                 return true;
             }

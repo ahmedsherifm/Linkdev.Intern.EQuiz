@@ -80,7 +80,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessUnity\BusinessUnity.cs" />
-    <Compile Include="BusinessUnity\IBusinessUnity.cs" />
     <Compile Include="Interfaces\IQuestionService.cs" />
     <Compile Include="Interfaces\IQuizService.cs" />
     <Compile Include="Interfaces\ITemplateService.cs" />
