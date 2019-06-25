@@ -8,24 +8,22 @@ using System.Web;
 
 namespace Linkdev.Intern.EQuiz.Data.Repository.UnitOfWork
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork, IDisposable
     {
-        public EQuizContext Context { get; private set; }
+        public EQuizContext Context { get; private set; } = new EQuizContext();
 
-        public UnitOfWork(EQuizContext _context)
+        public UnitOfWork()
         {
-            Context = _context;
-
-            AnswerRepository = new AnswerRepository(_context);
-            EmployeeQuestionTemplateRepository = new EmployeeQuestionTemplateRepository(_context);
-            EmployeeRepository = new EmployeeRepository(_context);
-            EmployeeTemplateRepository = new EmployeeTemplateRepository(_context);
-            QuestionRepository = new QuestionRepository(_context);
-            QuestionTemplateRepository = new QuestionTemplateRepository(_context);
-            QuizRepository = new QuizRepository(_context);
-            TemplateRepository = new TemplateRepository(_context);
-            TopicRepository = new TopicRepository(_context);
-            QuestionQuizRepository = new QuestionQuizRepository(_context);
+            AnswerRepository = new AnswerRepository(Context);
+            EmployeeQuestionTemplateRepository = new EmployeeQuestionTemplateRepository(Context);
+            EmployeeRepository = new EmployeeRepository(Context);
+            EmployeeTemplateRepository = new EmployeeTemplateRepository(Context);
+            QuestionRepository = new QuestionRepository(Context);
+            QuestionTemplateRepository = new QuestionTemplateRepository(Context);
+            QuizRepository = new QuizRepository(Context);
+            TemplateRepository = new TemplateRepository(Context);
+            TopicRepository = new TopicRepository(Context);
+            QuestionQuizRepository = new QuestionQuizRepository(Context);
         }
 
         public IAnswerRepository AnswerRepository { get; set; }
@@ -42,6 +40,12 @@ namespace Linkdev.Intern.EQuiz.Data.Repository.UnitOfWork
         public void SaveChanges()
         {
             Context.SaveChanges();
+        }
+
+        public void Dispose()
+        {
+            Context.Dispose();
+            GC.SuppressFinalize(this);
         }
     }
 }

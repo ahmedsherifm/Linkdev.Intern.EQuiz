@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
+using Linkdev.Intern.EQuiz.Mappers.Criteria;
 
 namespace Linkdev.Intern.EQuiz.Service.Services
 {
@@ -147,6 +148,13 @@ namespace Linkdev.Intern.EQuiz.Service.Services
             }
         }
 
-       
+        public IEnumerable<TopicDTO> Search(TopicCriteria topicCriteria)
+        {
+            using (var UnitOfWork = new UnitOfWork())
+            {
+                var result = UnitOfWork.TopicRepository.Search(topicCriteria);
+                return SMapper.Map(result.ToList());
+            }
+        }
     }
 }

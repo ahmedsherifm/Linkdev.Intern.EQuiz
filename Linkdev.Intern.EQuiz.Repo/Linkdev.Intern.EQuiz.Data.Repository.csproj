@@ -120,6 +120,10 @@
       <Project>{11be22e5-51e5-4830-a07e-e253cddf5f0c}</Project>
       <Name>Linkdev.Intern.EQuiz.Data.EntityFrameWork</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Linkdev.Intern.EQuiz.Mappers\Linkdev.Intern.EQuiz.Shared.csproj">
+      <Project>{57A6ABEB-1678-448F-B41C-062669B19103}</Project>
+      <Name>Linkdev.Intern.EQuiz.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

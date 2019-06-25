@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Linkdev.Intern.EQuiz.Mappers.Criteria;
 
 namespace Linkdev.Intern.EQuiz.API.Controllers
 {
@@ -90,6 +91,13 @@ namespace Linkdev.Intern.EQuiz.API.Controllers
         public bool? RemoveTopic(int id)
         {
             return BusinessUnity.TopicService.RemoveTopic(id);
+        }
+
+        [HttpPost]
+        [Route("search")]
+        public IEnumerable<TopicDTO> Search([FromBody]TopicCriteria topicCriteria)
+        {
+            return BusinessUnity.TopicService.Search(topicCriteria);
         }
     }
 }

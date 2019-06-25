@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Linkdev.Intern.EQuiz.Mappers.Criteria;
 
 namespace Linkdev.Intern.EQuiz.Service.Interfaces
 {
@@ -23,6 +24,9 @@ namespace Linkdev.Intern.EQuiz.Service.Interfaces
         //Topic GetTopicSingleOrDefault(Expression<Func<Topic, bool>> predict);
 
         // implemeting topic repo services
+
+        IEnumerable<TopicDTO> Search(TopicCriteria topicCriteria);
+
         IEnumerable<TopicDTO> GetTopicsByCreationDate(int pageIndex, int pageSize = 10);
 
         IEnumerable<TopicDTO> GetTopicsByName(bool ascending, int pageIndex, int pageSize = 10);

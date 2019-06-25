@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using Linkdev.Intern.EQuiz.Mappers.Criteria;
 
 namespace Linkdev.Intern.EQuiz.Data.Repository.Repositories
 {
@@ -127,6 +128,60 @@ namespace Linkdev.Intern.EQuiz.Data.Repository.Repositories
             return EQuizContext.Questions
                     .SingleOrDefault(q => q.ID == qid)
                     .Topic;
+        }
+
+        public override IEnumerable<Topic> Search(BaseCriteria baseCriteria)
+        {
+            var topicCriteria = baseCriteria as TopicCriteria;
+            if (topicCriteria == null) return null;
+
+            IQueryable<Topic> topics = GetAll().AsQueryable();
+
+            if (topicCriteria.IsDeleted != null)
+                topics = topics.Where(t => t.IsDeleted == topicCriteria.IsDeleted);
+
+            if (topicCriteria.Name != null)
+                topics = topics.Where(t => t.Name.ToLower().Contains(topicCriteria.Name.ToLower()));
+
+            if(topicCriteria.CreationDate != null)
+                topics = topics.Where(t => t.CreationDate == topicCriteria.CreationDate);
+
+            if(topicCriteria.OrderDirection != null && topicCriteria.OrderType != null)
+                switch (topicCriteria.OrderType)
+                {
+                    case OrderType.Name:
+                        if(topicCriteria.OrderDirection == OrderDirection.Desending)
+                            topics = topics.OrderByDescending(t=>t.Name);
+                        else
+                            topics = topics.OrderBy(t => t.Name);
+                        break;
+
+                    case OrderType.CreationDate:
+                        if (topicCriteria.OrderDirection == OrderDirection.Desending)
+                            topics = topics.OrderByDescending(t => t.CreationDate);
+                        else
+                            topics = topics.OrderBy(t => t.CreationDate);
+                        break;
+
+                    case OrderType.IsDeleted:
+                        if (topicCriteria.OrderDirection == OrderDirection.Desending)
+                            topics = topics.OrderByDescending(t => t.IsDeleted);
+                        else
+                            topics = topics.OrderBy(t => t.IsDeleted);
+                        break;
+
+                    default:
+                        topics = topics.OrderBy(t => t.ID);
+                        break;
+                }
+
+
+            if (topicCriteria.PageSize != null && topicCriteria.PageIndex != null)
+                topics = topics
+                    .Skip(((int)topicCriteria.PageIndex - 1) * (int)topicCriteria.PageSize)
+                    .Take((int)topicCriteria.PageSize);
+
+            return topics;
         }
 
     }

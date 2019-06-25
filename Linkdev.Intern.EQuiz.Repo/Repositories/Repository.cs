@@ -1,4 +1,5 @@
 ﻿using Linkdev.Intern.EQuiz.Data.Repository.Interfaces;
+using Linkdev.Intern.EQuiz.Mappers.Criteria;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -60,6 +61,7 @@ namespace Linkdev.Intern.EQuiz.Data.Repository.Repositories
             return Context.Set<TEntity>().SingleOrDefault(predict);
         }
 
-        
+        public virtual IEnumerable<TEntity> Search(BaseCriteria baseCriteria)
+        { return null; }
     }
 }
